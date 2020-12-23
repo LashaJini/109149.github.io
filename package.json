@@ -1,0 +1,29 @@
+{
+  "name": "109149.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:109149/109149.github.io.git",
+  "author": "109149 <109149qwe@gmail.com> (http://109149.rocks/)",
+  "license": "MIT",
+  "devDependencies": {
+    "commitizen": "4.2.2",
+    "cz-conventional-changelog": "3.3.0"
+  },
+  "scripts": {
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@types/jest": "26.0.19",
+    "@types/node": "14.14.14",
+    "@types/react": "17.0.0",
+    "@types/react-dom": "17.0.0",
+    "react": "17.0.1",
+    "rmrf": "2.0.3",
+    "typescript": "4.1.3"
+  }
+}
