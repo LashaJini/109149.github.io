@@ -1,12 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import { Logo, Divider } from "../";
+import { MenuButtons, Logo, Divider } from "../";
 import { bp } from "../../constants";
 
 const numberOfColumns = 12;
 // let row = 1;
 
 const App = () => {
+  const observableElementRef = React.useRef();
+  const [observableElement, setObservableElement] = React.useState();
+
+  React.useEffect(() => {
+    setObservableElement(observableElementRef.current);
+  }, []);
+
+  console.log("render");
   return (
     <div style={{ height: "5000px" }}>
       <Grid className="grid">
@@ -14,43 +22,26 @@ const App = () => {
           <LogoGridItem className="logo-wrapper" col="1/2">
             <Logo width="200px" height="100px" />
           </LogoGridItem>
-          <MenuGridItem className="menu-wrapper" col="2/3">
-            <Div></Div>
-            <Div></Div>
-            <Div></Div>
-            <Div></Div>
-          </MenuGridItem>
         </HeaderGridItem>
 
-        <DividerGridItem className="grid-item-divider" row="2">
+        <GridItem row="2" ref={observableElementRef}></GridItem>
+
+        <DividerGridItem className="grid-item-divider" row="3">
           <Divider fill="var(--bg-color-primary)" />
         </DividerGridItem>
-
-        <GridItem row="3">
-          <Div2></Div2>
-        </GridItem>
       </Grid>
+      <MenuButtons observableElement={observableElement} />
     </div>
   );
 };
-
-const Div = styled.div`
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  background: green;
-`;
-const Div2 = styled.div`
-  display: inline-block;
-  width: 100%;
-  height: 500px;
-  background: green;
-`;
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(${numberOfColumns}, 1fr);
   grid-gap: 20px;
+
+  position: absolute;
+  width: 100%;
 `;
 
 const GridItem = styled.div`
@@ -72,15 +63,24 @@ const HeaderGridItem = styled(GridItem)`
   grid-gap: 20px;
   align-items: start;
   background-color: var(--bg-color-secondary);
+
   position: sticky;
   top: 0;
   z-index: 1;
 `;
 
-const LogoGridItem = styled(GridItem)``;
+const LogoGridItem = styled(GridItem)`
+  position: sticky;
+  top: 0;
+  z-index: 1;
+`;
 
 const MenuGridItem = styled(GridItem)`
   height: 100px;
+
+  position: sticky;
+  top: 0;
+  z-index: 1;
 `;
 
 const DividerGridItem = styled(GridItem)`
