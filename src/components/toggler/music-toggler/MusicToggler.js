@@ -5,6 +5,8 @@ import {
   wildReputation,
   shotInTheDark,
 } from "../../../static/music";
+import PauseButton from "./PauseButton";
+import PlayButton from "./PlayButton";
 
 const Button = styled.button`
   width: 50px;
@@ -23,9 +25,7 @@ const PrevButton = styled(Button)`
   position: absolute;
   transform: translate(${({ x, y }) => `${x},${y}`});
 `;
-const PlayButton = styled(Button)`
-  position: absolute;
-`;
+const Play = styled.div``;
 const NextButton = styled(Button)`
   position: absolute;
   transform: translate(${({ x, y }) => `${x},${y}`});
@@ -34,6 +34,9 @@ const NextButton = styled(Button)`
 const ACDC = [noMansLand, wildReputation, shotInTheDark];
 
 const MusicToggler = ({
+  width,
+  height,
+  fill,
   isPlaying = false,
   prevButtonIsVisible = false,
   nextButtonIsVisible = false,
@@ -117,9 +120,13 @@ const MusicToggler = ({
       >
         {"<"}
       </PrevButton>
-      <PlayButton visible={true} onClick={playCurrent}>
-        ī
-      </PlayButton>
+      <Play visible={true} onClick={playCurrent}>
+        {musicIsPlaying ? (
+          <PauseButton width={width} height={height} fill={fill} />
+        ) : (
+          <PlayButton width={width} height={height} fill={fill} />
+        )}
+      </Play>
       <NextButton
         x={translateNextButton.x}
         y={translateNextButton.y}
