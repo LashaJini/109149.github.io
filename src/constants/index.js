@@ -4,11 +4,18 @@ const css = {
     light: {
       bgColorPrimary: "#ccc",
       bgColorSecondary: "#333333",
+      textColorPrimary: "black",
     },
     dark: {
       bgColorPrimary: "#151515",
       bgColorSecondary: "#333333",
+      textColorPrimary: "white",
     },
+  },
+  vars: {
+    bgColorPrimary: "var(--bg-color-primary)",
+    bgColorSecondary: "var(--bg-color-secondary)",
+    textColorPrimary: "var(--text-color-primary)",
   },
 };
 
