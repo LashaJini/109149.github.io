@@ -305,11 +305,9 @@ const A = styled.div`
   cursor: pointer;
 
   position: absolute;
-  // transform: translate3d(${({ _i }) => _i * 35}px, 0, 0);
 
   &:hover {
-    background: white;
-    color: var(--fg);
+    background: var(--text-color-primary);
   }
 
   transition-duration: calc(10ms + (100ms * ${({ _i }) => (_i ? _i : 1)}));
