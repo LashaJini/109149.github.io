@@ -1,11 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-
-const SVG = styled.svg`
-  width: ${({ _width }) => (_width ? _width : "24px")};
-  height: ${({ _height }) => (_height ? _height : "24px")};
-  fill: ${({ _fill }) => (_fill ? _fill : "#000000")};
-`;
+import SVG from "./SVG";
 
 const Moon = ({ width, height, fill }) => {
   return (
@@ -15,8 +9,8 @@ const Moon = ({ width, height, fill }) => {
         id="svg78"
         _width={width}
         _height={height}
-        viewBox="0 0 914.24103 1023.7199"
         _fill={fill}
+        viewBox="0 0 914.24103 1023.7199"
       >
         <g id="g86" transform="translate(-58.089546,-6.1205709)">
           <path
