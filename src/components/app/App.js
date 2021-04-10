@@ -1,37 +1,51 @@
 import React from "react";
 import styled from "styled-components";
-import { MenuButtons, Logo, Divider } from "../";
-import { bp } from "../../constants";
+import { ThemeContext, MenuButtons, Logo, Divider } from "../";
+import { bp, themes } from "../../constants";
+import { useDarkMode } from "../../hooks";
 
 const numberOfColumns = 12;
 // let row = 1;
 
+// TODO: row generator
 const App = () => {
   const observableElementRef = React.useRef();
   const [observableElement, setObservableElement] = React.useState();
+  const [darkModeEnabled, setDarkModeEnabled] = useDarkMode();
 
   React.useEffect(() => {
     setObservableElement(observableElementRef.current);
   }, []);
 
+  const toggleTheme = () => {
+    setDarkModeEnabled((prev) => !prev); // TODO: useToggler
+  };
+
   console.log("render");
   return (
-    <div style={{ height: "5000px" }}>
-      <Grid className="grid">
-        <HeaderGridItem className="grid-item-header">
-          <LogoGridItem className="logo-wrapper" col="1/2">
-            <Logo width="200px" height="100px" />
-          </LogoGridItem>
-        </HeaderGridItem>
+    <ThemeContext.Provider
+      value={{
+        theme: darkModeEnabled ? themes.dark : themes.light,
+        toggleTheme,
+      }}
+    >
+      <div style={{ height: "5000px" }}>
+        <Grid className="grid">
+          <HeaderGridItem className="grid-item-header">
+            <LogoGridItem className="logo-wrapper" col="1/2">
+              <Logo width="200px" height="100px" />
+            </LogoGridItem>
+          </HeaderGridItem>
 
-        <GridItem row="2" ref={observableElementRef}></GridItem>
+          <GridItem row="2" ref={observableElementRef}></GridItem>
 
-        <DividerGridItem className="grid-item-divider" row="3">
-          <Divider fill="var(--bg-color-primary)" />
-        </DividerGridItem>
-      </Grid>
-      <MenuButtons observableElement={observableElement} />
-    </div>
+          <DividerGridItem className="grid-item-divider" row="3">
+            <Divider fill="var(--bg-color-primary)" />
+          </DividerGridItem>
+        </Grid>
+        <MenuButtons observableElement={observableElement} />
+      </div>
+    </ThemeContext.Provider>
   );
 };
 
