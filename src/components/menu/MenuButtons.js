@@ -12,6 +12,7 @@ function getY(y) {
   return Math.floor(-r * Math.sin(Math.PI / 3 + (Math.PI / 4) * y));
 }
 
+// TODO: constants...
 const MenuButtons = ({ observableElement }) => {
   const observer = React.useRef();
   const observableElementRef = React.useRef();
@@ -99,11 +100,6 @@ const MenuButtons = ({ observableElement }) => {
   return (
     <StickyDiv className="menu-buttons-wrapper">
       <Div>
-        <link
-          rel="stylesheet"
-          href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-        />
-
         <Nav className="menu menu-nav">
           <Input
             type="checkbox"
@@ -294,6 +290,10 @@ const A = styled.div`
   background: var(--fg);
   border-radius: 100%;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 60px;
   height: 60px;
   line-height: 60px;
@@ -305,10 +305,6 @@ const A = styled.div`
   cursor: pointer;
 
   position: absolute;
-
-  &:hover {
-    background: var(--text-color-primary);
-  }
 
   transition-duration: calc(10ms + (100ms * ${({ _i }) => (_i ? _i : 1)}));
 
