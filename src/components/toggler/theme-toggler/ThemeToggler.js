@@ -1,45 +1,49 @@
 import React from "react";
 import Sun from "./Sun";
 import Moon from "./Moon";
-import { useDarkMode } from "../../../hooks";
-import { css } from "../../../constants";
+import { ThemeContext } from "../../";
+import { themes } from "../../../constants";
+import styled from "styled-components";
 
-// TODO: use context for theme instead of state.
-const ThemeToggler = ({ width, height, fill, darkModeIsOne = false }) => {
-  const [darkModeEnabled, setDarkModeEnabled] = useDarkMode(darkModeIsOne);
+const ThemeToggler = ({ width, height, fill }) => {
   const [svgFill, setSVGFill] = React.useState(
-    fill || css.vars.textColorPrimary
+    fill || themes.vars.textColorPrimary
   );
-
-  const toggleDarkMode = () => {
-    setDarkModeEnabled((prev) => !prev);
-  };
 
   const hoverHandler = (color) => {
     setSVGFill(color);
   };
 
   return (
-    <>
-      <div onClick={toggleDarkMode}>
-        {darkModeEnabled ? (
-          <div
-            onMouseEnter={() => hoverHandler(css.theme.light.textColorPrimary)}
-            onMouseLeave={() => hoverHandler(css.theme.dark.textColorPrimary)}
-          >
+    <ThemeContext.Consumer>
+      {({ theme, toggleTheme }) => (
+        <Div
+          onClick={toggleTheme}
+          onMouseEnter={() => hoverHandler(themes.vars.textColorSecondary)}
+          onMouseLeave={() => hoverHandler(themes.vars.textColorPrimary)}
+        >
+          {theme === themes.dark ? (
             <Sun fill={svgFill} width={width} height={height} />
-          </div>
-        ) : (
-          <div
-            onMouseEnter={() => hoverHandler(css.theme.dark.textColorPrimary)}
-            onMouseLeave={() => hoverHandler(css.theme.light.textColorPrimary)}
-          >
+          ) : (
             <Moon fill={svgFill} width={width} height={height} />
-          </div>
-        )}
-      </div>
-    </>
+          )}
+        </Div>
+      )}
+    </ThemeContext.Consumer>
   );
 };
+
+const Div = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  border-radius: 100%;
+  &:hover {
+    background: var(--text-color-primary);
+  }
+`;
 
 export default ThemeToggler;
