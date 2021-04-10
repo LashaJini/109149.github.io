@@ -13,13 +13,13 @@ $number-of-togglers: 5;
   width: 90px;
 }
 .menu-nav {
-  width: 380px;
+  width: 90px;
 }
 
 /* label */
 .cta-menu-open-button {
   position: absolute;
-  transform: scale(1.1, 1.1) translate3d(0, 0, 0);
+  transform: scale(1) translate3d(0, 0, 0);
 }
 .menu-menu-open-button {
   transform: scale(0) translate3d(0, 0, 0);

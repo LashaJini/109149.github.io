@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import "./MenuButtons.scss";
+import { ThemeToggler, SoundToggler, MusicToggler } from "../";
 
 const r = 90;
 
@@ -96,139 +97,111 @@ const MenuButtons = ({ observableElement }) => {
   }
 
   return (
-    <Div className="menu-buttons-wrapper">
-      <link
-        rel="stylesheet"
-        href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-      />
-
-      <Nav className="menu menu-nav">
-        <Input
-          type="checkbox"
-          href="#"
-          className="menu-open"
-          name="menu-open"
-          id="menu-open"
+    <StickyDiv className="menu-buttons-wrapper">
+      <Div>
+        <link
+          rel="stylesheet"
+          href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
         />
-        <Label
-          className="menu-open-button menu-menu-open-button"
-          htmlFor="menu-open"
-        >
-          <Hamburger1 className="hamburger-1"></Hamburger1>
-          <Hamburger2 className="hamburger-2"></Hamburger2>
-          <Hamburger3 className="hamburger-3"></Hamburger3>
-        </Label>
 
-        <A
-          href="https://google.com"
-          className="toggler-button"
-          _x={getX(0)}
-          _y={getY(0)}
-        >
-          <i className="fa fa-bar-chart"></i>{" "}
-        </A>
-        <A
-          href="https://google.com"
-          className="toggler-button"
-          _i={2}
-          _x={getX(1)}
-          _y={getY(1)}
-        >
-          <i className="fa fa-plus"></i>{" "}
-        </A>
-        <A
-          href="https://google.com"
-          className="toggler-button"
-          _i={3}
-          _x={getX(2)}
-          _y={getY(2)}
-        >
-          <i className="fa fa-heart"></i>{" "}
-        </A>
-        <A
-          href="https://google.com"
-          className="toggler-button"
-          _i={4}
-          _x={getX(3)}
-          _y={getY(3)}
-        >
-          <i className="fa fa-envelope"></i>{" "}
-        </A>
-        <A
-          href="https://google.com"
-          className="toggler-button"
-          _i={5}
-          _x={getX(4)}
-          _y={getY(4)}
-        >
-          <i className="fa fa-cog"></i>{" "}
-        </A>
-      </Nav>
+        <Nav className="menu menu-nav">
+          <Input
+            type="checkbox"
+            href="#"
+            className="menu-open"
+            name="menu-open"
+            id="menu-open"
+          />
+          <Label
+            className="menu-open-button menu-menu-open-button"
+            htmlFor="menu-open"
+          >
+            <Hamburger1 className="hamburger-1"></Hamburger1>
+            <Hamburger2 className="hamburger-2"></Hamburger2>
+            <Hamburger3 className="hamburger-3"></Hamburger3>
+          </Label>
 
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        width="0"
-        height="0"
-      >
-        <defs>
-          <filter id="shadowed-goo">
-            <feGaussianBlur
-              in="SourceGraphic"
-              result="blur"
-              stdDeviation="10"
-            />
-            <feColorMatrix
-              in="blur"
-              mode="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-              result="goo"
-            />
+          <A className="toggler-button" _x={getX(0)} _y={getY(0)}>
+            <ThemeToggler />
+          </A>
+          <A className="toggler-button" _i={2} _x={getX(1)} _y={getY(1)}>
+            <SoundToggler />
+          </A>
+          <A className="toggler-button" _i={3} _x={getX(2)} _y={getY(2)}>
+            <MusicToggler />
+          </A>
+          <A className="toggler-button" _i={4} _x={getX(3)} _y={getY(3)}>
+            <i className="fa fa-envelope"></i>{" "}
+          </A>
+          <A className="toggler-button" _i={5} _x={getX(4)} _y={getY(4)}>
+            <i className="fa fa-cog"></i>{" "}
+          </A>
+        </Nav>
 
-            <feGaussianBlur in="goo" stdDeviation="15" result="shadow" />
-            <feColorMatrix
-              in="shadow"
-              mode="matrix"
-              values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.2"
-              result="shadow"
-            />
-            <feOffset in="shadow" dx="-10" dy="10" result="shadow" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          width="0"
+          height="0"
+        >
+          <defs>
+            <filter id="cta-filter">
+              <feGaussianBlur
+                in="SourceGraphic"
+                result="blur"
+                stdDeviation="10"
+              />
+              <feColorMatrix
+                in="blur"
+                mode="matrix"
+                values="1 1 1 1 0
+                      0 1 0 0 0
+                      0 0 1 0 0
+                      0 0 0 24 -9"
+                result="goo"
+              />
 
-            <feBlend in2="shadow" in="goo" result="goo" />
+              <feGaussianBlur in="goo" stdDeviation="5" result="shadow" />
+              <feColorMatrix
+                in="shadow"
+                mode="matrix"
+                values="0 0 0 0 0
+                      0 0 0 0 0
+                      0 0 0 0 0
+                      0 0 0 1 -0.1"
+                result="shadow"
+              />
+              <feOffset in="shadow" dx="3" dy="10" result="shadow" />
 
-            <feBlend in2="goo" in="SourceGraphic" result="mix" />
-          </filter>
+              <feBlend in2="shadow" in="goo" result="goo" />
 
-          <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="9" />
-            <feColorMatrix
-              in="blur"
-              mode="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-              result="goo"
-            />
-            <feBlend in2="goo" in="SourceGraphic" result="mix" />
-          </filter>
-        </defs>
-      </svg>
-    </Div>
+              <feBlend in2="goo" in="SourceGraphic" result="mix" />
+            </filter>
+          </defs>
+        </svg>
+      </Div>
+    </StickyDiv>
   );
 };
 
-const Div = styled.div`
+const StickyDiv = styled.div`
   position: sticky;
   transition: all 1200ms ease;
-
-  display: flex;
-  align-items: center;
-  justify-content: end;
   z-index: 10;
+  width: 100%;
+`;
+
+const Div = styled.div`
+  // for mobile.
+  position: absolute;
+  top: 50%;
+  left: 75%;
 
   transition: all 1200ms ease;
 `;
 
 const Nav = styled.nav`
-  filter: url("#shadowed-goo");
+  filter: url("#cta-filter");
   // background: rgba(55, 35, 35, 0.2);
 
   height: 100px;
@@ -289,7 +262,7 @@ const Label = styled.label`
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.2, 1.2) translate3d(0, 0, 0);
+    transform: scale(1.05, 1.05) translate3d(0, 0, 0);
   }
 `;
 const Input = styled.input`
@@ -298,7 +271,11 @@ const Input = styled.input`
   &:checked ~ ${Label} {
     transition-timing-function: linear;
     transition-duration: 200ms;
-    transform: scale(0.8, 0.8) translate3d(0, 0, 0);
+    transform: scale(0.7, 0.7) translate3d(0, 0, 0);
+
+    &:hover {
+      transform: scale(0.8, 0.8) translate3d(0, 0, 0);
+    }
 
     ${Hamburger1} {
       transform: translate3d(0, 0, 0) rotate(45deg);
@@ -312,7 +289,7 @@ const Input = styled.input`
   }
 `;
 
-const A = styled.a`
+const A = styled.div`
   --fg: var(--bg-color-primary);
   background: var(--fg);
   border-radius: 100%;
@@ -325,7 +302,7 @@ const A = styled.a`
   text-align: center;
   // transform: translate3d(0, 0, 0);
   transition: all ease-out 2200ms;
-  // color: inherit;
+  cursor: pointer;
 
   position: absolute;
   // transform: translate3d(${({ _i }) => _i * 35}px, 0, 0);
