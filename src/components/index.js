@@ -1,3 +1,4 @@
+import { ThemeContext } from "./context";
 import SoundToggler from "./toggler/sound-toggler/SoundToggler";
 import MusicToggler from "./toggler/music-toggler/MusicToggler";
 import ThemeToggler from "./toggler/theme-toggler/ThemeToggler";
@@ -14,4 +15,5 @@ export {
   ThemeToggler,
   SoundToggler,
   MusicToggler,
+  ThemeContext,
 };
