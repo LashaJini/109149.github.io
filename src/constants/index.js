@@ -5,17 +5,26 @@ const css = {
       bgColorPrimary: "#ccc",
       bgColorSecondary: "#333333",
       textColorPrimary: "black",
+      textColorSecondary: "white",
     },
     dark: {
       bgColorPrimary: "#151515",
       bgColorSecondary: "#333333",
       textColorPrimary: "white",
+      textColorSecondary: "black",
     },
   },
+};
+
+const themes = {
+  dark: "dark",
+  light: "light",
   vars: {
+    /* css variables; MUST BE IN SYNC with src/index.css:root */
     bgColorPrimary: "var(--bg-color-primary)",
     bgColorSecondary: "var(--bg-color-secondary)",
     textColorPrimary: "var(--text-color-primary)",
+    textColorSecondary: "var(--text-color-secondary)",
   },
 };
 
@@ -41,4 +50,4 @@ const acdcYtUrls = {
   backInBlackURL: "https://www.youtube.com/watch?v=pAgnJDJN4VA",
 };
 
-export { bp, acdcYtUrls, css };
+export { bp, acdcYtUrls, css, themes };

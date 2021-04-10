@@ -2,6 +2,7 @@
   --bg-color-primary: #ccc;
   --bg-color-secondary: #333333;
   --text-color-primary: black;
+  --text-color-secondary: white;
 }
 
 /* dark mode */
@@ -9,6 +10,7 @@
   --bg-color-primary: #151515;
   --bg-color-secondary: #333333;
   --text-color-primary: white;
+  --text-color-secondary: black;
 }
 
 body {
