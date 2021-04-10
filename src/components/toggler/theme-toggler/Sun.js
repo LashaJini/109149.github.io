@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import SVG from "./SVG";
+import { themes } from "../../../constants";
 
 const Path = styled.path`
-  fill: ${({ _fill }) => (_fill ? _fill : "#000000")};
+  fill: ${({ _fill }) => (_fill ? _fill : themes.vars.textColorPrimary)};
+  transition: all ease 200ms;
   cursor: pointer;
 `;
 
