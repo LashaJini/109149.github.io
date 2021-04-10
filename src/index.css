@@ -1,12 +1,14 @@
 :root {
   --bg-color-primary: #ccc;
   --bg-color-secondary: #333333;
+  --text-color-primary: black;
 }
 
 /* dark mode */
 [data-theme="dark"] {
   --bg-color-primary: #151515;
   --bg-color-secondary: #333333;
+  --text-color-primary: white;
 }
 
 body {
