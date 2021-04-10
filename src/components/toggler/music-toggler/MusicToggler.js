@@ -7,53 +7,29 @@ import {
 } from "../../../static/music";
 import PauseButton from "./PauseButton";
 import PlayButton from "./PlayButton";
-
-const Button = styled.button`
-  width: 50px;
-  height: 25px;
-  cursor: pointer;
-  font-weight: bold;
-  display: ${({ visible }) => (visible ? "flex" : "none")};
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  padding: 5px;
-  border-radius: 10px;
-`;
-
-const PrevButton = styled(Button)`
-  position: absolute;
-  transform: translate(${({ x, y }) => `${x},${y}`});
-`;
-const Play = styled.div``;
-const NextButton = styled(Button)`
-  position: absolute;
-  transform: translate(${({ x, y }) => `${x},${y}`});
-`;
+import NextButton from "./NextButton";
+import PrevButton from "./PreviousButton";
+import { themes } from "../../../constants";
 
 const ACDC = [noMansLand, wildReputation, shotInTheDark];
 
-const MusicToggler = ({
-  width,
-  height,
-  fill,
-  isPlaying = false,
-  prevButtonIsVisible = false,
-  nextButtonIsVisible = false,
-  translatePrevButton = { x: "0px", y: "0px" },
-  translateNextButton = { x: "0px", y: "0px" },
-}) => {
+// TODO: fix: on mobile, when focusing + going cta, next + prev buttons do not disappear.
+// TODO: change transform of next + prev buttons when in cta mode.
+const MusicToggler = ({ width, height, fill, isPlaying = false }) => {
   const audioRef = React.useRef();
   const [musicIsPlaying, setMusicIsPlaying] = React.useState(isPlaying);
   const [currentlyPlaying, setCurrentlyPlaying] = React.useState({
     index: 0,
     src: ACDC[0],
   });
+  const [visible, setVisible] = React.useState(false);
+
   const pause = React.useCallback(() => {
     if (musicIsPlaying) {
       audioRef.current.pause();
     }
   }, [musicIsPlaying]);
+
   const playNext = React.useCallback(() => {
     pause();
 
@@ -99,6 +75,18 @@ const MusicToggler = ({
     setMusicIsPlaying(true);
   };
 
+  const prevNextVisibilityToggler = (event) => {
+    // we need this check because onClick triggers onMouseLeave.
+    if (
+      event.currentTarget.classList.contains("music-toggler") &&
+      event.type !== "mouseleave"
+    ) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  };
+
   React.useEffect(() => {
     function nextSong() {
       audioRef.current.currentTime = 0;
@@ -110,33 +98,87 @@ const MusicToggler = ({
   }, [playNext]);
 
   return (
-    <>
+    <Div
+      className="music-toggler"
+      onMouseEnter={prevNextVisibilityToggler}
+      onMouseLeave={prevNextVisibilityToggler}
+    >
       <audio ref={audioRef} /*controls*/ src={currentlyPlaying.src}></audio>
-      <PrevButton
-        x={translatePrevButton.x}
-        y={translatePrevButton.y}
-        visible={prevButtonIsVisible}
-        onClick={playPrev}
+      <PrevButtonWrapper className="prev-button" visible={visible}>
+        <PrevButton
+          className="prev-button"
+          onClick={playPrev}
+          width={width}
+          height={height}
+        />
+      </PrevButtonWrapper>
+      <NextButtonWrapper className="next-button" visible={visible}>
+        <NextButton onClick={playNext} width={width} height={height} />
+      </NextButtonWrapper>
+      <PlayPauseButtonWrapper
+        className="play-pause-button"
+        visible={true}
+        onClick={playCurrent}
       >
-        {"<"}
-      </PrevButton>
-      <Play visible={true} onClick={playCurrent}>
         {musicIsPlaying ? (
-          <PauseButton width={width} height={height} fill={fill} />
+          <PauseButton width={width} height={height} />
         ) : (
-          <PlayButton width={width} height={height} fill={fill} />
+          <PlayButton width={width} height={height} />
         )}
-      </Play>
-      <NextButton
-        x={translateNextButton.x}
-        y={translateNextButton.y}
-        visible={nextButtonIsVisible}
-        onClick={playNext}
-      >
-        {">"}
-      </NextButton>
-    </>
+      </PlayPauseButtonWrapper>
+    </Div>
   );
 };
+
+const Div = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const Button = styled.div`
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  font-weight: bold;
+  display: ${({ visible }) => (visible ? "flex" : "none")};
+  align-items: center;
+  justify-content: center;
+  // font-size: 1.1rem;
+  border-radius: 100%;
+  background: var(--bg-color-primary);
+
+  &:hover {
+    background: var(--text-color-primary);
+    svg {
+      fill: ${themes.vars.textColorSecondary};
+    }
+  }
+`;
+
+const PrevButtonWrapper = styled(Button)`
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(-5%, 55%);
+`;
+const NextButtonWrapper = styled(Button)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(5%, 55%);
+`;
+
+const PlayPauseButtonWrapper = styled(Div)`
+  border-radius: 100%;
+  &:hover {
+    background: var(--text-color-primary);
+    svg {
+      fill: ${themes.vars.textColorSecondary};
+    }
+  }
+`;
 
 export default MusicToggler;
