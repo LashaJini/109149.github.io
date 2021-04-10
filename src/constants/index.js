@@ -1,3 +1,17 @@
+/* css variables; MUST BE IN SYNC with src/index.css:root */
+const css = {
+  theme: {
+    light: {
+      bgColorPrimary: "#ccc",
+      bgColorSecondary: "#333333",
+    },
+    dark: {
+      bgColorPrimary: "#151515",
+      bgColorSecondary: "#333333",
+    },
+  },
+};
+
 /* breakpoints */
 const bp = {
   xxs: "0px" /* extra-extra-small */,
@@ -20,4 +34,4 @@ const acdcYtUrls = {
   backInBlackURL: "https://www.youtube.com/watch?v=pAgnJDJN4VA",
 };
 
-export { bp, acdcYtUrls };
+export { bp, acdcYtUrls, css };
