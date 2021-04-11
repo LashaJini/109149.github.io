@@ -35,13 +35,14 @@ const App = () => {
             <LogoGridItem className="logo-wrapper" col="1/2">
               <Logo width="200px" height="100px" />
             </LogoGridItem>
+            <DividerGridItem ref={observableElementRef} row="2">
+              <Divider />
+            </DividerGridItem>
           </HeaderGridItem>
 
-          <GridItem row="2" ref={observableElementRef}></GridItem>
-
-          <DividerGridItem className="grid-item-divider" row="3">
-            <Divider fill="var(--bg-color-primary)" />
-          </DividerGridItem>
+          <GridItem row="2">
+            <h2 style={{ color: "white" }}>Whoami</h2>
+          </GridItem>
         </Grid>
         <MenuButtons observableElement={observableElement} />
       </div>
@@ -52,7 +53,7 @@ const App = () => {
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(${numberOfColumns}, 1fr);
-  grid-gap: 20px;
+  grid-gap: 30px;
 
   position: absolute;
   width: 100%;
@@ -62,36 +63,55 @@ const GridItem = styled.div`
   margin: 0;
   padding: 0;
   background-color: ${({ bgColor }) =>
-    bgColor ? bgColor : "var(--bg-color-secondary)"};
+    bgColor ? bgColor : themes.vars.bgColorPrimary};
   display: flex;
   align-items: center;
   justify-content: center;
   grid-column: ${({ col }) => (col ? col : `span ${numberOfColumns}`)};
   grid-row: ${({ row }) => (row ? row : "1")};
+  z-index: 2;
 `;
 
 const HeaderGridItem = styled(GridItem)`
   display: grid;
   grid-template-columns: 1fr 4fr;
-  grid-auto-rows: 300px;
+  grid-auto-rows: 250px;
   grid-gap: 20px;
   align-items: start;
-  background-color: var(--bg-color-secondary);
+  background-color: ${themes.vars.bgColorSecondary};
 
   position: sticky;
   top: 0;
   z-index: 1;
+
+  @media (min-width: ${bp.xs}) {
+    grid-auto-rows: 280px;
+  }
+  @media (min-width: ${bp.sm1}) {
+    grid-auto-rows: 290px;
+  }
+  @media (min-width: ${bp.sm2}) {
+    grid-auto-rows: 390px;
+  }
+  @media (min-width: ${bp.sm}) {
+    grid-auto-rows: 480px;
+  }
+  @media (min-width: ${bp.md1}) {
+    grid-auto-rows: 580px;
+  }
+  @media (min-width: ${bp.md}) {
+    grid-auto-rows: 640px;
+  }
+  @media (min-width: ${bp.lg1}) {
+    grid-auto-rows: 720px;
+  }
+  @media (min-width: ${bp.lg}) {
+    grid-auto-rows: 860px;
+  }
 `;
 
 const LogoGridItem = styled(GridItem)`
-  position: sticky;
-  top: 0;
-  z-index: 1;
-`;
-
-const MenuGridItem = styled(GridItem)`
-  height: 100px;
-
+  background-color: ${themes.vars.bgColorSecondary};
   position: sticky;
   top: 0;
   z-index: 1;
@@ -99,25 +119,11 @@ const MenuGridItem = styled(GridItem)`
 
 const DividerGridItem = styled(GridItem)`
   background-color: transparent;
-  position: relative;
-  top: -110%;
-  z-index: 2;
-
-  @media (min-width: ${bp.xs}) {
-    top: -80%;
-  }
-
-  @media (min-width: ${bp.sm}) {
-    top: -55%;
-  }
-
-  @media (min-width: ${bp.md}) {
-    top: -45%;
-  }
-
-  @media (min-width: ${bp.lg}) {
-    top: -35%;
-  }
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: all 200ms ease;
 `;
 
 export default App;
