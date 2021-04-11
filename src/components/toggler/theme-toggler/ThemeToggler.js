@@ -1,31 +1,18 @@
 import React from "react";
-import Sun from "./Sun";
-import Moon from "./Moon";
 import { ThemeContext } from "../../";
 import { themes } from "../../../constants";
 import styled from "styled-components";
+import { SunSVG, MoonSVG } from "../../svg";
 
 const ThemeToggler = ({ width, height, fill }) => {
-  const [svgFill, setSVGFill] = React.useState(
-    fill || themes.vars.textColorPrimary
-  );
-
-  const hoverHandler = (color) => {
-    setSVGFill(color);
-  };
-
   return (
     <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
-        <Div
-          onClick={toggleTheme}
-          onMouseEnter={() => hoverHandler(themes.vars.textColorSecondary)}
-          onMouseLeave={() => hoverHandler(themes.vars.textColorPrimary)}
-        >
+        <Div onClick={toggleTheme}>
           {theme === themes.dark ? (
-            <Sun fill={svgFill} width={width} height={height} />
+            <SunSVG fill={fill} width={width} height={height} />
           ) : (
-            <Moon fill={svgFill} width={width} height={height} />
+            <MoonSVG fill={fill} width={width} height={height} />
           )}
         </Div>
       )}
@@ -39,10 +26,13 @@ const Div = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-
   border-radius: 100%;
+
   &:hover {
-    background: var(--text-color-primary);
+    background: ${themes.vars.textColorPrimary};
+    svg {
+      fill: ${themes.vars.textColorSecondary};
+    }
   }
 `;
 

@@ -5,10 +5,12 @@ import {
   wildReputation,
   shotInTheDark,
 } from "../../../static/music";
-import PauseButton from "./PauseButton";
-import PlayButton from "./PlayButton";
-import NextButton from "./NextButton";
-import PrevButton from "./PreviousButton";
+import {
+  PrevButtonSVG as PrevButton,
+  PauseButtonSVG as PauseButton,
+  PlayButtonSVG as PlayButton,
+  NextButtonSVG as NextButton,
+} from "../../svg";
 import { themes } from "../../../constants";
 import "./MusicToggler.scss";
 

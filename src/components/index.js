@@ -1,3 +1,4 @@
+import NetworkToggler from "./toggler/network-toggler/NetworkToggler";
 import { ThemeContext } from "./context";
 import SoundToggler from "./toggler/sound-toggler/SoundToggler";
 import MusicToggler from "./toggler/music-toggler/MusicToggler";
@@ -16,4 +17,5 @@ export {
   SoundToggler,
   MusicToggler,
   ThemeContext,
+  NetworkToggler,
 };

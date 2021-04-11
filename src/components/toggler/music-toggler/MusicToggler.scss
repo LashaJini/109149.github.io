@@ -4,11 +4,11 @@
     &:hover {
       /* prev button */
       div:nth-child(2) {
-        transform: translate(-130%, -20%) rotate(-55deg);
+        transform: translate(-120%, -50%) rotate(-35deg);
       }
       /* next button */
       div:nth-child(3) {
-        transform: translate(-60%, -115%) rotate(-55deg);
+        transform: translate(-20%, -125%) rotate(-35deg);
       }
     }
   }
