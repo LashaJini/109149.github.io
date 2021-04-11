@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import "./MenuButtons.scss";
 import { ThemeToggler, SoundToggler, MusicToggler } from "../";
-import { themes } from "../../constants";
+import { themes, bp } from "../../constants";
 
 const r = 90;
 
@@ -16,9 +16,73 @@ function getY(y) {
   return Math.floor(-r * Math.sin(start + spread * y));
 }
 
+function ctaMode() {
+  /* main */
+  document
+    .querySelector(".menu-buttons-wrapper")
+    .classList.add("cta-menu-buttons-wrapper-nav");
+  document
+    .querySelector(".menu-buttons-wrapper")
+    .classList.remove("menu-menu-buttons-wrapper-nav");
+
+  /* nav */
+  document.querySelector(".menu").classList.add("cta-nav");
+  document.querySelector(".menu").classList.remove("menu-nav");
+
+  /* label */
+  document
+    .querySelector(".menu-open-button")
+    .classList.add("cta-menu-open-button");
+  document
+    .querySelector(".menu-open-button")
+    .classList.remove("menu-menu-open-button");
+
+  /* a */
+  document
+    .querySelectorAll(".toggler-button")
+    .forEach((x) => x.classList.add("a-cta"));
+  document
+    .querySelectorAll(".toggler-button")
+    .forEach((x) => x.classList.remove("a-nav"));
+}
+
+function menuMode() {
+  /* label should not be checked */
+  document.querySelector("#menu-open").checked = false;
+
+  /* main */
+  document
+    .querySelector(".menu-buttons-wrapper")
+    .classList.remove("cta-menu-buttons-wrapper-nav");
+  document
+    .querySelector(".menu-buttons-wrapper")
+    .classList.add("menu-menu-buttons-wrapper-nav");
+
+  /* nav */
+  document.querySelector(".menu").classList.remove("cta-nav");
+  document.querySelector(".menu").classList.add("menu-nav");
+
+  /* label */
+  document
+    .querySelector(".menu-open-button")
+    .classList.remove("cta-menu-open-button");
+  document
+    .querySelector(".menu-open-button")
+    .classList.add("menu-menu-open-button");
+
+  /* a */
+  document
+    .querySelectorAll(".toggler-button")
+    .forEach((x) => x.classList.remove("a-cta"));
+  document
+    .querySelectorAll(".toggler-button")
+    .forEach((x) => x.classList.add("a-nav"));
+}
+
 const MenuButtons = ({ observableElement }) => {
   const observer = React.useRef();
   const observableElementRef = React.useRef();
+  const [intersecting, setIntersecting] = React.useState(true);
   const [isCta, setIsCta] = React.useState(false);
 
   React.useEffect(() => {
@@ -34,74 +98,47 @@ const MenuButtons = ({ observableElement }) => {
     }
   }, [observableElement]);
 
+  // handles initial setup for screen width less than bp.sm
+  React.useEffect(() => {
+    if (window.innerWidth <= bp.sm.substring(bp.sm.length - 2, 0)) {
+      /* cta */
+      setIsCta(true);
+      ctaMode();
+    }
+  }, []);
+
   function handleIntersect(entries, observer) {
     if (!entries[0].isIntersecting && entries[0].intersectionRatio === 0) {
       /* cta */
       setIsCta(true);
-
-      /* main */
-      document
-        .querySelector(".menu-buttons-wrapper")
-        .classList.add("cta-menu-buttons-wrapper-nav");
-      document
-        .querySelector(".menu-buttons-wrapper")
-        .classList.remove("menu-menu-buttons-wrapper-nav");
-
-      /* nav */
-      document.querySelector(".menu").classList.add("cta-nav");
-      document.querySelector(".menu").classList.remove("menu-nav");
-
-      /* label */
-      document
-        .querySelector(".menu-open-button")
-        .classList.add("cta-menu-open-button");
-      document
-        .querySelector(".menu-open-button")
-        .classList.remove("menu-menu-open-button");
-
-      /* a */
-      document
-        .querySelectorAll(".toggler-button")
-        .forEach((x) => x.classList.add("a-cta"));
-      document
-        .querySelectorAll(".toggler-button")
-        .forEach((x) => x.classList.remove("a-nav"));
+      setIntersecting(false);
+      ctaMode();
     } else {
-      /* menu */
-      setIsCta(false);
-
-      /* label should not be checked */
-      document.querySelector("#menu-open").checked = false;
-
-      /* main */
-      document
-        .querySelector(".menu-buttons-wrapper")
-        .classList.remove("cta-menu-buttons-wrapper-nav");
-      document
-        .querySelector(".menu-buttons-wrapper")
-        .classList.add("menu-menu-buttons-wrapper-nav");
-
-      /* nav */
-      document.querySelector(".menu").classList.remove("cta-nav");
-      document.querySelector(".menu").classList.add("menu-nav");
-
-      /* label */
-      document
-        .querySelector(".menu-open-button")
-        .classList.remove("cta-menu-open-button");
-      document
-        .querySelector(".menu-open-button")
-        .classList.add("menu-menu-open-button");
-
-      /* a */
-      document
-        .querySelectorAll(".toggler-button")
-        .forEach((x) => x.classList.remove("a-cta"));
-      document
-        .querySelectorAll(".toggler-button")
-        .forEach((x) => x.classList.add("a-nav"));
+      if (window.innerWidth > bp.sm.substring(bp.sm.length - 2, 0)) {
+        /* menu */
+        setIsCta(false);
+        setIntersecting(true);
+        menuMode();
+      }
     }
   }
+
+  React.useEffect(() => {
+    function t() {
+      if (window.innerWidth <= bp.sm.substring(bp.sm.length - 2, 0)) {
+        /* cta */
+        setIsCta(true);
+        ctaMode();
+      } else if (intersecting) {
+        /* menu */
+        setIsCta(false);
+        menuMode();
+      }
+    }
+
+    window.addEventListener("resize", t);
+    return () => window.removeEventListener("resize", t);
+  }, [intersecting]);
 
   return (
     <StickyDiv className="menu-buttons-wrapper">
@@ -186,15 +223,15 @@ const MenuButtons = ({ observableElement }) => {
 const StickyDiv = styled.div`
   position: sticky;
   transition: all 1200ms ease;
-  z-index: 10;
+  z-index: 1;
   width: 100%;
 `;
 
 const Div = styled.div`
   position: absolute;
-  top: 50%;
-  left: 78%;
-
+  top: 0;
+  right: 5%;
+  transform: translate(-10%);
   transition: all 1200ms ease;
 `;
 
@@ -210,7 +247,7 @@ const Nav = styled.nav`
   margin-right: 1rem;
 
   position: relative;
-  right: 10%;
+  // right: 10%;
 
   transition: all 2200ms ease;
 `;
