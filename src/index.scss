@@ -1,12 +1,24 @@
 :root {
+  /* color */
   --bg-color-primary: #ccc;
   --bg-color-secondary: #333333;
   --text-color-primary: black;
   --text-color-secondary: white;
+
+  /* breakpoints */
+  --bp-xss: 0;
+  --bp-xs: 320px;
+  --bp-sm1: 360px;
+  --bp-sm2: 460px;
+  --bp-sm: 600px;
+  --bp-md: 960px;
+  --bp-lg: 1280px;
+  --bp-xl: 1920px;
 }
 
 /* dark mode */
 [data-theme="dark"] {
+  /* color */
   --bg-color-primary: #151515;
   --bg-color-secondary: #333333;
   --text-color-primary: white;

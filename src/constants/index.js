@@ -1,4 +1,4 @@
-/* css variables; MUST BE IN SYNC with src/index.css:root */
+/* css variables; MUST BE IN SYNC with src/index.scss:root */
 const css = {
   theme: {
     light: {
@@ -28,10 +28,12 @@ const themes = {
   },
 };
 
-/* breakpoints */
+/* breakpoints; SYNCED with bp.scss and index.scss */
 const bp = {
   xxs: "0px" /* extra-extra-small */,
   xs: "320px" /* extra-small */,
+  sm1: "360px" /* small-1 */,
+  sm2: "460px" /* small-2 */,
   sm: "600px" /* small */,
   md: "960px" /* medium */,
   lg: "1280px" /* large */,
