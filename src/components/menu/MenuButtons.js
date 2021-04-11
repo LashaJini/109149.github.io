@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import "./MenuButtons.scss";
-import { ThemeToggler, SoundToggler, MusicToggler } from "../";
+import { NetworkToggler, ThemeToggler, SoundToggler, MusicToggler } from "../";
 import { themes, bp } from "../../constants";
 
 const r = 90;
@@ -90,7 +90,7 @@ const MenuButtons = ({ observableElement }) => {
       let options = {
         root: null,
         rootMargin: "0px",
-        threshold: 0,
+        threshold: 0.5,
       };
       observableElementRef.current = observableElement;
       observer.current = new IntersectionObserver(handleIntersect, options);
@@ -108,7 +108,7 @@ const MenuButtons = ({ observableElement }) => {
   }, []);
 
   function handleIntersect(entries, observer) {
-    if (!entries[0].isIntersecting && entries[0].intersectionRatio === 0) {
+    if (!entries[0].isIntersecting && entries[0].intersectionRatio <= 0.5) {
       /* cta */
       setIsCta(true);
       setIntersecting(false);
@@ -161,16 +161,16 @@ const MenuButtons = ({ observableElement }) => {
           </Label>
 
           <A className="toggler-button" _x={getX(0)} _y={getY(0)}>
-            <ThemeToggler />
+            <NetworkToggler />
           </A>
           <A className="toggler-button" _i={2} _x={getX(1)} _y={getY(1)}>
-            <SoundToggler />
-          </A>
-          <A className="toggler-button" _i={3} _x={getX(2)} _y={getY(2)}>
             <MusicToggler isCta={isCta} />
           </A>
+          <A className="toggler-button" _i={3} _x={getX(2)} _y={getY(2)}>
+            <SoundToggler />
+          </A>
           <A className="toggler-button" _i={4} _x={getX(3)} _y={getY(3)}>
-            <i className="fa fa-envelope"></i>{" "}
+            <ThemeToggler />
           </A>
         </Nav>
 
@@ -223,7 +223,7 @@ const MenuButtons = ({ observableElement }) => {
 const StickyDiv = styled.div`
   position: sticky;
   transition: all 1200ms ease;
-  z-index: 1;
+  z-index: 10;
   width: 100%;
 `;
 
