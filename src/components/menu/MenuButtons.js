@@ -2,20 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import "./MenuButtons.scss";
 import { ThemeToggler, SoundToggler, MusicToggler } from "../";
+import { themes } from "../../constants";
 
 const r = 90;
 
+const start = (2 * Math.PI) / 5;
+const spread = Math.PI / 4;
+
 function getX(x) {
-  return Math.floor(r * Math.cos(Math.PI / 3 + (Math.PI / 4) * x));
+  return Math.floor(r * Math.cos(start + spread * x));
 }
 function getY(y) {
-  return Math.floor(-r * Math.sin(Math.PI / 3 + (Math.PI / 4) * y));
+  return Math.floor(-r * Math.sin(start + spread * y));
 }
 
-// TODO: constants...
 const MenuButtons = ({ observableElement }) => {
   const observer = React.useRef();
   const observableElementRef = React.useRef();
+  const [isCta, setIsCta] = React.useState(false);
 
   React.useEffect(() => {
     if (observableElement) {
@@ -33,6 +37,7 @@ const MenuButtons = ({ observableElement }) => {
   function handleIntersect(entries, observer) {
     if (!entries[0].isIntersecting && entries[0].intersectionRatio === 0) {
       /* cta */
+      setIsCta(true);
 
       /* main */
       document
@@ -63,6 +68,7 @@ const MenuButtons = ({ observableElement }) => {
         .forEach((x) => x.classList.remove("a-nav"));
     } else {
       /* menu */
+      setIsCta(false);
 
       /* label should not be checked */
       document.querySelector("#menu-open").checked = false;
@@ -124,13 +130,10 @@ const MenuButtons = ({ observableElement }) => {
             <SoundToggler />
           </A>
           <A className="toggler-button" _i={3} _x={getX(2)} _y={getY(2)}>
-            <MusicToggler />
+            <MusicToggler isCta={isCta} />
           </A>
           <A className="toggler-button" _i={4} _x={getX(3)} _y={getY(3)}>
             <i className="fa fa-envelope"></i>{" "}
-          </A>
-          <A className="toggler-button" _i={5} _x={getX(4)} _y={getY(4)}>
-            <i className="fa fa-cog"></i>{" "}
           </A>
         </Nav>
 
@@ -188,17 +191,15 @@ const StickyDiv = styled.div`
 `;
 
 const Div = styled.div`
-  // for mobile.
   position: absolute;
   top: 50%;
-  left: 75%;
+  left: 78%;
 
   transition: all 1200ms ease;
 `;
 
 const Nav = styled.nav`
   filter: url("#cta-filter");
-  // background: rgba(55, 35, 35, 0.2);
 
   height: 100px;
   font-size: 20px;
@@ -209,7 +210,7 @@ const Nav = styled.nav`
   margin-right: 1rem;
 
   position: relative;
-  right: 5%;
+  right: 10%;
 
   transition: all 2200ms ease;
 `;
@@ -239,8 +240,7 @@ const Hamburger3 = styled(Hamburger)`
 `;
 
 const Label = styled.label`
-  --fg: var(--bg-color-primary);
-  // position: absolute;
+  --fg: ${themes.vars.bgColorPrimary};
   background: var(--fg);
   border-radius: 100%;
   width: 80px;
@@ -254,7 +254,6 @@ const Label = styled.label`
   transition: all;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transition-duration: 500ms;
-  // transform: scale(1.1, 1.1) translate3d(0, 0, 0);
   cursor: pointer;
 
   &:hover {
@@ -286,7 +285,7 @@ const Input = styled.input`
 `;
 
 const A = styled.div`
-  --fg: var(--bg-color-primary);
+  --fg: ${themes.vars.bgColorPrimary};
   background: var(--fg);
   border-radius: 100%;
 
@@ -300,7 +299,6 @@ const A = styled.div`
 
   color: white;
   text-align: center;
-  // transform: translate3d(0, 0, 0);
   transition: all ease-out 2200ms;
   cursor: pointer;
 
@@ -314,8 +312,6 @@ const A = styled.div`
       transform: translate3d(${({ _x }) => _x}px, ${({ _y }) => _y}px, 0);
     }
   }
-
-  // transition-delay: 2.2s;
 `;
 
 export default MenuButtons;
