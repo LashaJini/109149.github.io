@@ -33,10 +33,13 @@ const bp = {
   xxs: "0px" /* extra-extra-small */,
   xs: "320px" /* extra-small */,
   sm1: "360px" /* small-1 */,
-  sm2: "460px" /* small-2 */,
+  sm2: "440px" /* small-2 */,
   sm: "600px" /* small */,
+  md1: "760px" /* medium-1 */,
   md: "960px" /* medium */,
+  lg1: "1080px" /* large-1 */,
   lg: "1280px" /* large */,
+  xl1: "1500px" /* extra-large-1 */,
   xl: "1920px" /* extra-large */,
 };
 
