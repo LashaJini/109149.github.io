@@ -161,7 +161,7 @@ const MenuButtons = ({ observableElement }) => {
           </Label>
 
           <A className="toggler-button" _x={getX(0)} _y={getY(0)}>
-            <NetworkToggler />
+            <NetworkToggler isCta={isCta} />
           </A>
           <A className="toggler-button" _i={2} _x={getX(1)} _y={getY(1)}>
             <MusicToggler isCta={isCta} />
