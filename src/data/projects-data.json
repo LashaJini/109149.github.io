@@ -1,0 +1,41 @@
+{
+  "cardImageUrl": "acdc.jpg",
+  "projectName": "Portfolio Project",
+  "repoUrl": "https://google.com",
+  "ytUrl": "https://www.youtube.com/watch?v=PZE89NFYb04",
+  "difficulty": "6",
+  "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+  "headerInfo": "AC/DC Portfolio",
+  "techUsed": [
+    {
+      "name": "github",
+      "url": "https://github.com",
+      "bgColor": "black",
+      "svgUrl": ""
+    },
+    {
+      "name": "typescript",
+      "url": "https://google.com",
+      "bgColor": "blue",
+      "svgUrl": ""
+    },
+    {
+      "name": "javascript",
+      "url": "https://google.com",
+      "bgColor": "blue",
+      "svgUrl": ""
+    },
+    {
+      "name": "react",
+      "url": "https://google.com",
+      "bgColor": "blue",
+      "svgUrl": ""
+    },
+    {
+      "name": "node",
+      "url": "https://google.com",
+      "bgColor": "green",
+      "svgUrl": ""
+    }
+  ]
+}
