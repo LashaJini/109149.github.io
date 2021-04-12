@@ -1,3 +1,8 @@
+import YoutubeSVG from "./Youtube";
+import TypescriptSVG from "./Typescript";
+import ReactSVG from "./React";
+import NodeSVG from "./Node";
+import JavascriptSVG from "./Javascript";
 import MoonSVG from "./Moon";
 import SunSVG from "./Sun";
 import BellSVG from "./Bell";
@@ -14,13 +19,16 @@ import TwitterSVG from "./Twitter";
 import SVG from "./SVG";
 
 const SVGComponents = {
+  TypescriptSVG,
+  RedditSVG,
+  NodeSVG,
+  JavascriptSVG,
   EmailSVG,
   GithubSVG,
   NextButtonSVG,
   PauseButtonSVG,
   PrevButtonSVG,
   PlayButtonSVG,
-  RedditSVG,
   StackoverflowSVG,
   TwitterSVG,
   SVG,
@@ -28,6 +36,8 @@ const SVGComponents = {
   BellSVG,
   MoonSVG,
   SunSVG,
+  YoutubeSVG,
+  ReactSVG,
 };
 
 export default SVGComponents;
@@ -46,4 +56,9 @@ export {
   BellSVG,
   MoonSVG,
   SunSVG,
+  TypescriptSVG,
+  NodeSVG,
+  JavascriptSVG,
+  YoutubeSVG,
+  ReactSVG,
 };
