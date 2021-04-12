@@ -6,12 +6,14 @@ const css = {
       bgColorSecondary: "#333333",
       textColorPrimary: "black",
       textColorSecondary: "white",
+      titleColorPrimary: "D00000",
     },
     dark: {
       bgColorPrimary: "#151515",
       bgColorSecondary: "#333333",
       textColorPrimary: "white",
       textColorSecondary: "black",
+      titleColorPrimary: "D00000",
     },
   },
 };
@@ -25,6 +27,7 @@ const themes = {
     bgColorSecondary: "var(--bg-color-secondary)",
     textColorPrimary: "var(--text-color-primary)",
     textColorSecondary: "var(--text-color-secondary)",
+    titleColorPrimary: "var(--title-color-primary)",
   },
 };
 

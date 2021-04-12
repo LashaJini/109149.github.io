@@ -10,7 +10,6 @@ import {
   NetworkSVG,
 } from "../../svg";
 
-// TODO: change twitter svg
 const NetworkToggler = ({ width, height, fill, isCta }) => {
   React.useEffect(() => {
     if (isCta) {

@@ -1,9 +1,15 @@
+@font-face {
+  font-family: "Roboto";
+  src: local("Roboto"), url("./fonts/Roboto-Regular.ttf") format("truetype");
+}
+
 :root {
   /* color */
   --bg-color-primary: #ccc;
   --bg-color-secondary: #333333;
   --text-color-primary: black;
   --text-color-secondary: white;
+  --title-color-primary: #d00000;
 
   /* breakpoints */
   --bp-xss: 0;
@@ -26,9 +32,11 @@
   --bg-color-secondary: #333333;
   --text-color-primary: white;
   --text-color-secondary: black;
+  --title-color-primary: #d00000;
 }
 
 body {
+  font-family: Roboto;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
