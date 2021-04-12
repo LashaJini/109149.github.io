@@ -20,7 +20,7 @@ const Logo = ({ width = "400px", height = "200px" }) => {
 
   return (
     <>
-      <SVG id="logo-svg" viewBox="-10 0 240 60" _width={width} _height={height}>
+      <SVG id="logo-svg" viewBox="-22 0 240 60" _width={width} _height={height}>
         <radialGradient id="radial-gradient">
           <stop offset="10%" stopColor="#63000a" />
           <stop offset="95%" stopColor="#b80013" />
