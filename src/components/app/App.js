@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { ThemeContext, MenuButtons, Logo, Divider } from "../";
+import { Card, Footer, ThemeContext, MenuButtons, Logo, Divider } from "../";
 import { bp, themes } from "../../constants";
 import { useDarkMode } from "../../hooks";
 
 const numberOfColumns = 12;
-// let row = 1;
 
-// TODO: row generator
+// TODO: do something about 5000px
 const App = () => {
   const observableElementRef = React.useRef();
   const [observableElement, setObservableElement] = React.useState();
@@ -40,8 +39,49 @@ const App = () => {
             </DividerGridItem>
           </HeaderGridItem>
 
-          <GridItem row="2">
-            <h2 style={{ color: "white" }}>Whoami</h2>
+          <Whoami row="2">
+            <h2>whoami</h2>
+          </Whoami>
+          <GridItem row="3">
+            <p>
+              I am a student, a dog owner. Writing this, was the most boring
+              thing to do in this project.
+            </p>
+          </GridItem>
+
+          <TitleGridItem row="4">
+            <h2>Recent Projects</h2>
+          </TitleGridItem>
+          <GridItem row="5">
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+            Lorem ipsum dolor sit amet.
+          </GridItem>
+          <ProjectsItem className="project-cards-grid-item" row="6">
+            <ProjectItem nth="1">
+              <Card />
+            </ProjectItem>
+            <ProjectItem nth="2">
+              <Card />
+            </ProjectItem>
+          </ProjectsItem>
+
+          <TitleGridItem row="7">
+            <h2>Tech Familiar with</h2>
+          </TitleGridItem>
+          <GridItem row="8">tech rotating globe</GridItem>
+
+          <TitleGridItem row="9">
+            <h2>What I'm into?</h2>
+          </TitleGridItem>
+          <GridItem row="10">
+            <p>Rust, wasm, deno...</p>
+          </GridItem>
+
+          <GridItem row="11">
+            <Footer logo={{ width: "200px", height: "100px" }} />
           </GridItem>
         </Grid>
         <MenuButtons observableElement={observableElement} />
@@ -53,7 +93,7 @@ const App = () => {
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(${numberOfColumns}, 1fr);
-  grid-gap: 30px;
+  grid-gap: 5px;
 
   position: absolute;
   width: 100%;
@@ -78,10 +118,14 @@ const HeaderGridItem = styled(GridItem)`
   grid-auto-rows: 250px;
   grid-gap: 20px;
   align-items: start;
-  background-color: ${themes.vars.bgColorSecondary};
+  // background: linear-gradient(#ccc, ${themes.vars.bgColorSecondary});
+  background: ${themes.vars.bgColorSecondary};
+  // background: linear-gradient(
+  //   ${themes.vars.bgColorPrimary},
+  //   ${themes.vars.bgColorSecondary}
+  // );
 
   position: sticky;
-  top: 0;
   z-index: 1;
 
   @media (min-width: ${bp.xs}) {
@@ -111,7 +155,7 @@ const HeaderGridItem = styled(GridItem)`
 `;
 
 const LogoGridItem = styled(GridItem)`
-  background-color: ${themes.vars.bgColorSecondary};
+  background: transparent;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -124,6 +168,70 @@ const DividerGridItem = styled(GridItem)`
   bottom: 0;
   left: 0;
   transition: all 200ms ease;
+`;
+
+const TitleGridItem = styled(GridItem)`
+  color: ${themes.vars.titleColorPrimary};
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.5rem;
+`;
+
+const Whoami = styled(TitleGridItem)`
+  background: transparent;
+  text-transform: none;
+`;
+
+const ProjectsItem = styled(GridItem)`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.5rem;
+  margin: 0 1rem;
+`;
+const ProjectItem = styled(GridItem)`
+  @media (min-width: ${bp.xxs}) {
+    grid-column: span 4;
+    grid-row: ${({ nth }) => nth};
+  }
+
+  @media (min-width: ${bp.md1}) {
+    grid-column: ${({ nth }) => (nth % 2 === 0 ? "3/5" : "1/3")};
+    grid-row: ${({ nth }) => Math.floor((nth - 1) / 2 + 1)};
+  }
+
+  @media (min-width: ${bp.lg1}) {
+    grid-column: ${({ nth }) => {
+      switch (nth % 3) {
+        case 0:
+          return "4/5";
+        case 1:
+          return "2/4";
+        case 2:
+          return "1/2";
+        default:
+          return "span 3";
+      }
+    }};
+    grid-row: ${({ nth }) => Math.floor((nth - 1) / 3 + 1)};
+  }
+
+  @media (min-width: ${bp.xl1}) {
+    grid-column: ${({ nth }) => {
+      switch (nth % 4) {
+        case 0:
+          return "4/5";
+        case 1:
+          return "3/4";
+        case 2:
+          return "2/3";
+        case 3:
+          return "1/2";
+        default:
+          return "span 4";
+      }
+    }};
+    grid-row: ${({ nth }) => Math.floor((nth - 1) / 4 + 1)};
+  }
 `;
 
 export default App;
