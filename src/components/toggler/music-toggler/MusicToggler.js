@@ -107,10 +107,10 @@ const MusicToggler = ({ width, height, fill, isCta, isPlaying = false }) => {
     <Div className="music-toggler">
       <audio ref={audioRef} /*controls*/ src={currentlyPlaying.src}></audio>
       <PrevButtonWrapper className="prev-button" onClick={playPrev}>
-        <PrevButton width={width} height={height} />
+        <PrevButton width={"16px"} height={"16px"} />
       </PrevButtonWrapper>
       <NextButtonWrapper className="next-button" onClick={playNext}>
-        <NextButton width={width} height={height} />
+        <NextButton width={"16px"} height={"16px"} />
       </NextButtonWrapper>
       <PlayPauseButtonWrapper
         className="play-pause-button"
