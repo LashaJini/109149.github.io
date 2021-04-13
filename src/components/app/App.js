@@ -6,7 +6,12 @@ import { useDarkMode } from "../../hooks";
 
 const numberOfColumns = 12;
 
-// TODO: do something about 5000px
+function updateRootHeight() {
+  document.querySelector("#root").style.height = `${
+    document.querySelector(".app-grid").scrollHeight
+  }px`;
+}
+
 const App = () => {
   const observableElementRef = React.useRef();
   const [observableElement, setObservableElement] = React.useState();
@@ -14,6 +19,12 @@ const App = () => {
 
   React.useEffect(() => {
     setObservableElement(observableElementRef.current);
+    updateRootHeight();
+  }, []);
+
+  React.useEffect(() => {
+    window.addEventListener("resize", updateRootHeight);
+    return () => window.removeEventListener("resize", updateRootHeight);
   }, []);
 
   const toggleTheme = () => {
@@ -28,64 +39,62 @@ const App = () => {
         toggleTheme,
       }}
     >
-      <div style={{ height: "5000px" }}>
-        <Grid className="grid">
-          <HeaderGridItem className="grid-item-header">
-            <LogoGridItem className="logo-wrapper" col="1/2">
-              <Logo width="200px" height="100px" />
-            </LogoGridItem>
-            <DividerGridItem ref={observableElementRef} row="2">
-              <Divider />
-            </DividerGridItem>
-          </HeaderGridItem>
+      <Grid className="app-grid">
+        <HeaderGridItem className="grid-item-header">
+          <LogoGridItem className="logo-wrapper" col="1/2">
+            <Logo width="200px" height="100px" />
+          </LogoGridItem>
+          <DividerGridItem ref={observableElementRef} row="2">
+            <Divider />
+          </DividerGridItem>
+        </HeaderGridItem>
 
-          <Whoami row="2">
-            <h2>whoami</h2>
-          </Whoami>
-          <GridItem row="3">
-            <p>
-              I am a student, a dog owner. Writing this, was the most boring
-              thing to do in this project.
-            </p>
-          </GridItem>
+        <Whoami row="2">
+          <h2>whoami</h2>
+        </Whoami>
+        <GridItem row="3">
+          <p>
+            I am a student, a dog owner. Writing this, was the most boring thing
+            to do in this project.
+          </p>
+        </GridItem>
 
-          <TitleGridItem row="4">
-            <h2>Recent Projects</h2>
-          </TitleGridItem>
-          <GridItem row="5">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet.
-          </GridItem>
-          <ProjectsItem className="project-cards-grid-item" row="6">
-            <ProjectItem nth="1">
-              <Card />
-            </ProjectItem>
-            <ProjectItem nth="2">
-              <Card />
-            </ProjectItem>
-          </ProjectsItem>
+        <TitleGridItem row="4">
+          <h2>Recent Projects</h2>
+        </TitleGridItem>
+        <GridItem row="5">
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+          ipsum dolor sit amet.
+        </GridItem>
+        <ProjectsItem className="project-cards-grid-item" row="6">
+          <ProjectItem nth="1">
+            <Card />
+          </ProjectItem>
+          <ProjectItem nth="2">
+            <Card />
+          </ProjectItem>
+        </ProjectsItem>
 
-          <TitleGridItem row="7">
-            <h2>Tech Familiar with</h2>
-          </TitleGridItem>
-          <GridItem row="8">tech rotating globe</GridItem>
+        <TitleGridItem row="7">
+          <h2>Tech Familiar with</h2>
+        </TitleGridItem>
+        <GridItem row="8">tech rotating globe</GridItem>
 
-          <TitleGridItem row="9">
-            <h2>What I'm into?</h2>
-          </TitleGridItem>
-          <GridItem row="10">
-            <p>Rust, wasm, deno...</p>
-          </GridItem>
+        <TitleGridItem row="9">
+          <h2>What I'm into?</h2>
+        </TitleGridItem>
+        <GridItem row="10">
+          <p>Rust, wasm, deno...</p>
+        </GridItem>
 
-          <GridItem row="11">
-            <Footer logo={{ width: "200px", height: "100px" }} />
-          </GridItem>
-        </Grid>
-        <MenuButtons observableElement={observableElement} />
-      </div>
+        <GridItem row="11">
+          <Footer logo={{ width: "200px", height: "100px" }} />
+        </GridItem>
+      </Grid>
+      <MenuButtons observableElement={observableElement} />
     </ThemeContext.Provider>
   );
 };
