@@ -46,6 +46,8 @@ body {
   height: 100vh;
   background: var(--bg-color-primary);
   box-sizing: border-box;
+  // cursor: url("./components/svg/rock-hand-cursor.svg") 9 0, auto;
+  cursor: url("./components/svg/general-cursor.svg"), auto;
 }
 
 code {
@@ -55,4 +57,8 @@ code {
 
 #root {
   height: 100%;
+}
+
+.hoverable {
+  cursor: url("./components/svg/rock-hand-cursor.svg") 9 0, auto;
 }
