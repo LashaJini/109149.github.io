@@ -1,3 +1,4 @@
+import useEffectSkipFirstRender from "./use-effect-skip-first-render";
 import useDarkMode from "./use-dark-mode";
 import usePrefersDarkMode from "./use-prefers-dark-mode";
 import useLocalStorage from "./use-local-storage";
@@ -12,6 +13,7 @@ const hooks = {
   useLocalStorage,
   useEventListener,
   useDarkMode,
+  useEffectSkipFirstRender,
 };
 
 export default hooks;
@@ -22,4 +24,5 @@ export {
   useLocalStorage,
   useEventListener,
   useDarkMode,
+  useEffectSkipFirstRender,
 };
