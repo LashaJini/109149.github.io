@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
-// import App from "./tmp/Filter";
+// import App from "./tmp/Jiggle";
 import { App } from "./components";
 // import reportWebVitals from "./reportWebVitals";
 

@@ -297,7 +297,6 @@ const Label = styled.label`
   border-radius: 100%;
   width: 80px;
   height: 80px;
-  line-height: 80px;
 
   color: white;
   text-align: center;
@@ -346,7 +345,6 @@ const A = styled.div`
 
   width: 60px;
   height: 60px;
-  line-height: 60px;
 
   color: white;
   text-align: center;

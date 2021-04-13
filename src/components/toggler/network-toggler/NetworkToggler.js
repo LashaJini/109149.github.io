@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { themes } from "../../../constants";
+import { themes, networkUrls } from "../../../constants";
 import {
   EmailSVG,
   TwitterSVG,
@@ -9,6 +9,7 @@ import {
   GithubSVG,
   NetworkSVG,
 } from "../../svg";
+import { Linkable } from "../../";
 
 const NetworkToggler = ({ width, height, fill, isCta }) => {
   React.useEffect(() => {
@@ -28,19 +29,29 @@ const NetworkToggler = ({ width, height, fill, isCta }) => {
       </Toggler>
 
       <Wrapper className="network-icon github-icon">
-        <GithubSVG width={width} height={height} fill={fill} />
+        <Linkable url={networkUrls.github}>
+          <GithubSVG width={width} height={height} fill={fill} />
+        </Linkable>
       </Wrapper>
       <Wrapper className="network-icon stackoverflow-icon" _i={2}>
-        <StackoverflowSVG width={width} height={height} fill={fill} />
+        <Linkable url={networkUrls.stackoverflow}>
+          <StackoverflowSVG width={width} height={height} fill={fill} />
+        </Linkable>
       </Wrapper>
       <Wrapper className="network-icon reddit-icon" _i={3}>
-        <RedditSVG width={width} height={height} fill={fill} />
+        <Linkable url={networkUrls.reddit}>
+          <RedditSVG width={width} height={height} fill={fill} />
+        </Linkable>
       </Wrapper>
       <Wrapper className="network-icon twitter-icon" _i={4}>
-        <TwitterSVG width={width} height={height} fill={fill} />
+        <Linkable url={networkUrls.twitter}>
+          <TwitterSVG width={width} height={height} fill={fill} />
+        </Linkable>
       </Wrapper>
       <Wrapper className="network-icon email-icon" _i={5}>
-        <EmailSVG width={width} height={height} fill={fill} />
+        <Linkable url={networkUrls.email}>
+          <EmailSVG width={width} height={height} fill={fill} />
+        </Linkable>
       </Wrapper>
     </Div>
   );

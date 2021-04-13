@@ -58,4 +58,14 @@ const acdcYtUrls = {
   backInBlackURL: "https://www.youtube.com/watch?v=pAgnJDJN4VA",
 };
 
-export { bp, acdcYtUrls, css, themes };
+const networkUrls = {
+  github: "https://github.com/109149/",
+  stackoverflow: "https://stackoverflow.com/users/14414945/109149",
+  reddit: "https://www.reddit.com/user/109149",
+  twitter: "https://twitter.com/109149qwe",
+  email: "mailto:109149qwe@gmail.com",
+};
+
+const rickRoll = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&autoplay=1";
+
+export { bp, acdcYtUrls, css, themes, rickRoll, networkUrls };

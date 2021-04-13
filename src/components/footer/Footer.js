@@ -1,7 +1,14 @@
 import React from "react";
-import { Logo } from "../";
+import { Logo, Linkable, Jiggle } from "../";
 import styled from "styled-components";
-import { themes } from "../../constants";
+import { themes, networkUrls } from "../../constants";
+import {
+  EmailSVG,
+  TwitterSVG,
+  RedditSVG,
+  StackoverflowSVG,
+  GithubSVG,
+} from "../svg";
 
 const Footer = ({ logo: { width, height } }) => {
   return (
@@ -13,7 +20,43 @@ const Footer = ({ logo: { width, height } }) => {
 
         <div>Help me overcome boredom.</div>
 
-        <div>CONTACT BUTTONS</div>
+        <Network>
+          <LogoWrapper>
+            <Jiggle>
+              <Linkable url={networkUrls.github}>
+                <GithubSVG width={"28px"} height={"28px"} />
+              </Linkable>
+            </Jiggle>
+          </LogoWrapper>
+          <LogoWrapper>
+            <Jiggle>
+              <Linkable url={networkUrls.stackoverflow}>
+                <StackoverflowSVG width={"28px"} height={"28px"} />
+              </Linkable>
+            </Jiggle>
+          </LogoWrapper>
+          <LogoWrapper>
+            <Jiggle>
+              <Linkable url={networkUrls.reddit}>
+                <RedditSVG width={"28px"} height={"28px"} />
+              </Linkable>
+            </Jiggle>
+          </LogoWrapper>
+          <LogoWrapper>
+            <Jiggle>
+              <Linkable url={networkUrls.twitter}>
+                <TwitterSVG width={"28px"} height={"28px"} />
+              </Linkable>
+            </Jiggle>
+          </LogoWrapper>
+          <LogoWrapper>
+            <Jiggle>
+              <Linkable url={networkUrls.email}>
+                <EmailSVG width={"28px"} height={"28px"} />
+              </Linkable>
+            </Jiggle>
+          </LogoWrapper>
+        </Network>
 
         <div>© 2021-present 109149. All Rights Reserved.</div>
       </Div>
@@ -25,6 +68,7 @@ const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0.256rem;
 `;
 
 const Div = styled.div`
@@ -37,10 +81,10 @@ const Div = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 1rem;
+`;
 
-  div {
-    margin-bottom: 1.8rem;
-  }
+const Network = styled(LogoWrapper)`
+  margin: 1rem 0 2rem 0;
 `;
 
 export default Footer;

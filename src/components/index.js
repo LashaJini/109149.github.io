@@ -1,3 +1,5 @@
+import Linkable from "./linkable/Linkable";
+import Jiggle from "./animation/Jiggle";
 import Button from "./button/Button";
 import AnimTechButton from "./animation/AnimTechButton";
 import YoutubeIFrame from "./yt/YoutubeIFrame";
@@ -34,4 +36,6 @@ export {
   YoutubeIFrame,
   AnimTechButton,
   Button,
+  Jiggle,
+  Linkable,
 };

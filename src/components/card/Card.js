@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import data from "../../data/projects-data.json";
 import ACDC from "./acdc.jpg";
-import { Tooltip, Button, Tech, ProgressBar, YoutubeIFrame } from "../";
+import { Jiggle, Tooltip, Button, Tech, ProgressBar, YoutubeIFrame } from "../";
 import { YoutubeSVG } from "../svg";
 import { useEventListener } from "../../hooks";
 import { themes } from "../../constants";
@@ -63,7 +63,9 @@ const Card = ({ cardWidth }) => {
           _row="2"
           onClick={() => setIFrameIsVisible(true)}
         >
-          <YoutubeSVG width="32px" height="32px" fill="red" />
+          <Jiggle>
+            <YoutubeSVG width="100%" height="32px" fill="red" />
+          </Jiggle>
           <YoutubeIFrame visible={iframeIsVisible} />
           <Tooltip text="Demo video" attachTo={YtGriditem} width="100px" />
         </YtGriditem>
@@ -115,7 +117,7 @@ const Grid = styled.div`
   align-items: center;
   justify-items: center;
   width: ${({ _width }) => (_width ? _width : "100%")};
-  min-width: 300px;
+  min-width: 280px;
   // height: 38rem;
   border-radius: 5px;
   padding: 1rem 0;

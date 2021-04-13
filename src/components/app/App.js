@@ -1,6 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { Card, Footer, ThemeContext, MenuButtons, Logo, Divider } from "../";
+import {
+  Jiggle,
+  Card,
+  Footer,
+  ThemeContext,
+  MenuButtons,
+  Logo,
+  Divider,
+} from "../";
 import { bp, themes } from "../../constants";
 import { useDarkMode } from "../../hooks";
 
@@ -28,7 +36,7 @@ const App = () => {
   }, []);
 
   const toggleTheme = () => {
-    setDarkModeEnabled((prev) => !prev); // TODO: useToggler
+    setDarkModeEnabled((prev) => !prev);
   };
 
   console.log("render");
@@ -50,7 +58,14 @@ const App = () => {
         </HeaderGridItem>
 
         <Whoami row="2">
-          <h2>whoami</h2>
+          <h2>
+            <Jiggle>w</Jiggle>
+            <Jiggle>h</Jiggle>
+            <Jiggle>o</Jiggle>
+            <Jiggle>a</Jiggle>
+            <Jiggle>m</Jiggle>
+            <Jiggle>i</Jiggle>
+          </h2>
         </Whoami>
         <GridItem row="3">
           <p>
@@ -60,7 +75,23 @@ const App = () => {
         </GridItem>
 
         <TitleGridItem row="4">
-          <h2>Recent Projects</h2>
+          <h2>
+            <Jiggle>R</Jiggle>
+            <Jiggle>e</Jiggle>
+            <Jiggle>c</Jiggle>
+            <Jiggle>e</Jiggle>
+            <Jiggle>n</Jiggle>
+            <Jiggle>t</Jiggle>
+            <span> </span>
+            <Jiggle>P</Jiggle>
+            <Jiggle>r</Jiggle>
+            <Jiggle>o</Jiggle>
+            <Jiggle>j</Jiggle>
+            <Jiggle>e</Jiggle>
+            <Jiggle>c</Jiggle>
+            <Jiggle>t</Jiggle>
+            <Jiggle>s</Jiggle>
+          </h2>
         </TitleGridItem>
         <GridItem row="5">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
@@ -76,15 +107,52 @@ const App = () => {
           <ProjectItem nth="2">
             <Card />
           </ProjectItem>
+          <ProjectItem nth="3">
+            <Card />
+          </ProjectItem>
         </ProjectsItem>
 
         <TitleGridItem row="7">
-          <h2>Tech Familiar with</h2>
+          <h2>
+            <Jiggle>t</Jiggle>
+            <Jiggle>e</Jiggle>
+            <Jiggle>c</Jiggle>
+            <Jiggle>h</Jiggle>
+            <span> </span>
+            <Jiggle>f</Jiggle>
+            <Jiggle>a</Jiggle>
+            <Jiggle>m</Jiggle>
+            <Jiggle>i</Jiggle>
+            <Jiggle>l</Jiggle>
+            <Jiggle>i</Jiggle>
+            <Jiggle>a</Jiggle>
+            <Jiggle>r</Jiggle>
+            <span> </span>
+            <Jiggle>w</Jiggle>
+            <Jiggle>i</Jiggle>
+            <Jiggle>t</Jiggle>
+            <Jiggle>h</Jiggle>
+          </h2>
         </TitleGridItem>
         <GridItem row="8">tech rotating globe</GridItem>
 
         <TitleGridItem row="9">
-          <h2>What I'm into?</h2>
+          <h2>
+            <Jiggle>w</Jiggle>
+            <Jiggle>h</Jiggle>
+            <Jiggle>a</Jiggle>
+            <Jiggle>t</Jiggle>
+            <span> </span>
+            <Jiggle>i</Jiggle>
+            <Jiggle>'</Jiggle>
+            <Jiggle>m</Jiggle>
+            <span> </span>
+            <Jiggle>i</Jiggle>
+            <Jiggle>n</Jiggle>
+            <Jiggle>t</Jiggle>
+            <Jiggle>o</Jiggle>
+            <Jiggle>?</Jiggle>
+          </h2>
         </TitleGridItem>
         <GridItem row="10">
           <p>Rust, wasm, deno...</p>
@@ -190,6 +258,7 @@ const TitleGridItem = styled(GridItem)`
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 1.5rem;
+  user-select: none;
 `;
 
 const Whoami = styled(TitleGridItem)`
@@ -199,19 +268,15 @@ const Whoami = styled(TitleGridItem)`
 
 const ProjectsItem = styled(GridItem)`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 0.5rem;
+  grid-template-columns: 1fr 8fr 8fr 8fr 1fr;
+  grid-gap: 1rem;
   margin: 0 1rem;
 `;
+
 const ProjectItem = styled(GridItem)`
   @media (min-width: ${bp.xxs}) {
-    grid-column: span 4;
+    grid-column: span 5;
     grid-row: ${({ nth }) => nth};
-  }
-
-  @media (min-width: ${bp.md1}) {
-    grid-column: ${({ nth }) => (nth % 2 === 0 ? "3/5" : "1/3")};
-    grid-row: ${({ nth }) => Math.floor((nth - 1) / 2 + 1)};
   }
 
   @media (min-width: ${bp.lg1}) {
@@ -219,33 +284,15 @@ const ProjectItem = styled(GridItem)`
       switch (nth % 3) {
         case 0:
           return "4/5";
-        case 1:
-          return "2/4";
         case 2:
-          return "1/2";
+          return "3/4";
+        case 1:
+          return "2/3";
         default:
           return "span 3";
       }
     }};
     grid-row: ${({ nth }) => Math.floor((nth - 1) / 3 + 1)};
-  }
-
-  @media (min-width: ${bp.xl1}) {
-    grid-column: ${({ nth }) => {
-      switch (nth % 4) {
-        case 0:
-          return "4/5";
-        case 1:
-          return "3/4";
-        case 2:
-          return "2/3";
-        case 3:
-          return "1/2";
-        default:
-          return "span 4";
-      }
-    }};
-    grid-row: ${({ nth }) => Math.floor((nth - 1) / 4 + 1)};
   }
 `;
 

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Linkable } from "../";
 
 const Div = styled.div`
   width: 44px;
@@ -49,17 +50,12 @@ const Div = styled.div`
   }
 `;
 
-const AnimTechButton = (props) => {
+const AnimTechButton = ({ children, url }) => {
   return (
     <Div>
-      <a
-        href={props.url || "https://google.com"}
-        target="_blank"
-        rel="noreferrer"
-        className="hoverable"
-      >
-        <div>{props.children}</div>
-      </a>
+      <Linkable url={url}>
+        <div>{children}</div>
+      </Linkable>
     </Div>
   );
 };
