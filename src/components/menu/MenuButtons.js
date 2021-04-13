@@ -152,7 +152,7 @@ const MenuButtons = ({ observableElement }) => {
             id="menu-open"
           />
           <Label
-            className="menu-open-button menu-menu-open-button"
+            className="menu-open-button menu-menu-open-button hoverable"
             htmlFor="menu-open"
           >
             <Hamburger1 className="hamburger-1"></Hamburger1>
@@ -160,16 +160,31 @@ const MenuButtons = ({ observableElement }) => {
             <Hamburger3 className="hamburger-3"></Hamburger3>
           </Label>
 
-          <A className="toggler-button" _x={getX(0)} _y={getY(0)}>
+          <A className="toggler-button hoverable" _x={getX(0)} _y={getY(0)}>
             <NetworkToggler isCta={isCta} />
           </A>
-          <A className="toggler-button" _i={2} _x={getX(1)} _y={getY(1)}>
+          <A
+            className="toggler-button hoverable"
+            _i={2}
+            _x={getX(1)}
+            _y={getY(1)}
+          >
             <MusicToggler isCta={isCta} />
           </A>
-          <A className="toggler-button" _i={3} _x={getX(2)} _y={getY(2)}>
+          <A
+            className="toggler-button hoverable"
+            _i={3}
+            _x={getX(2)}
+            _y={getY(2)}
+          >
             <SoundToggler />
           </A>
-          <A className="toggler-button" _i={4} _x={getX(3)} _y={getY(3)}>
+          <A
+            className="toggler-button hoverable"
+            _i={4}
+            _x={getX(3)}
+            _y={getY(3)}
+          >
             <ThemeToggler />
           </A>
         </Nav>
@@ -291,7 +306,6 @@ const Label = styled.label`
   transition: all;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transition-duration: 500ms;
-  cursor: pointer;
 
   &:hover {
     transform: scale(1.05, 1.05) translate3d(0, 0, 0);
@@ -337,7 +351,6 @@ const A = styled.div`
   color: white;
   text-align: center;
   transition: all ease-out 2200ms;
-  cursor: pointer;
 
   position: absolute;
 

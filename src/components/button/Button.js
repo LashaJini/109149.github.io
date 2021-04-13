@@ -11,6 +11,7 @@ const Button = (props) => {
           href={props.href || "https://google.com"}
           target="_blank"
           rel="noreferrer"
+          className="hoverable"
           _fillColor={props.fillColor}
         >
           <p>

@@ -173,7 +173,6 @@ const HeaderGridItem = styled(GridItem)`
 const DiffBarGridItem = styled(GridItem)`
   position: relative;
   margin-bottom: 2rem;
-  cursor: pointer;
 `;
 
 const TechHeaderGridItem = styled(GridItem)`

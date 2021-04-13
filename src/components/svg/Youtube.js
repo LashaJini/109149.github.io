@@ -10,6 +10,7 @@ const Youtube = ({ width, height, fill }) => {
         _height={height}
         _fill={fill}
         viewBox="0 0 480 360"
+        className="hoverable"
       >
         <g id="g52" transform="translate(-217.69456,-273.02012)">
           <path
@@ -23,7 +24,6 @@ const Youtube = ({ width, height, fill }) => {
 };
 
 const SVGExtended = styled(SVG)`
-  cursor: pointer;
   &:hover {
     transform: scale(1.1);
   }

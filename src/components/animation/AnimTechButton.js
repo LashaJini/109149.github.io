@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Div = styled.div`
-  cursor: pointer;
   width: 44px;
   height: 44px;
   display: flex;
@@ -57,6 +56,7 @@ const AnimTechButton = (props) => {
         href={props.url || "https://google.com"}
         target="_blank"
         rel="noreferrer"
+        className="hoverable"
       >
         <div>{props.children}</div>
       </a>
