@@ -70,7 +70,11 @@ const App = () => {
         <GridItem row="3">
           <p>
             I am a student, a dog owner. Writing this, was the most boring thing
-            to do in this project.
+            to do in this project. Lorem ipsum dolor sit amet, consetetur
+            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+            no sea takimata sanctus est Lorem ipsum dolor sit amet.
           </p>
         </GridItem>
 
@@ -134,7 +138,13 @@ const App = () => {
             <Jiggle>h</Jiggle>
           </h2>
         </TitleGridItem>
-        <GridItem row="8">tech rotating globe</GridItem>
+        <GridItem row="8">
+          tech rotating globe Lorem ipsum dolor sit amet, consetetur sadipscing
+          elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+          magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+          justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+          takimata sanctus est Lorem ipsum dolor sit amet.
+        </GridItem>
 
         <TitleGridItem row="9">
           <h2>
@@ -155,7 +165,13 @@ const App = () => {
           </h2>
         </TitleGridItem>
         <GridItem row="10">
-          <p>Rust, wasm, deno...</p>
+          <p>
+            Rust, wasm, deno... Lorem ipsum dolor sit amet, consetetur
+            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+            no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          </p>
         </GridItem>
 
         <GridItem row="11">
