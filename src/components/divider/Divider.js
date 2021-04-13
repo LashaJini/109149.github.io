@@ -36,7 +36,7 @@ function Divider5({ width, height, fill }) {
       _width={width}
       _height={height}
       _fill={fill}
-      viewBox="0 0 270.93335 135.46666"
+      viewBox="0 0 270.93335 105.46666" // 135
       version="1.1"
     >
       <g transform="matrix(1.3009447,0,0,3.4211344,-1.6517685,-735.27499)">
