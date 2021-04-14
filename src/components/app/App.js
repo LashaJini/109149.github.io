@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  // Particles,
+  Blockquote,
   Title,
   Card,
   Footer,
@@ -9,7 +9,6 @@ import {
   MenuButtons,
   Logo,
   Divider,
-  // DividerUpper,
 } from "../";
 import { bp, themes } from "../../constants";
 import { useDarkMode } from "../../hooks";
@@ -62,27 +61,32 @@ const App = () => {
         <Whoami row="2">
           <Title>whoami</Title>
         </Whoami>
-        <GridItem row="3">
-          <p>
-            I am a student, a dog owner. Writing this, was the most boring thing
-            to do in this project. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.
-          </p>
-        </GridItem>
+        <ParagraphGridItem row="3">
+          <Blockquote>
+            <p>
+              I am a student, a dog owner. Writing this, was the most boring
+              thing to do in this project. Lorem ipsum dolor sit amet,
+              consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+              invidunt ut labore et dolore magna aliquyam erat, sed diam
+              voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+              Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+              dolor sit amet.
+            </p>
+          </Blockquote>
+        </ParagraphGridItem>
 
         <TitleGridItem row="4">
           <Title>Recent Projects</Title>
         </TitleGridItem>
-        <GridItem row="5">
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet.
-        </GridItem>
+        <ParagraphGridItem row="5">
+          <p>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+            Lorem ipsum dolor sit amet.
+          </p>
+        </ParagraphGridItem>
         <ProjectsItem className="project-cards-grid-item" row="6">
           <ProjectItem nth="1">
             <Card />
@@ -98,18 +102,18 @@ const App = () => {
         <TitleGridItem row="7">
           <Title>tech familiar with</Title>
         </TitleGridItem>
-        <GridItem row="8">
+        <ParagraphGridItem row="8">
           tech rotating globe Lorem ipsum dolor sit amet, consetetur sadipscing
           elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
           magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
           justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
           takimata sanctus est Lorem ipsum dolor sit amet.
-        </GridItem>
+        </ParagraphGridItem>
 
         <TitleGridItem row="9">
           <Title>what i'm into?</Title>
         </TitleGridItem>
-        <GridItem row="10">
+        <ParagraphGridItem row="10">
           <p>
             Rust, wasm, deno... Lorem ipsum dolor sit amet, consetetur
             sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
@@ -117,7 +121,7 @@ const App = () => {
             accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
             no sea takimata sanctus est Lorem ipsum dolor sit amet.
           </p>
-        </GridItem>
+        </ParagraphGridItem>
 
         <GridItem row="11">
           <Footer logo={{ width: "200px", height: "100px" }} />
@@ -131,7 +135,7 @@ const App = () => {
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(${numberOfColumns}, 1fr);
-  grid-gap: 5px;
+  grid-gap: 15px;
 
   position: absolute;
   width: 100%;
@@ -158,10 +162,10 @@ const HeaderGridItem = styled(GridItem)`
   align-items: start;
   // background: linear-gradient(#ccc, ${themes.vars.bgColorSecondary});
   background: ${themes.vars.bgColorSecondary};
-  // background: linear-gradient(
-  //   ${themes.vars.bgColorPrimary},
-  //   ${themes.vars.bgColorSecondary}
-  // );
+  background: linear-gradient(
+    ${themes.vars.bgColorSecondary1},
+    ${themes.vars.bgColorSecondary}
+  );
 
   position: sticky;
   z-index: 1;
@@ -242,6 +246,10 @@ const TitleGridItem = styled(GridItem)`
 const Whoami = styled(TitleGridItem)`
   background: transparent;
   text-transform: none;
+`;
+
+const ParagraphGridItem = styled(GridItem)`
+  grid-column: 2 / ${numberOfColumns};
 `;
 
 const ProjectsItem = styled(GridItem)`

@@ -2,7 +2,7 @@ import React from "react";
 import { Writable, Jiggle } from "../";
 import { useObservable } from "../../hooks";
 
-const Title = ({ children, delay = 100, startTime = 0 }) => {
+const Title = ({ children, delay = 55, startTime = 0 }) => {
   const h2Ref = React.useRef();
   const [animated, setAnimated] = React.useState(false);
 

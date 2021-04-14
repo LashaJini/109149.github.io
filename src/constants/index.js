@@ -4,6 +4,7 @@ const css = {
     light: {
       bgColorPrimary: "#ccc",
       bgColorSecondary: "#333333",
+      bgColorSecondary1: "#212121",
       textColorPrimary: "black",
       textColorSecondary: "white",
       titleColorPrimary: "D00000",
@@ -11,6 +12,7 @@ const css = {
     dark: {
       bgColorPrimary: "#151515",
       bgColorSecondary: "#333333",
+      bgColorSecondary1: "#212121",
       textColorPrimary: "white",
       textColorSecondary: "black",
       titleColorPrimary: "D00000",
@@ -25,6 +27,7 @@ const themes = {
     /* css variables; MUST BE IN SYNC with src/index.css:root */
     bgColorPrimary: "var(--bg-color-primary)",
     bgColorSecondary: "var(--bg-color-secondary)",
+    bgColorSecondary1: "var(--bg-color-secondary-1)",
     textColorPrimary: "var(--text-color-primary)",
     textColorSecondary: "var(--text-color-secondary)",
     titleColorPrimary: "var(--title-color-primary)",

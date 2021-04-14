@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useEffectSkipFirstRender } from "../../hooks";
 
-const Jiggle = ({ children }) => {
+const Jiggle = ({ children, jiggle = false }) => {
   const spanRef = React.useRef();
   const timerRef = React.useRef();
-  const [jiggling, setJiggling] = React.useState(false);
+  const [jiggling, setJiggling] = React.useState(jiggle);
 
   function animate() {
     if (!jiggling) {

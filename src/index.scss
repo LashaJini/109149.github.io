@@ -7,6 +7,7 @@
   /* color */
   --bg-color-primary: #ccc;
   --bg-color-secondary: #333333;
+  --bg-color-secondary-1: #212121;
   --text-color-primary: black;
   --text-color-secondary: white;
   --title-color-primary: #d00000;
@@ -30,6 +31,7 @@
   /* color */
   --bg-color-primary: #151515;
   --bg-color-secondary: #333333;
+  --bg-color-secondary-1: #212121;
   --text-color-primary: white;
   --text-color-secondary: black;
   --title-color-primary: #d00000;
@@ -38,6 +40,7 @@
 body {
   font-family: Roboto;
   margin: 0;
+  color: var(--text-color-primary);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;

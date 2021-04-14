@@ -36,7 +36,6 @@ const Writable = ({
 const Span = styled.span`
   transition: opacity 1s ease;
   transition-delay: ${({ _delay }) => (_delay ? _delay : 100)}ms;
-  color: white;
 `;
 
 export default Writable;

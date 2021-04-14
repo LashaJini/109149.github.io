@@ -1,3 +1,4 @@
+import Blockquote from "./blockquote/Blockquote";
 import Title from "./title/Title";
 import Writable from "./animation/Writable";
 import DividerUpper from "./svg/DividerUpper";
@@ -46,4 +47,5 @@ export {
   DividerUpper,
   Writable,
   Title,
+  Blockquote,
 };
