@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  Jiggle,
+  // Particles,
+  Title,
   Card,
   Footer,
   ThemeContext,
   MenuButtons,
   Logo,
   Divider,
+  // DividerUpper,
 } from "../";
 import { bp, themes } from "../../constants";
 import { useDarkMode } from "../../hooks";
@@ -58,14 +60,7 @@ const App = () => {
         </HeaderGridItem>
 
         <Whoami row="2">
-          <h2>
-            <Jiggle>w</Jiggle>
-            <Jiggle>h</Jiggle>
-            <Jiggle>o</Jiggle>
-            <Jiggle>a</Jiggle>
-            <Jiggle>m</Jiggle>
-            <Jiggle>i</Jiggle>
-          </h2>
+          <Title>whoami</Title>
         </Whoami>
         <GridItem row="3">
           <p>
@@ -79,23 +74,7 @@ const App = () => {
         </GridItem>
 
         <TitleGridItem row="4">
-          <h2>
-            <Jiggle>R</Jiggle>
-            <Jiggle>e</Jiggle>
-            <Jiggle>c</Jiggle>
-            <Jiggle>e</Jiggle>
-            <Jiggle>n</Jiggle>
-            <Jiggle>t</Jiggle>
-            <span> </span>
-            <Jiggle>P</Jiggle>
-            <Jiggle>r</Jiggle>
-            <Jiggle>o</Jiggle>
-            <Jiggle>j</Jiggle>
-            <Jiggle>e</Jiggle>
-            <Jiggle>c</Jiggle>
-            <Jiggle>t</Jiggle>
-            <Jiggle>s</Jiggle>
-          </h2>
+          <Title>Recent Projects</Title>
         </TitleGridItem>
         <GridItem row="5">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
@@ -117,26 +96,7 @@ const App = () => {
         </ProjectsItem>
 
         <TitleGridItem row="7">
-          <h2>
-            <Jiggle>t</Jiggle>
-            <Jiggle>e</Jiggle>
-            <Jiggle>c</Jiggle>
-            <Jiggle>h</Jiggle>
-            <span> </span>
-            <Jiggle>f</Jiggle>
-            <Jiggle>a</Jiggle>
-            <Jiggle>m</Jiggle>
-            <Jiggle>i</Jiggle>
-            <Jiggle>l</Jiggle>
-            <Jiggle>i</Jiggle>
-            <Jiggle>a</Jiggle>
-            <Jiggle>r</Jiggle>
-            <span> </span>
-            <Jiggle>w</Jiggle>
-            <Jiggle>i</Jiggle>
-            <Jiggle>t</Jiggle>
-            <Jiggle>h</Jiggle>
-          </h2>
+          <Title>tech familiar with</Title>
         </TitleGridItem>
         <GridItem row="8">
           tech rotating globe Lorem ipsum dolor sit amet, consetetur sadipscing
@@ -147,22 +107,7 @@ const App = () => {
         </GridItem>
 
         <TitleGridItem row="9">
-          <h2>
-            <Jiggle>w</Jiggle>
-            <Jiggle>h</Jiggle>
-            <Jiggle>a</Jiggle>
-            <Jiggle>t</Jiggle>
-            <span> </span>
-            <Jiggle>i</Jiggle>
-            <Jiggle>'</Jiggle>
-            <Jiggle>m</Jiggle>
-            <span> </span>
-            <Jiggle>i</Jiggle>
-            <Jiggle>n</Jiggle>
-            <Jiggle>t</Jiggle>
-            <Jiggle>o</Jiggle>
-            <Jiggle>?</Jiggle>
-          </h2>
+          <Title>what i'm into?</Title>
         </TitleGridItem>
         <GridItem row="10">
           <p>
@@ -261,13 +206,30 @@ const LogoGridItem = styled(GridItem)`
 `;
 
 const DividerGridItem = styled(GridItem)`
-  background-color: transparent;
+  background: transparent;
   width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
   transition: all 200ms ease;
 `;
+
+// const DividerUpperGridItem = styled(GridItem)`
+//   background: transparent;
+//   position: absolute;
+//   top: 10%;
+//   right: -8%;
+//   grid-column: 2;
+//   z-index: 3;
+// `;
+
+// const ParticlesGridItem = styled(GridItem)`
+//   background: transparent;
+//   position: absolute;
+//   bottom: 5%;
+//   right: 0;
+//   z-index: 2;
+// `;
 
 const TitleGridItem = styled(GridItem)`
   color: ${themes.vars.titleColorPrimary};
