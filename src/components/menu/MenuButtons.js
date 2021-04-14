@@ -3,6 +3,7 @@ import styled from "styled-components";
 import "./MenuButtons.scss";
 import { NetworkToggler, ThemeToggler, SoundToggler, MusicToggler } from "../";
 import { themes, bp } from "../../constants";
+import { useObservable } from "../../hooks";
 
 const r = 90;
 
@@ -80,23 +81,13 @@ function menuMode() {
 }
 
 const MenuButtons = ({ observableElement }) => {
-  const observer = React.useRef();
-  const observableElementRef = React.useRef();
   const [intersecting, setIntersecting] = React.useState(true);
   const [isCta, setIsCta] = React.useState(false);
-
-  React.useEffect(() => {
-    if (observableElement) {
-      let options = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.5,
-      };
-      observableElementRef.current = observableElement;
-      observer.current = new IntersectionObserver(handleIntersect, options);
-      observer.current.observe(observableElementRef.current);
-    }
-  }, [observableElement]);
+  useObservable(observableElement, handleIntersect, {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+  });
 
   // handles initial setup for screen width less than bp.sm
   React.useEffect(() => {

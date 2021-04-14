@@ -67,6 +67,14 @@ code {
   animation: jiggleAnimation 1s ease;
 }
 
+.zero-opacity {
+  opacity: 0;
+}
+
+.full-opacity {
+  opacity: 1;
+}
+
 @keyframes jiggleAnimation {
   0% {
     transform: scale(1, 1);
