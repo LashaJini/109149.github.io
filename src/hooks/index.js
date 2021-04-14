@@ -1,3 +1,4 @@
+import useObservable from "./use-observable";
 import useEffectSkipFirstRender from "./use-effect-skip-first-render";
 import useDarkMode from "./use-dark-mode";
 import usePrefersDarkMode from "./use-prefers-dark-mode";
@@ -14,6 +15,7 @@ const hooks = {
   useEventListener,
   useDarkMode,
   useEffectSkipFirstRender,
+  useObservable,
 };
 
 export default hooks;
@@ -25,4 +27,5 @@ export {
   useEventListener,
   useDarkMode,
   useEffectSkipFirstRender,
+  useObservable,
 };
