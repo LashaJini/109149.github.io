@@ -1,6 +1,9 @@
+import Scaleable from "./animation/Scaleable";
+import Paragraph from "./text/Paragraph";
+import SwoopIn from "./animation/SwoopIn";
 import Blockquote from "./blockquote/Blockquote";
 import Title from "./title/Title";
-import Writable from "./animation/Writable";
+import Fadeable from "./animation/Fadeable";
 import DividerUpper from "./svg/DividerUpper";
 import Particles from "./animation/Particles";
 import Linkable from "./linkable/Linkable";
@@ -45,7 +48,10 @@ export {
   Linkable,
   Particles,
   DividerUpper,
-  Writable,
   Title,
   Blockquote,
+  Fadeable,
+  SwoopIn,
+  Paragraph,
+  Scaleable,
 };

@@ -29,8 +29,8 @@ const Div = styled.div`
   &:before {
     content: "";
     position: absolute;
-    width: ${({ _width }) => (_width ? _width - 10 : 190)}px;
-    top: -29px;
+    width: ${({ _width }) => (_width ? _width - 13 : 187)}px;
+    top: -18px;
     left: ${({ _left }) => (_left ? `${_left}px` : "50%")};
     border: 6px solid ${themes.vars.bgColorPrimary};
     transform: translateX(-45%);
@@ -45,7 +45,7 @@ const Div = styled.div`
     border-radius: 0 50px 0 0;
     width: ${({ _width }) => (_width ? _width : 200)}px;
     height: 30px;
-    top: -55px;
+    top: -40px;
     left: ${({ _left }) => (_left ? `${_left}px` : "50%")};
     transform: translateX(-45%);
     border-bottom: none;

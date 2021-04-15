@@ -1,3 +1,4 @@
+import useFullyVisible from "./use-fully-visible";
 import useObservable from "./use-observable";
 import useEffectSkipFirstRender from "./use-effect-skip-first-render";
 import useDarkMode from "./use-dark-mode";
@@ -16,6 +17,7 @@ const hooks = {
   useDarkMode,
   useEffectSkipFirstRender,
   useObservable,
+  useFullyVisible,
 };
 
 export default hooks;
@@ -28,4 +30,5 @@ export {
   useDarkMode,
   useEffectSkipFirstRender,
   useObservable,
+  useFullyVisible,
 };

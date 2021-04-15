@@ -83,11 +83,6 @@ function menuMode() {
 const MenuButtons = ({ observableElement }) => {
   const [intersecting, setIntersecting] = React.useState(true);
   const [isCta, setIsCta] = React.useState(false);
-  useObservable(observableElement, handleIntersect, {
-    root: null,
-    rootMargin: "0px",
-    threshold: 0.5,
-  });
 
   // handles initial setup for screen width less than bp.sm
   React.useEffect(() => {
@@ -97,6 +92,12 @@ const MenuButtons = ({ observableElement }) => {
       ctaMode();
     }
   }, []);
+
+  useObservable(observableElement, handleIntersect, true, {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+  });
 
   function handleIntersect(entries, observer) {
     if (!entries[0].isIntersecting && entries[0].intersectionRatio <= 0.5) {
