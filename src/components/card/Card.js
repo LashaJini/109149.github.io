@@ -2,9 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import data from "../../data/projects-data.json";
 import ACDC from "./acdc.jpg";
-import { Jiggle, Tooltip, Button, Tech, ProgressBar, YoutubeIFrame } from "../";
+import {
+  Scaleable,
+  Jiggle,
+  Tooltip,
+  Button,
+  Tech,
+  ProgressBar,
+  YoutubeIFrame,
+} from "../";
 import { YoutubeSVG } from "../svg";
-import { useEventListener } from "../../hooks";
+import { useEventListener, useFullyVisible } from "../../hooks";
 import { themes } from "../../constants";
 
 const diff = [
@@ -35,6 +43,8 @@ const diff = [
 // TODO: restrict number of characters in description (?)
 const Card = ({ cardWidth }) => {
   const [iframeIsVisible, setIFrameIsVisible] = React.useState(false);
+  const dummyRef = React.useRef();
+  const fullyVisible = useFullyVisible(dummyRef.current);
 
   // listen click for outside iframe
   useEventListener("click", (event) => {
@@ -47,68 +57,90 @@ const Card = ({ cardWidth }) => {
   });
 
   return (
-    <>
-      <Grid className="project-card-grid" _width={cardWidth}>
-        <ImageGridItem className="project-image-grid-item">
-          <img src={ACDC} alt="repository logo" />
-        </ImageGridItem>
+    <div ref={dummyRef}>
+      {fullyVisible ? (
+        <Scaleable>
+          <Grid
+            className="project-card-grid"
+            _width={cardWidth}
+            fullyVisible={fullyVisible}
+          >
+            <ImageGridItem className="project-image-grid-item">
+              <img src={ACDC} alt="repository logo" />
+            </ImageGridItem>
 
-        <HeaderGridItem className="project-header-grid-item" _row="3">
-          <span>{data.projectName}</span>
-          <Tooltip text={data.headerInfo} attachTo={HeaderGridItem} />
-        </HeaderGridItem>
+            <HeaderGridItem className="project-header-grid-item" _row="3">
+              <span>{data.projectName}</span>
+              <Tooltip text={data.headerInfo} attachTo={HeaderGridItem} />
+            </HeaderGridItem>
 
-        <YtGriditem
-          _col="4/6"
-          _row="2"
-          onClick={() => setIFrameIsVisible(true)}
-        >
-          <Jiggle>
-            <YoutubeSVG width="100%" height="32px" fill="red" />
-          </Jiggle>
-          <YoutubeIFrame visible={iframeIsVisible} />
-          <Tooltip text="Demo video" attachTo={YtGriditem} width="100px" />
-        </YtGriditem>
+            <YtGriditem
+              _col="4/6"
+              _row="2"
+              onClick={() => setIFrameIsVisible(true)}
+            >
+              <Jiggle>
+                <YoutubeSVG width="100%" height="32px" fill="red" />
+              </Jiggle>
+              <YoutubeIFrame visible={iframeIsVisible} />
+              <Tooltip text="Demo video" attachTo={YtGriditem} width="100px" />
+            </YtGriditem>
 
-        <DiffBarGridItem _col="3/7" _row="4">
-          <ProgressBar {...diff[3]} />
-          <Tooltip text="Difficulty (subjective)" attachTo={DiffBarGridItem} />
-        </DiffBarGridItem>
+            <DiffBarGridItem _col="3/7" _row="4">
+              <ProgressBar {...diff[3]} />
+              <Tooltip
+                text="Difficulty (subjective)"
+                attachTo={DiffBarGridItem}
+              />
+            </DiffBarGridItem>
 
-        <TechHeaderGridItem _col="2/9" _row="5">
-          Built with:
-        </TechHeaderGridItem>
+            <TechHeaderGridItem _col="2/9" _row="5">
+              Built with:
+            </TechHeaderGridItem>
 
-        <TechButtonsGridItem _col="3/7" _row="6">
-          <ul className="used-tech">
-            {data.techUsed.map((tech) => {
-              return (
-                <li key={tech.name}>
-                  <Tech name={tech.name} />
-                </li>
-              );
-            })}
-          </ul>
-        </TechButtonsGridItem>
+            <TechButtonsGridItem _col="3/7" _row="6">
+              <ul className="used-tech">
+                {data.techUsed.map((tech) => {
+                  return (
+                    <li key={tech.name}>
+                      <Tech name={tech.name} />
+                    </li>
+                  );
+                })}
+              </ul>
+            </TechButtonsGridItem>
 
-        <DescriptionGridItem _col="2/8" _row="8">
-          {data.description}
-        </DescriptionGridItem>
+            <DescriptionGridItem _col="2/8" _row="8">
+              {data.description}
+            </DescriptionGridItem>
 
-        <LiveWebsiteGridItem _col="2/5" _row="10">
-          <Button url={data.repoUrl} width="100%" fillColor="#ff003c">
-            Website
-          </Button>
-        </LiveWebsiteGridItem>
-        <RepoButtonGriditem _col="5/8" _row="10">
-          <Button url={data.repoUrl} width="100%" fillColor="#c648c8">
-            Repo
-          </Button>
-        </RepoButtonGriditem>
-      </Grid>
-    </>
+            <LiveWebsiteGridItem _col="2/5" _row="10">
+              <Button url={data.repoUrl} width="100%" fillColor="#ff003c">
+                Website
+              </Button>
+            </LiveWebsiteGridItem>
+            <RepoButtonGriditem _col="5/8" _row="10">
+              <Button url={data.repoUrl} width="100%" fillColor="#c648c8">
+                Repo
+              </Button>
+            </RepoButtonGriditem>
+          </Grid>
+        </Scaleable>
+      ) : (
+        <Loading></Loading>
+      )}
+    </div>
   );
 };
+
+const Loading = styled.div`
+  width: 50px;
+  height: 50px;
+  background: ${themes.vars.bgColorPrimary};
+  border: 1px solid black;
+  border-radius: 100%;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+`;
 
 const Grid = styled.div`
   display: grid;
@@ -118,11 +150,13 @@ const Grid = styled.div`
   justify-items: center;
   width: ${({ _width }) => (_width ? _width : "100%")};
   min-width: 280px;
-  // height: 38rem;
+  // max-width: 440px;
+  // max-height: 800px;
   border-radius: 5px;
   padding: 1rem 0;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
   border: 1px solid black;
+
   color: ${themes.vars.textColorPrimary};
 
   &:hover {
