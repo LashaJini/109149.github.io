@@ -1,9 +1,15 @@
 import React from "react";
-import styled from "styled-components";
 import "./MenuButtons.scss";
 import { NetworkToggler, ThemeToggler, SoundToggler, MusicToggler } from "../";
-import { themes, bp } from "../../constants";
+import { bp } from "../../constants";
 import { useObservable } from "../../hooks";
+import StickyDiv from "./StickyDiv";
+import Div from "./Div";
+import Nav from "./Nav";
+import Label from "./Label";
+import Input from "./Input";
+import A from "./A";
+import { Hamburger1, Hamburger2, Hamburger3 } from "./Hamburger";
 
 const r = 90;
 
@@ -226,132 +232,5 @@ const MenuButtons = ({ observableElement }) => {
     </StickyDiv>
   );
 };
-
-const StickyDiv = styled.div`
-  position: sticky;
-  transition: all 1200ms ease;
-  z-index: 10;
-  width: 100%;
-`;
-
-const Div = styled.div`
-  position: absolute;
-  top: 0;
-  right: 5%;
-  transform: translate(-10%);
-  transition: all 1200ms ease;
-`;
-
-const Nav = styled.nav`
-  filter: url("#cta-filter");
-
-  height: 100px;
-  font-size: 20px;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  margin-right: 1rem;
-
-  position: relative;
-  // right: 10%;
-
-  transition: all 2200ms ease;
-`;
-
-const Hamburger = styled.span`
-  --width: 25px;
-  --height: 3px;
-  width: var(--width);
-  height: var(--height);
-  background: white;
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: calc(var(--width) / -2);
-  margin-top: calc(var(--height) / -2);
-  transition: transform 200ms;
-`;
-const Hamburger1 = styled(Hamburger)`
-  transform: translate3d(0, -8px, 0);
-`;
-const Hamburger2 = styled(Hamburger)`
-  transform: translate3d(0, 0, 0);
-`;
-const Hamburger3 = styled(Hamburger)`
-  transform: translate3d(0, 8px, 0);
-`;
-
-const Label = styled.label`
-  --fg: ${themes.vars.bgColorPrimary};
-  background: var(--fg);
-  border-radius: 100%;
-  width: 80px;
-  height: 80px;
-
-  color: white;
-  text-align: center;
-
-  z-index: 2;
-  transition: all;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transition-duration: 500ms;
-
-  &:hover {
-    transform: scale(1.05, 1.05) translate3d(0, 0, 0);
-  }
-`;
-const Input = styled.input`
-  display: none;
-
-  &:checked ~ ${Label} {
-    transition-timing-function: linear;
-    transition-duration: 200ms;
-    transform: scale(0.7, 0.7) translate3d(0, 0, 0);
-
-    &:hover {
-      transform: scale(0.8, 0.8) translate3d(0, 0, 0);
-    }
-
-    ${Hamburger1} {
-      transform: translate3d(0, 0, 0) rotate(45deg);
-    }
-    ${Hamburger2} {
-      transform: translate3d(0, 0, 0) scale(0.1, 1);
-    }
-    ${Hamburger3} {
-      transform: translate3d(0, 0, 0) rotate(-45deg);
-    }
-  }
-`;
-
-const A = styled.div`
-  --fg: ${themes.vars.bgColorPrimary};
-  background: var(--fg);
-  border-radius: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 60px;
-  height: 60px;
-
-  color: white;
-  text-align: center;
-  transition: all ease-out 2200ms;
-
-  position: absolute;
-
-  transition-duration: calc(10ms + (100ms * ${({ _i }) => (_i ? _i : 1)}));
-
-  ${Input}:checked ~ & {
-    transition-timing-function: cubic-bezier(0.935, 0, 0.34, 1.33);
-    &:nth-child(${({ _i }) => (_i ? _i : 1) + 2}) {
-      transform: translate3d(${({ _x }) => _x}px, ${({ _y }) => _y}px, 0);
-    }
-  }
-`;
 
 export default MenuButtons;
