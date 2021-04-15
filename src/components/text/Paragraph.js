@@ -6,7 +6,11 @@ const Paragraph = ({ children }) => {
   const spanRef = React.useRef();
   const fullyVisible = useFullyVisible(spanRef.current);
 
-  return <Div ref={spanRef}>{fullyVisible && children}</Div>;
+  return (
+    <Div ref={spanRef} className="paragraph">
+      {fullyVisible && children}
+    </Div>
+  );
 };
 
 const Div = styled.div`

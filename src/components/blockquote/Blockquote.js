@@ -5,7 +5,12 @@ import { themes } from "../../constants";
 const Blockquote = ({ children, width, left, borderColor }) => {
   return (
     <>
-      <Wrapper _width={width} _left={left} _borderColor={borderColor}>
+      <Wrapper
+        _width={width}
+        _left={left}
+        _borderColor={borderColor}
+        className="blockquote-wrapper"
+      >
         <Div _width={width} _left={left} _borderColor={borderColor}>
           {children}
         </Div>
@@ -15,22 +20,25 @@ const Blockquote = ({ children, width, left, borderColor }) => {
 };
 
 const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid
     ${({ _borderColor }) => (_borderColor ? _borderColor : "#e74848")};
   border-radius: 20px;
   padding: 7px;
   width: 100%;
   height: 100%;
+  position: relative;
+  max-width: 300px;
 `;
 
 const Div = styled.div`
-  position: relative;
-
   &:before {
     content: "";
     position: absolute;
     width: ${({ _width }) => (_width ? _width - 13 : 187)}px;
-    top: -18px;
+    top: -10px;
     left: ${({ _left }) => (_left ? `${_left}px` : "50%")};
     border: 6px solid ${themes.vars.bgColorPrimary};
     transform: translateX(-45%);
@@ -45,7 +53,7 @@ const Div = styled.div`
     border-radius: 0 50px 0 0;
     width: ${({ _width }) => (_width ? _width : 200)}px;
     height: 30px;
-    top: -40px;
+    top: -32px;
     left: ${({ _left }) => (_left ? `${_left}px` : "50%")};
     transform: translateX(-45%);
     border-bottom: none;
