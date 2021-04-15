@@ -136,7 +136,8 @@ const Button = styled.div`
   border-radius: 100%;
   background: ${themes.vars.bgColorPrimary};
   transform: translate3d(0, 0, 0);
-  transition: all ease 200ms;
+  // transition: background 1200ms ease, fill 1200ms ease;
+  transition: all 200ms ease-out;
 
   &:hover {
     background: ${themes.vars.textColorPrimary};

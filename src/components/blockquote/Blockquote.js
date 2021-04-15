@@ -37,11 +37,13 @@ const Div = styled.div`
   &:before {
     content: "";
     position: absolute;
-    width: ${({ _width }) => (_width ? _width - 13 : 187)}px;
-    top: -10px;
+    width: ${({ _width }) => (_width ? _width : 200)}px;
+    height: 6px;
+    top: -4px;
     left: ${({ _left }) => (_left ? `${_left}px` : "50%")};
-    border: 6px solid ${themes.vars.bgColorPrimary};
+    background: ${themes.vars.bgColorPrimary};
     transform: translateX(-45%);
+    transition: background 1.2s ease-out;
     z-index: 2;
   }
 

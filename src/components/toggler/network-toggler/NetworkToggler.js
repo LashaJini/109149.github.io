@@ -106,6 +106,8 @@ const Toggler = styled(Div)`
   position: absolute;
   background: ${themes.vars.bgColorPrimary};
   z-index: 1;
+  // transition: background 1200ms ease, fill 1200ms ease;
+  transition: all 200ms ease-out;
 
   &:hover {
     background: ${themes.vars.textColorPrimary};

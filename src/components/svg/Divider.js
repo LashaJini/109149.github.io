@@ -21,9 +21,9 @@ const Divider = ({
 
 const SVGExtended = styled(SVG)`
   display: block; /* for the empty line... */
+  transition: fill 1.2s ease-out;
 `;
 
-// eslint-disable-next-line
 function Divider5({ width, height, fill }) {
   return (
     <SVGExtended

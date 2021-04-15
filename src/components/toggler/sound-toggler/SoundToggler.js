@@ -6,7 +6,9 @@ import { BellSVG } from "../../svg";
 const SoundToggler = ({ width, height, fill }) => {
   return (
     <Div>
-      <BellSVG width={width} height={height} fill={fill} />
+      <Toggler>
+        <BellSVG width={width} height={height} fill={fill} />
+      </Toggler>
     </Div>
   );
 };
@@ -17,7 +19,15 @@ const Div = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
+`;
+
+const Toggler = styled(Div)`
   border-radius: 100%;
+  position: absolute;
+  background: ${themes.vars.bgColorPrimary};
+  z-index: 1;
+  // transition: background 1200ms ease, fill 1200ms ease;
+  transition: all 200ms ease-out;
 
   &:hover {
     background: ${themes.vars.textColorPrimary};
