@@ -9,7 +9,6 @@ import {
   ThemeContext,
   MenuButtons,
   Logo,
-  // Fadeable,
   SwoopIn,
   Divider,
 } from "../";
@@ -28,6 +27,16 @@ const App = () => {
   const observableElementRef = React.useRef();
   const [observableElement, setObservableElement] = React.useState();
   const [darkModeEnabled, setDarkModeEnabled] = useDarkMode();
+  const gridRef = React.useRef();
+  const resizeObserver = React.useRef();
+
+  React.useEffect(() => {
+    function handler(entries) {
+      updateRootHeight();
+    }
+    resizeObserver.current = new ResizeObserver(handler);
+    resizeObserver.current.observe(gridRef.current);
+  }, []);
 
   React.useEffect(() => {
     setObservableElement(observableElementRef.current);
@@ -51,7 +60,7 @@ const App = () => {
         toggleTheme,
       }}
     >
-      <Grid className="app-grid">
+      <Grid className="app-grid" ref={gridRef}>
         <HeaderGridItem className="grid-item-header">
           <LogoGridItem className="logo-wrapper" col="1/2">
             <SwoopIn>
@@ -64,7 +73,7 @@ const App = () => {
         </HeaderGridItem>
 
         <Whoami row="2">
-          <Title>whoami</Title>
+          <Title># whoami</Title>
         </Whoami>
         <ParagraphGridItem row="3">
           <Blockquote>
@@ -87,7 +96,7 @@ const App = () => {
         </TitleGridItem>
         <ParagraphGridItem row="5">
           <Paragraph>
-            <SwoopIn from="right" to="left">
+            <SwoopIn from="left" to="right">
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
               erat, sed diam voluptua. At vero eos et accusam et justo duo
@@ -98,6 +107,18 @@ const App = () => {
         </ParagraphGridItem>
         <ProjectsItem className="project-cards-grid-item" row="6">
           <ProjectItem nth="1">
+            <Card />
+          </ProjectItem>
+          <ProjectItem nth="2">
+            <Card />
+          </ProjectItem>
+          <ProjectItem nth="3">
+            <Card />
+          </ProjectItem>
+          <ProjectItem nth="4">
+            <Card />
+          </ProjectItem>
+          <ProjectItem nth="5">
             <Card />
           </ProjectItem>
         </ProjectsItem>
@@ -122,7 +143,7 @@ const App = () => {
         </TitleGridItem>
         <ParagraphGridItem row="10">
           <Paragraph>
-            <SwoopIn from="right" to="left">
+            <SwoopIn from="left" to="right">
               Rust, wasm, deno... Lorem ipsum dolor sit amet, consetetur
               sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
               et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
@@ -227,29 +248,13 @@ const DividerGridItem = styled(GridItem)`
   transition: all 200ms ease;
 `;
 
-// const DividerUpperGridItem = styled(GridItem)`
-//   background: transparent;
-//   position: absolute;
-//   top: 10%;
-//   right: -8%;
-//   grid-column: 2;
-//   z-index: 3;
-// `;
-
-// const ParticlesGridItem = styled(GridItem)`
-//   background: transparent;
-//   position: absolute;
-//   bottom: 5%;
-//   right: 0;
-//   z-index: 2;
-// `;
-
 const TitleGridItem = styled(GridItem)`
   color: ${themes.vars.titleColorPrimary};
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 1.25rem;
   user-select: none;
+  min-height: 1rem;
 `;
 
 const Whoami = styled(TitleGridItem)`
