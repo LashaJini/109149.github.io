@@ -9,6 +9,7 @@ const defaultOptions = {
 const useObservable = (
   observableElement,
   handler,
+  condition = true,
   options = defaultOptions
 ) => {
   const observer = React.useRef();
@@ -16,14 +17,17 @@ const useObservable = (
   const handlerRef = React.useRef();
 
   React.useEffect(() => {
-    if (observableElement) {
+    handlerRef.current = handler;
+  }, [handler]);
+
+  React.useEffect(() => {
+    if (condition && observableElement) {
       observableElementRef.current = observableElement;
-      handlerRef.current = handler;
 
       observer.current = new IntersectionObserver(handlerRef.current, options);
       observer.current.observe(observableElementRef.current);
     }
-  }, [observableElement, handler, options]);
+  }, [condition, observableElement, options]);
 };
 
 export default useObservable;
