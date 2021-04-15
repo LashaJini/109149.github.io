@@ -3,11 +3,14 @@ import styled from "styled-components";
 import {
   Blockquote,
   Title,
+  Paragraph,
   Card,
   Footer,
   ThemeContext,
   MenuButtons,
   Logo,
+  // Fadeable,
+  SwoopIn,
   Divider,
 } from "../";
 import { bp, themes } from "../../constants";
@@ -51,7 +54,9 @@ const App = () => {
       <Grid className="app-grid">
         <HeaderGridItem className="grid-item-header">
           <LogoGridItem className="logo-wrapper" col="1/2">
-            <Logo width="200px" height="100px" />
+            <SwoopIn>
+              <Logo width="200px" height="100px" />
+            </SwoopIn>
           </LogoGridItem>
           <DividerGridItem ref={observableElementRef} row="2">
             <Divider />
@@ -63,15 +68,17 @@ const App = () => {
         </Whoami>
         <ParagraphGridItem row="3">
           <Blockquote>
-            <p>
-              I am a student, a dog owner. Writing this, was the most boring
-              thing to do in this project. Lorem ipsum dolor sit amet,
-              consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-              invidunt ut labore et dolore magna aliquyam erat, sed diam
-              voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-              Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-              dolor sit amet.
-            </p>
+            <Paragraph>
+              <SwoopIn from="bot" to="top">
+                I am a student, a dog owner. Writing this, was the most boring
+                thing to do in this project. Lorem ipsum dolor sit amet,
+                consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                invidunt ut labore et dolore magna aliquyam erat, sed diam
+                voluptua. At vero eos et accusam et justo duo dolores et ea
+                rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+                Lorem ipsum dolor sit amet.
+              </SwoopIn>
+            </Paragraph>
           </Blockquote>
         </ParagraphGridItem>
 
@@ -79,22 +86,18 @@ const App = () => {
           <Title>Recent Projects</Title>
         </TitleGridItem>
         <ParagraphGridItem row="5">
-          <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet.
-          </p>
+          <Paragraph>
+            <SwoopIn from="right" to="left">
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+              erat, sed diam voluptua. At vero eos et accusam et justo duo
+              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+              sanctus est Lorem ipsum dolor sit amet.
+            </SwoopIn>
+          </Paragraph>
         </ParagraphGridItem>
         <ProjectsItem className="project-cards-grid-item" row="6">
           <ProjectItem nth="1">
-            <Card />
-          </ProjectItem>
-          <ProjectItem nth="2">
-            <Card />
-          </ProjectItem>
-          <ProjectItem nth="3">
             <Card />
           </ProjectItem>
         </ProjectsItem>
@@ -102,25 +105,31 @@ const App = () => {
         <TitleGridItem row="7">
           <Title>tech familiar with</Title>
         </TitleGridItem>
-        <ParagraphGridItem row="8">
-          tech rotating globe Lorem ipsum dolor sit amet, consetetur sadipscing
-          elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-          magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-          justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-          takimata sanctus est Lorem ipsum dolor sit amet.
+        <ParagraphGridItem row="8" className="OIOIOI">
+          <Paragraph>
+            <SwoopIn from="right" to="left">
+              tech rotating globe Lorem ipsum dolor sit amet, consetetur
+              sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+              et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+              accusam et justo duo dolores et ea rebum. Stet clita kasd
+              gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </SwoopIn>
+          </Paragraph>
         </ParagraphGridItem>
 
         <TitleGridItem row="9">
           <Title>what i'm into?</Title>
         </TitleGridItem>
         <ParagraphGridItem row="10">
-          <p>
-            Rust, wasm, deno... Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.
-          </p>
+          <Paragraph>
+            <SwoopIn from="right" to="left">
+              Rust, wasm, deno... Lorem ipsum dolor sit amet, consetetur
+              sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+              et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+              accusam et justo duo dolores et ea rebum. Stet clita kasd
+              gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </SwoopIn>
+          </Paragraph>
         </ParagraphGridItem>
 
         <GridItem row="11">
@@ -239,7 +248,7 @@ const TitleGridItem = styled(GridItem)`
   color: ${themes.vars.titleColorPrimary};
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   user-select: none;
 `;
 
@@ -250,6 +259,7 @@ const Whoami = styled(TitleGridItem)`
 
 const ParagraphGridItem = styled(GridItem)`
   grid-column: 2 / ${numberOfColumns};
+  min-height: 150px; // because of Paragraph component...
 `;
 
 const ProjectsItem = styled(GridItem)`
