@@ -1,3 +1,5 @@
+import Colorable from "./colorable/Colorable";
+import Typeable from "./animation/Typeable";
 import Scaleable from "./animation/Scaleable";
 import Paragraph from "./text/Paragraph";
 import SwoopIn from "./animation/SwoopIn";
@@ -54,4 +56,6 @@ export {
   SwoopIn,
   Paragraph,
   Scaleable,
+  Typeable,
+  Colorable,
 };

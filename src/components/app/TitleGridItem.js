@@ -9,6 +9,7 @@ const TitleGridItem = styled(GridItem)`
   font-size: 1.25rem;
   user-select: none;
   min-height: 1rem;
+  margin-top: 120px;
 `;
 
 export default TitleGridItem;

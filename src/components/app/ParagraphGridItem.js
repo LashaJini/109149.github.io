@@ -4,7 +4,7 @@ import { numberOfColumns } from "./Grid";
 
 const ParagraphGridItem = styled(GridItem)`
   grid-column: 2 / ${numberOfColumns};
-  min-height: 150px; // because of Paragraph component...
+  // min-height: 150px; // because of Paragraph component...
 `;
 
 export default ParagraphGridItem;

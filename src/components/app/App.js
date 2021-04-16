@@ -1,6 +1,8 @@
 import React from "react";
 import {
   Blockquote,
+  Colorable,
+  Typeable,
   Title,
   Paragraph,
   Card,
@@ -85,15 +87,10 @@ const App = () => {
         <ParagraphGridItem row="3">
           <Blockquote>
             <Paragraph>
-              <SwoopIn from="bot" to="top">
-                I am a CE student, a dog owner and I am bored. Writing this, was
-                the most boring thing to do in this project. Lorem ipsum dolor
-                sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                tempor invidunt ut labore et dolore magna aliquyam erat, sed
-                diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-                Lorem ipsum dolor sit amet.
-              </SwoopIn>
+              <Typeable>
+                I am a CE student, a <Colorable>dog owner</Colorable> and I am
+                bored.
+              </Typeable>
             </Paragraph>
           </Blockquote>
         </ParagraphGridItem>
@@ -114,18 +111,6 @@ const App = () => {
         </ParagraphGridItem>
         <ProjectsItem className="project-cards-grid-item" row="6">
           <ProjectItem nth="1">
-            <Card />
-          </ProjectItem>
-          <ProjectItem nth="2">
-            <Card />
-          </ProjectItem>
-          <ProjectItem nth="3">
-            <Card />
-          </ProjectItem>
-          <ProjectItem nth="4">
-            <Card />
-          </ProjectItem>
-          <ProjectItem nth="5">
             <Card />
           </ProjectItem>
         </ProjectsItem>

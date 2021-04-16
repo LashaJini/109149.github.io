@@ -26,11 +26,14 @@ const Wrapper = styled.div`
   border: 2px solid
     ${({ _borderColor }) => (_borderColor ? _borderColor : "#e74848")};
   border-radius: 20px;
-  padding: 7px;
+  padding: 11px;
   width: 100%;
   height: 100%;
   position: relative;
   max-width: 300px;
+  // font-style: italic;
+  // font-weight: bold;
+  font-size: 1.1rem;
 `;
 
 const Div = styled.div`
