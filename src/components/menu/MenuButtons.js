@@ -2,7 +2,8 @@ import React from "react";
 import "./MenuButtons.scss";
 import { NetworkToggler, ThemeToggler, SoundToggler, MusicToggler } from "../";
 import { bp } from "../../constants";
-import { useObservable } from "../../hooks";
+import { useObservable, useHowler } from "../../hooks";
+import { menuCloseWav, menuOpenWav, menuTickWav } from "../../static/sound";
 import StickyDiv from "./StickyDiv";
 import Div from "./Div";
 import Nav from "./Nav";
@@ -89,6 +90,11 @@ function menuMode() {
 const MenuButtons = ({ observableElement }) => {
   const [intersecting, setIntersecting] = React.useState(true);
   const [isCta, setIsCta] = React.useState(false);
+  const [ctaIsOpen, setCtaIsOpen] = React.useState(false);
+
+  const { sound: menuOpen } = useHowler({ src: [menuOpenWav] });
+  const { sound: menuClose } = useHowler({ src: [menuCloseWav] });
+  const { sound: menuTick } = useHowler({ src: [menuTickWav] });
 
   // handles initial setup for screen width less than bp.sm
   React.useEffect(() => {
@@ -138,6 +144,26 @@ const MenuButtons = ({ observableElement }) => {
     return () => window.removeEventListener("resize", t);
   }, [intersecting]);
 
+  function openClose() {
+    if (ctaIsOpen) {
+      menuClose.play();
+      setCtaIsOpen(false);
+    } else {
+      menuOpen.play();
+      setCtaIsOpen(true);
+    }
+  }
+
+  React.useEffect(() => {
+    function tick() {
+      menuTick.play();
+    }
+
+    const targets = document.querySelectorAll(".toggler-button");
+    targets.forEach((t) => t.addEventListener("mouseenter", tick));
+    return () => targets.map((t) => t.removeEventListener("mouseenter", tick));
+  }, [menuTick]);
+
   return (
     <StickyDiv className="menu-buttons-wrapper">
       <Div>
@@ -152,6 +178,7 @@ const MenuButtons = ({ observableElement }) => {
           <Label
             className="menu-open-button menu-menu-open-button hoverable"
             htmlFor="menu-open"
+            onClick={openClose}
           >
             <Hamburger1 className="hamburger-1"></Hamburger1>
             <Hamburger2 className="hamburger-2"></Hamburger2>
