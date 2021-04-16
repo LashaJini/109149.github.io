@@ -1,3 +1,6 @@
+import menuCloseWav from "./menu-close.wav";
+import menuOpenWav from "./menu-open.wav";
+import menuTickWav from "./menu-tick.wav";
 import thunderstruckWav from "./acdc-thunderstruck.wav";
 import demonFireWav from "./acdc-demon-fire.wav";
 import hellsBellsWav from "./acdc-hells-bells.wav";
@@ -27,6 +30,9 @@ export {
   shotInTheDarkWav,
   wildReputationWav,
   backInBlackWav,
+  menuOpenWav,
+  menuTickWav,
+  menuCloseWav,
 };
 
 export default acdcWavs;
