@@ -244,6 +244,9 @@ const DescriptionGridItem = styled(GridItem)`
   margin-bottom: 2.2rem;
   font-size: 0.9em;
   line-height: 1.25rem;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 `;
 
 const LiveWebsiteGridItem = styled(GridItem)`

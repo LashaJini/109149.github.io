@@ -5,7 +5,7 @@ import { numberOfColumns } from "./Grid";
 const GridItem = styled.div`
   margin: 0;
   padding: 0;
-  background-color: ${({ bgColor }) =>
+  background: ${({ bgColor }) =>
     bgColor ? bgColor : themes.vars.bgColorPrimary};
   display: flex;
   align-items: center;

@@ -1,8 +1,10 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
+import { themes } from "../../constants";
 
-const Typeable = ({ children }) => {
-  const iRef = React.useRef(0);
+// TODO: fix on phone - absolute -> relative span issue
+const Typeable = ({ children, cursor = true }) => {
+  const iRef = React.useRef();
 
   function spanify(str) {
     return str.split("").map((c) => {
@@ -30,13 +32,15 @@ const Typeable = ({ children }) => {
   }
 
   if (typeof children === "string") {
-    return <Wrapper>{spanify(children)}</Wrapper>;
+    iRef.current = 0;
+    return <Wrapper _cursor={cursor}>{spanify(children)}</Wrapper>;
   }
 
   // array
   if (children.length && typeof children === "object") {
+    iRef.current = 0;
     return (
-      <Wrapper>
+      <Wrapper _cursor={cursor}>
         {children.map((child, i) => {
           return <React.Fragment key={i}>{spanify_rec(child)}</React.Fragment>;
         })}
@@ -70,23 +74,28 @@ const blink = keyframes`
 
 const size = "1.125rem";
 const Wrapper = styled.div`
-  margin: 5rem;
+  margin: 1rem;
   font-size: ${size};
   font-weight: bold;
   letter-spacing: 1.5px;
   line-height: 1.5;
   position: relative;
+  display: block;
 
-  &:after {
-    content: "";
-    position: absolute;
-    bottom: 0.4rem;
-    background: white;
-    margin-left: 1px;
-    width: 8px;
-    height: ${size};
-    animation: ${blink} 0.55s infinite alternate;
-  }
+  ${({ _cursor }) =>
+    _cursor &&
+    css`
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0.4rem;
+        background: ${themes.vars.textColorPrimary};
+        margin-left: 1px;
+        width: 8px;
+        height: ${size};
+        animation: ${blink} 0.55s infinite alternate;
+      }
+    `};
 `;
 
 const appear = keyframes`

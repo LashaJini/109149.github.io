@@ -11,10 +11,11 @@ const Colorable = ({ children }) => {
 };
 
 const Span = styled.span`
+  --c: ${themes.vars.textColorPrimary};
   color: ${themes.vars.bgColorPrimary};
   // font-size: 3rem;
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
-    1px 1px 0 #fff;
+  text-shadow: -1px -1px 0 var(--c), 1px -1px 0 var(--c), -1px 1px 0 var(--c),
+    1px 1px 0 var(--c);
 `;
 
 export default Colorable;
