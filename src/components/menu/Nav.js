@@ -9,7 +9,7 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: end;
-  margin-right: 1rem;
+  // margin-right: 1rem;
 
   position: relative;
 
