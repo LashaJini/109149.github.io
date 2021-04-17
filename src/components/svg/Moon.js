@@ -1,10 +1,11 @@
 import React from "react";
 import SVG from "./SVG";
+import styled, { keyframes } from "styled-components";
 
 const Moon = ({ width, height, fill }) => {
   return (
     <>
-      <SVG
+      <SVGExtended
         version="1.1"
         id="svg78"
         _width={width}
@@ -18,9 +19,32 @@ const Moon = ({ width, height, fill }) => {
             id="path90"
           />
         </g>
-      </SVG>
+      </SVGExtended>
     </>
   );
 };
+
+const doTheMoonThing = keyframes`
+  0% {
+    transform: rotate(90deg);
+  }
+  25% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(12deg);
+  }
+  75% {
+    transform: rotate(-9deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+`;
+
+const SVGExtended = styled(SVG)`
+  animation: ${doTheMoonThing} 1s ease;
+  animation-fill-mode: forwards;
+`;
 
 export default Moon;
