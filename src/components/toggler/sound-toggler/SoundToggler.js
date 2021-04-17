@@ -2,14 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import { themes } from "../../../constants";
 import { BellSVG } from "../../svg";
+import { SoundContext } from "../../";
 
 const SoundToggler = ({ width, height, fill }) => {
   return (
-    <Div>
-      <Toggler>
-        <BellSVG width={width} height={height} fill={fill} />
-      </Toggler>
-    </Div>
+    <SoundContext.Consumer>
+      {({ soundEnabled, toggleSound }) => (
+        <Div onClick={toggleSound}>
+          <Toggler>
+            <BellSVG
+              mode={soundEnabled}
+              width={width}
+              height={height}
+              fill={fill}
+            />
+          </Toggler>
+        </Div>
+      )}
+    </SoundContext.Consumer>
   );
 };
 
