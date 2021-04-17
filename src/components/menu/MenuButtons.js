@@ -1,9 +1,20 @@
 import React from "react";
 import "./MenuButtons.scss";
-import { NetworkToggler, ThemeToggler, SoundToggler, MusicToggler } from "../";
+import {
+  SoundContext,
+  NetworkToggler,
+  ThemeToggler,
+  SoundToggler,
+  MusicToggler,
+} from "../";
 import { bp } from "../../constants";
 import { useObservable, useHowler } from "../../hooks";
-import { menuCloseWav, menuOpenWav, menuTickWav } from "../../static/sound";
+import {
+  hellsBellsWav,
+  menuCloseWav,
+  menuOpenWav,
+  menuTickWav,
+} from "../../static/sound";
 import StickyDiv from "./StickyDiv";
 import Div from "./Div";
 import Nav from "./Nav";
@@ -91,10 +102,16 @@ const MenuButtons = ({ observableElement }) => {
   const [intersecting, setIntersecting] = React.useState(true);
   const [isCta, setIsCta] = React.useState(false);
   const [ctaIsOpen, setCtaIsOpen] = React.useState(false);
+  const sound = React.useContext(SoundContext);
+  const themeTogglerRef = React.useRef();
+  const soundTogglerRef = React.useRef();
+  const musicTogglerRef = React.useRef();
+  const networkTogglerRef = React.useRef();
 
   const { sound: menuOpen } = useHowler({ src: [menuOpenWav] });
   const { sound: menuClose } = useHowler({ src: [menuCloseWav] });
   const { sound: menuTick } = useHowler({ src: [menuTickWav] });
+  const { sound: bell } = useHowler({ src: [hellsBellsWav] });
 
   // handles initial setup for screen width less than bp.sm
   React.useEffect(() => {
@@ -146,23 +163,42 @@ const MenuButtons = ({ observableElement }) => {
 
   function openClose() {
     if (ctaIsOpen) {
-      menuClose.play();
+      sound.soundEnabled && menuClose.play();
       setCtaIsOpen(false);
     } else {
-      menuOpen.play();
+      sound.soundEnabled && menuOpen.play();
       setCtaIsOpen(true);
     }
   }
 
   React.useEffect(() => {
     function tick() {
-      menuTick.play();
+      sound.soundEnabled && menuTick.play();
     }
 
-    const targets = document.querySelectorAll(".toggler-button");
-    targets.forEach((t) => t.addEventListener("mouseenter", tick));
-    return () => targets.map((t) => t.removeEventListener("mouseenter", tick));
-  }, [menuTick]);
+    let tmp1 = networkTogglerRef.current;
+    let tmp2 = musicTogglerRef.current;
+    let tmp3 = soundTogglerRef.current;
+    let tmp4 = themeTogglerRef.current;
+    tmp1.addEventListener("mouseenter", tick);
+    tmp2.addEventListener("mouseenter", tick);
+    tmp3.addEventListener("mouseenter", tick);
+    tmp4.addEventListener("mouseenter", tick);
+
+    return () => {
+      tmp1.removeEventListener("mouseenter", tick);
+      tmp2.removeEventListener("mouseenter", tick);
+      tmp3.removeEventListener("mouseenter", tick);
+      tmp4.removeEventListener("mouseenter", tick);
+    };
+  }, [menuTick, sound.soundEnabled]);
+
+  function ringTheBell() {
+    if (!sound.soundEnabled) {
+      console.log("wtf");
+      bell.play();
+    }
+  }
 
   return (
     <StickyDiv className="menu-buttons-wrapper">
@@ -185,7 +221,12 @@ const MenuButtons = ({ observableElement }) => {
             <Hamburger3 className="hamburger-3"></Hamburger3>
           </Label>
 
-          <A className="toggler-button hoverable" _x={getX(0)} _y={getY(0)}>
+          <A
+            className="toggler-button hoverable"
+            _x={getX(0)}
+            _y={getY(0)}
+            ref={networkTogglerRef}
+          >
             <NetworkToggler isCta={isCta} />
           </A>
           <A
@@ -193,6 +234,7 @@ const MenuButtons = ({ observableElement }) => {
             _i={2}
             _x={getX(1)}
             _y={getY(1)}
+            ref={musicTogglerRef}
           >
             <MusicToggler isCta={isCta} />
           </A>
@@ -201,14 +243,17 @@ const MenuButtons = ({ observableElement }) => {
             _i={3}
             _x={getX(2)}
             _y={getY(2)}
+            ref={soundTogglerRef}
+            onClick={ringTheBell}
           >
-            <SoundToggler />
+            <SoundToggler width="40px" height="40px" />
           </A>
           <A
             className="toggler-button hoverable"
             _i={4}
             _x={getX(3)}
             _y={getY(3)}
+            ref={themeTogglerRef}
           >
             <ThemeToggler />
           </A>

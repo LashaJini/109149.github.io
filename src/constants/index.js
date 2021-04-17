@@ -20,6 +20,9 @@ const css = {
   },
 };
 
+/* sound is enabled by default */
+const soundEnabled = true;
+
 const themes = {
   dark: "dark",
   light: "light",
@@ -71,4 +74,4 @@ const networkUrls = {
 
 const rickRoll = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&autoplay=1";
 
-export { bp, acdcYtUrls, css, themes, rickRoll, networkUrls };
+export { bp, acdcYtUrls, css, themes, rickRoll, networkUrls, soundEnabled };

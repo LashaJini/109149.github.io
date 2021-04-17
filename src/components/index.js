@@ -19,7 +19,7 @@ import ProgressBar from "./progressbar/ProgressBar";
 import Card from "./card/Card";
 import Footer from "./footer/Footer";
 import NetworkToggler from "./toggler/network-toggler/NetworkToggler";
-import { ThemeContext } from "./context";
+import { ThemeContext, SoundContext } from "./context";
 import SoundToggler from "./toggler/sound-toggler/SoundToggler";
 import MusicToggler from "./toggler/music-toggler/MusicToggler";
 import ThemeToggler from "./toggler/theme-toggler/ThemeToggler";
@@ -58,4 +58,5 @@ export {
   Scaleable,
   Typeable,
   Colorable,
+  SoundContext,
 };
