@@ -2,10 +2,12 @@ import React from "react";
 import "./MenuButtons.scss";
 import {
   SoundContext,
+  AnimationContext,
   NetworkToggler,
   ThemeToggler,
   SoundToggler,
   MusicToggler,
+  AnimationToggler,
 } from "../";
 import { bp } from "../../constants";
 import { useObservable, useHowler } from "../../hooks";
@@ -25,8 +27,8 @@ import { Hamburger1, Hamburger2, Hamburger3 } from "./Hamburger";
 
 const r = 90;
 
-const start = (2 * Math.PI) / 5;
-const spread = Math.PI / 4;
+const start = (1.8 * Math.PI) / 5;
+const spread = Math.PI / 4.2;
 
 function getX(x) {
   return Math.floor(r * Math.cos(start + spread * x));
@@ -103,10 +105,12 @@ const MenuButtons = ({ observableElement }) => {
   const [isCta, setIsCta] = React.useState(false);
   const [ctaIsOpen, setCtaIsOpen] = React.useState(false);
   const sound = React.useContext(SoundContext);
+  // const animation = React.useContext(AnimationContext);
   const themeTogglerRef = React.useRef();
   const soundTogglerRef = React.useRef();
   const musicTogglerRef = React.useRef();
   const networkTogglerRef = React.useRef();
+  const animationTogglerRef = React.useRef();
 
   const { sound: menuOpen } = useHowler({ src: [menuOpenWav] });
   const { sound: menuClose } = useHowler({ src: [menuCloseWav] });
@@ -180,16 +184,19 @@ const MenuButtons = ({ observableElement }) => {
     let tmp2 = musicTogglerRef.current;
     let tmp3 = soundTogglerRef.current;
     let tmp4 = themeTogglerRef.current;
+    let tmp5 = animationTogglerRef.current;
     tmp1.addEventListener("mouseenter", tick);
     tmp2.addEventListener("mouseenter", tick);
     tmp3.addEventListener("mouseenter", tick);
     tmp4.addEventListener("mouseenter", tick);
+    tmp5.addEventListener("mouseenter", tick);
 
     return () => {
       tmp1.removeEventListener("mouseenter", tick);
       tmp2.removeEventListener("mouseenter", tick);
       tmp3.removeEventListener("mouseenter", tick);
       tmp4.removeEventListener("mouseenter", tick);
+      tmp5.removeEventListener("mouseenter", tick);
     };
   }, [menuTick, sound.soundEnabled]);
 
@@ -253,6 +260,15 @@ const MenuButtons = ({ observableElement }) => {
             _i={4}
             _x={getX(3)}
             _y={getY(3)}
+            ref={animationTogglerRef}
+          >
+            <AnimationToggler width="50px" height="50px" />
+          </A>
+          <A
+            className="toggler-button hoverable"
+            _i={5}
+            _x={getX(4)}
+            _y={getY(4)}
             ref={themeTogglerRef}
           >
             <ThemeToggler />

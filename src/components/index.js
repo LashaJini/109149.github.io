@@ -1,3 +1,4 @@
+import AnimationToggler from "./toggler/animation-toggler/AnimationToggler";
 import Colorable from "./colorable/Colorable";
 import Typeable from "./animation/Typeable";
 import Scaleable from "./animation/Scaleable";
@@ -19,7 +20,7 @@ import ProgressBar from "./progressbar/ProgressBar";
 import Card from "./card/Card";
 import Footer from "./footer/Footer";
 import NetworkToggler from "./toggler/network-toggler/NetworkToggler";
-import { ThemeContext, SoundContext } from "./context";
+import { AnimationContext, ThemeContext, SoundContext } from "./context";
 import SoundToggler from "./toggler/sound-toggler/SoundToggler";
 import MusicToggler from "./toggler/music-toggler/MusicToggler";
 import ThemeToggler from "./toggler/theme-toggler/ThemeToggler";
@@ -59,4 +60,6 @@ export {
   Typeable,
   Colorable,
   SoundContext,
+  AnimationContext,
+  AnimationToggler,
 };
