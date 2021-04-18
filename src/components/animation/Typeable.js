@@ -3,12 +3,12 @@ import styled, { keyframes, css } from "styled-components";
 import { themes } from "../../constants";
 import { AnimationContext } from "../";
 
-// TODO: fix on phone - absolute -> relative span issue
 const Typeable = ({ children, cursor = true }) => {
   const iRef = React.useRef();
   const animation = React.useContext(AnimationContext);
 
-  function spanify(str) {
+  function spanify(str, delay = 0) {
+    iRef.current += delay;
     return str.split("").map((c) => {
       iRef.current += 1;
 
@@ -24,9 +24,10 @@ const Typeable = ({ children, cursor = true }) => {
     });
   }
 
+  // TODO: maybe add statement for edge cases (?)
   function spanify_rec(children) {
     if (typeof children === "string") {
-      return spanify(children);
+      return spanify(children, 10);
     }
 
     // in case if text is wrapped inside another Element
@@ -83,8 +84,8 @@ const Wrapper = styled.div`
   margin: 1rem;
   font-size: ${size};
   font-weight: bold;
-  letter-spacing: 1.5px;
   line-height: 1.5;
+  // letter-spacing: 1.5px;
   position: relative;
   display: block;
 
@@ -106,16 +107,19 @@ const Wrapper = styled.div`
 
 const appear = keyframes`
   0% {
-    position: relative;
-    opacity: 0;
+    // position: relative;
+    // opacity: 0;
+    color: red;
   }
   20% {
-    position: relative;
-    opacity: 1;
+    // position: relative;
+    // opacity: 1;
+    font-size: ${size};
   }
   100% {
-    position: relative;
-    opacity: 1;
+    // position: relative;
+    // opacity: 1;
+    font-size: ${size};
   }
 `;
 
@@ -123,8 +127,9 @@ const Span = styled.span`
   ${({ _animationEnabled }) =>
     _animationEnabled &&
     css`
-      opacity: 0;
-      position: absolute;
+      // opacity: 0;
+      // position: absolute;
+      font-size: 0;
       animation: ${appear} 0.3s;
       animation-delay: ${({ _nth }) => (_nth ? _nth * 100 : 100)}ms;
       animation-fill-mode: forwards;
