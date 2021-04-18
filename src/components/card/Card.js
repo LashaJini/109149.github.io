@@ -69,22 +69,22 @@ const Card = ({ cardWidth }) => {
               <img src={ACDC} alt="repository logo" />
             </ImageGridItem>
 
-            <HeaderGridItem className="project-header-grid-item" _row="3">
-              <span>{data.projectName}</span>
-              <Tooltip text={data.headerInfo} attachTo={HeaderGridItem} />
-            </HeaderGridItem>
-
             <YtGriditem
               _col="4/6"
               _row="2"
               onClick={() => setIFrameIsVisible(true)}
             >
               <Jiggle>
-                <YoutubeSVG width="100%" height="32px" fill="red" />
+                <YoutubeSVG width="100%" height="20px" fill="red" />
               </Jiggle>
               <YoutubeIFrame visible={iframeIsVisible} />
               <Tooltip text="Demo video" attachTo={YtGriditem} width="100px" />
             </YtGriditem>
+
+            <HeaderGridItem className="project-header-grid-item" _row="3">
+              <span>{data.projectName}</span>
+              <Tooltip text={data.headerInfo} attachTo={HeaderGridItem} />
+            </HeaderGridItem>
 
             <DiffBarGridItem _col="3/7" _row="4">
               <ProgressBar {...diff[3]} />
@@ -178,8 +178,8 @@ const GridItem = styled.div`
 const ImageGridItem = styled(GridItem)`
   img {
     border: 5px solid #272133;
-    height: 160px;
-    width: 160px;
+    height: 140px;
+    width: 140px;
     border-radius: 100%;
     margin-top: 20px;
     transition: box-shadow 3s ease;
@@ -196,26 +196,26 @@ const YtGriditem = styled(GridItem)`
 const HeaderGridItem = styled(GridItem)`
   position: relative;
   text-align: center;
-  margin: 1rem;
+  margin: 0.5rem;
 
   span {
     color: ${themes.vars.textColorPrimary};
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-family: sans-serif;
   }
 `;
 
 const DiffBarGridItem = styled(GridItem)`
   position: relative;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 `;
 
 const TechHeaderGridItem = styled(GridItem)`
   width: 100%;
   height: 100%;
   font-weight: bold;
-  font-size: 1.125rem;
+  font-size: 0.9rem;
 `;
 
 const TechButtonsGridItem = styled(GridItem)`
