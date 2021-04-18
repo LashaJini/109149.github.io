@@ -15,8 +15,12 @@ import {
   SwoopIn,
   Divider,
 } from "../";
-import { themes, soundEnabled, animationEnabled } from "../../constants";
-import { useDarkMode } from "../../hooks";
+import {
+  themes,
+  soundEnabled as _soundEnabled,
+  animationEnabled as _animationEnabled,
+} from "../../constants";
+import { useDarkMode, useAnimation, useSound } from "../../hooks";
 import Grid from "./Grid";
 import GridItem from "./GridItem";
 import HeaderGridItem from "./HeaderGridItem";
@@ -37,14 +41,19 @@ function updateRootHeight() {
 const App = () => {
   const observableElementRef = React.useRef();
   const [observableElement, setObservableElement] = React.useState();
+  // const [sound, setSound] = React.useState(soundEnabled);
+
   const [darkModeEnabled, setDarkModeEnabled] = useDarkMode();
-  const [sound, setSound] = React.useState(soundEnabled);
-  const [animation, setAnimation] = React.useState(animationEnabled);
+  const [animationEnabled, setAnimationEnabled] = useAnimation(
+    _animationEnabled
+  );
+  const [soundEnabled, setSoundEnabled] = useSound(_soundEnabled);
+
   const gridRef = React.useRef();
   const resizeObserver = React.useRef();
 
   React.useEffect(() => {
-    if (animation) {
+    if (animationEnabled) {
       document.body.style.setProperty(
         "transition",
         "background 1.2s ease-out, color 1.2s ease-out"
@@ -52,7 +61,7 @@ const App = () => {
     } else {
       document.body.style.removeProperty("transition");
     }
-  }, [animation]);
+  }, [animationEnabled]);
 
   React.useEffect(() => {
     function handler(entries) {
@@ -77,11 +86,11 @@ const App = () => {
   };
 
   const toggleSound = () => {
-    setSound((prev) => !prev);
+    setSoundEnabled((prev) => !prev);
   };
 
   const toggleAnimation = () => {
-    setAnimation((prev) => !prev);
+    setAnimationEnabled((prev) => !prev);
   };
 
   console.log("render");
@@ -94,20 +103,20 @@ const App = () => {
     >
       <SoundContext.Provider
         value={{
-          soundEnabled: sound,
+          soundEnabled,
           toggleSound,
         }}
       >
         <AnimationContext.Provider
           value={{
-            animationEnabled: animation,
+            animationEnabled,
             toggleAnimation,
           }}
         >
           <Grid
             className="app-grid"
             ref={gridRef}
-            _animationEnabled={animation}
+            _animationEnabled={animationEnabled}
           >
             <HeaderGridItem className="grid-item-header">
               <LogoGridItem className="logo-wrapper" col="1/2">

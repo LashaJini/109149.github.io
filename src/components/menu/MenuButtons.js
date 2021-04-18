@@ -104,8 +104,10 @@ const MenuButtons = ({ observableElement }) => {
   const [intersecting, setIntersecting] = React.useState(true);
   const [isCta, setIsCta] = React.useState(false);
   const [ctaIsOpen, setCtaIsOpen] = React.useState(false);
+
   const sound = React.useContext(SoundContext);
   const animation = React.useContext(AnimationContext);
+
   const themeTogglerRef = React.useRef();
   const soundTogglerRef = React.useRef();
   const musicTogglerRef = React.useRef();

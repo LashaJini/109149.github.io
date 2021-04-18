@@ -1,3 +1,5 @@
+import useSound from "./use-sound";
+import useAnimation from "./use-animation";
 import useFullyVisible from "./use-fully-visible";
 import useObservable from "./use-observable";
 import useEffectSkipFirstRender from "./use-effect-skip-first-render";
@@ -18,6 +20,8 @@ const hooks = {
   useEffectSkipFirstRender,
   useObservable,
   useFullyVisible,
+  useAnimation,
+  useSound,
 };
 
 export default hooks;
@@ -31,4 +35,6 @@ export {
   useEffectSkipFirstRender,
   useObservable,
   useFullyVisible,
+  useAnimation,
+  useSound,
 };
