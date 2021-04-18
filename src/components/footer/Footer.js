@@ -80,7 +80,7 @@ const Div = styled.div`
   text-align: center;
   justify-content: center;
   flex-direction: column;
-  padding: 1rem;
+  // padding: 1rem;
 `;
 
 const Network = styled(LogoWrapper)`

@@ -49,8 +49,7 @@ body {
   height: 100vh;
   background: var(--bg-color-primary);
   box-sizing: border-box;
-  // cursor: url("./components/svg/rock-hand-cursor.svg") 9 0, auto;
-  // transition: background 1.2s ease-out, color 1.2s ease-out;
+  overflow: hidden;
   cursor: url("./components/svg/general-cursor.svg"), auto;
 }
 

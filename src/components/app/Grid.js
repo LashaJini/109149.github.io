@@ -8,6 +8,11 @@ const Grid = styled.div`
   grid-template-columns: repeat(${numberOfColumns}, 1fr);
   grid-gap: 2rem;
 
+  overflow-y: scroll;
+  height: 100vh;
+  scroll-snap-type: y proximity;
+  // scroll-padding: 5rem;
+
   position: absolute;
   width: 100%;
 

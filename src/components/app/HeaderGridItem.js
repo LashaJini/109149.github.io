@@ -1,8 +1,32 @@
 import styled from "styled-components";
 import GridItem from "./GridItem";
+import LogoGridItem from "./LogoGridItem";
+import DividerGridItem from "./DividerGridItem";
+import { Divider, SwoopIn, Logo } from "../";
 import { bp, themes } from "../../constants";
 
-const HeaderGridItem = styled(GridItem)`
+import React from "react";
+
+const HeaderGridItem = () => {
+  return (
+    <GridItemExtended>
+      <LogoGridItem className="logo-wrapper" col="1/2">
+        <SwoopIn>
+          <Logo width="200px" height="100px" />
+        </SwoopIn>
+      </LogoGridItem>
+      <DividerGridItem row="2">
+        <Divider />
+      </DividerGridItem>
+    </GridItemExtended>
+  );
+};
+
+const GridItemExtended = styled(GridItem)`
+  scroll-snap-align: start;
+  grid-row: 1;
+  height: 100vh;
+
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-auto-rows: 230px;
