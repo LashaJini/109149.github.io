@@ -44,6 +44,17 @@ const App = () => {
   const resizeObserver = React.useRef();
 
   React.useEffect(() => {
+    if (animation) {
+      document.body.style.setProperty(
+        "transition",
+        "background 1.2s ease-out, color 1.2s ease-out"
+      );
+    } else {
+      document.body.style.removeProperty("transition");
+    }
+  }, [animation]);
+
+  React.useEffect(() => {
     function handler(entries) {
       updateRootHeight();
     }
@@ -93,7 +104,11 @@ const App = () => {
             toggleAnimation,
           }}
         >
-          <Grid className="app-grid" ref={gridRef}>
+          <Grid
+            className="app-grid"
+            ref={gridRef}
+            _animationEnabled={animation}
+          >
             <HeaderGridItem className="grid-item-header">
               <LogoGridItem className="logo-wrapper" col="1/2">
                 <SwoopIn>
@@ -135,15 +150,6 @@ const App = () => {
             </ParagraphGridItem>
             <ProjectsItem className="project-cards-grid-item" row="6">
               <ProjectItem nth="1">
-                <Card />
-              </ProjectItem>
-              <ProjectItem nth="2">
-                <Card />
-              </ProjectItem>
-              <ProjectItem nth="3">
-                <Card />
-              </ProjectItem>
-              <ProjectItem nth="4">
                 <Card />
               </ProjectItem>
             </ProjectsItem>
