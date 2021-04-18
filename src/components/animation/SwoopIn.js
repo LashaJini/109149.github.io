@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { keyframes, css } from "styled-components";
+import { AnimationContext } from "../";
 
 const SwoopIn = ({
   from = "left",
@@ -9,6 +10,8 @@ const SwoopIn = ({
   sine = false,
   animate = true,
 }) => {
+  const animation = React.useContext(AnimationContext);
+
   return (
     <Wrapper>
       <Div
@@ -16,6 +19,7 @@ const SwoopIn = ({
         _direction={`${from}-${to}`}
         _sine={false}
         _animate={animate}
+        _animationEnabled={animation.animationEnabled}
       >
         {children}
       </Div>
@@ -118,50 +122,54 @@ const Div = styled.div`
   height: 100%;
   transform: translate(0);
 
-  animation: ${({ _duration }) => (_duration ? _duration : 0.8)}s ease
-    ${({ _animate, _direction, _sine }) => {
-      if (_animate) {
-        if (_sine) {
-          switch (_direction) {
-            case "top-bot":
-              return css`
-                ${swoopTopBot}
-              `;
-            case "right-left":
-              return css`
-                ${swoopRightLeft}
-              `;
-            case "bot-top":
-              return css`
-                ${swoopBotTop}
-              `;
-            default:
-              return css`
-                ${swoopLeftRight}
-              `;
+  ${({ _animationEnabled }) =>
+    _animationEnabled &&
+    css`
+      animation: ${({ _duration }) => (_duration ? _duration : 0.8)}s ease
+        ${({ _animate, _direction, _sine }) => {
+          if (_animate) {
+            if (_sine) {
+              switch (_direction) {
+                case "top-bot":
+                  return css`
+                    ${swoopTopBot}
+                  `;
+                case "right-left":
+                  return css`
+                    ${swoopRightLeft}
+                  `;
+                case "bot-top":
+                  return css`
+                    ${swoopBotTop}
+                  `;
+                default:
+                  return css`
+                    ${swoopLeftRight}
+                  `;
+              }
+            } else {
+              switch (_direction) {
+                case "top-bot":
+                  return css`
+                    ${swoopTopBotNoSine}
+                  `;
+                case "right-left":
+                  return css`
+                    ${swoopRightLeftNoSine}
+                  `;
+                case "bot-top":
+                  return css`
+                    ${swoopBotTopNoSine}
+                  `;
+                default:
+                  return css`
+                    ${swoopLeftRightNoSine}
+                  `;
+              }
+            }
           }
-        } else {
-          switch (_direction) {
-            case "top-bot":
-              return css`
-                ${swoopTopBotNoSine}
-              `;
-            case "right-left":
-              return css`
-                ${swoopRightLeftNoSine}
-              `;
-            case "bot-top":
-              return css`
-                ${swoopBotTopNoSine}
-              `;
-            default:
-              return css`
-                ${swoopLeftRightNoSine}
-              `;
-          }
-        }
-      }
-    }};
+        }};
+    `}
 `;
 
 export default SwoopIn;

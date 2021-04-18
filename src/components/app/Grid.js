@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import GridItem from "./GridItem";
 
 export const numberOfColumns = 12;
 
@@ -9,6 +10,14 @@ const Grid = styled.div`
 
   position: absolute;
   width: 100%;
+
+  ${({ _animationEnabled }) =>
+    _animationEnabled &&
+    css`
+      ${GridItem} {
+        transition: background 1.2s ease-out;
+      }
+    `}
 `;
 
 export default Grid;

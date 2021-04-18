@@ -1,9 +1,12 @@
 import React from "react";
 import SVG from "./SVG";
 import styled, { keyframes, css } from "styled-components";
+import { AnimationContext } from "../";
 
 // TODO: sync with bell sound somehow
 const Bell = ({ width, height, fill, mode }) => {
+  const animation = React.useContext(AnimationContext);
+
   return (
     <>
       <SVGExtended
@@ -11,6 +14,7 @@ const Bell = ({ width, height, fill, mode }) => {
         _height={height}
         _fill={fill}
         _mode={mode}
+        _animationEnabled={animation.animationEnabled}
         viewBox="0 0 153.23544 256.2492"
       >
         <g id="bell">
@@ -196,87 +200,110 @@ const strikeReverse = keyframes`
 // const waitForHellsBellsWav = 3.5;
 const waitForHellsBellsWav = 0;
 const SVGExtended = styled(SVG)`
-  ${({ _mode }) =>
+  ${({ _mode, _animationEnabled }) =>
     _mode
       ? css`
           #stem {
             transform-origin: 50% 0;
             transform: translate(0, 25px) rotate(0);
-            animation: ${moveStem} 2s ease;
-            animation-delay: ${waitForHellsBellsWav}s;
-            animation-fill-mode: forwards;
           }
-
           #bell {
             transform: translate(-26px);
-            animation: ${ring} 2s;
-            animation-delay: ${waitForHellsBellsWav + 0.9}s;
           }
-
-          #first {
-            opacity: 0;
-            animation: ${wave} 2s;
-            animation-delay: ${waitForHellsBellsWav + 1.25}s;
-            animation-fill-mode: forwards;
-          }
-          #middle {
-            opacity: 0;
-            animation: ${wave} 2s;
-            animation-delay: ${waitForHellsBellsWav + 1.45}s;
-            animation-fill-mode: forwards;
-          }
-          #last {
-            opacity: 0;
-            animation: ${wave} 2s;
-            animation-delay: ${waitForHellsBellsWav + 1.65}s;
-            animation-fill-mode: forwards;
-          }
-
           #line {
-            opacity: 1;
-            animation: ${strikeReverse} 0.2s ease;
-            animation-delay: 1s;
-            animation-fill-mode: forwards;
+            opacity: 0;
           }
+
+          ${_animationEnabled &&
+          css`
+            #stem {
+              animation: ${moveStem} 2s ease;
+              animation-delay: ${waitForHellsBellsWav}s;
+              animation-fill-mode: forwards;
+            }
+            #bell {
+              animation: ${ring} 2s;
+              animation-delay: ${waitForHellsBellsWav + 0.9}s;
+            }
+            #first {
+              opacity: 0;
+              animation: ${wave} 2s;
+              animation-delay: ${waitForHellsBellsWav + 1.25}s;
+              animation-fill-mode: forwards;
+            }
+            #middle {
+              opacity: 0;
+              animation: ${wave} 2s;
+              animation-delay: ${waitForHellsBellsWav + 1.45}s;
+              animation-fill-mode: forwards;
+            }
+            #last {
+              opacity: 0;
+              animation: ${wave} 2s;
+              animation-delay: ${waitForHellsBellsWav + 1.65}s;
+              animation-fill-mode: forwards;
+            }
+            #line {
+              opacity: 1;
+              animation: ${strikeReverse} 0.2s ease;
+              animation-delay: 1s;
+              animation-fill-mode: forwards;
+            }
+          `}
         `
       : css`
           #stem {
-            transform: translate(-11px, 20px);
-            animation: ${hide} 2s;
-            animation-fill-mode: forwards;
+            transform: translate(0, -20px);
           }
-
           #bell {
             transform: translate(-26px);
-            animation: ${liftUpAndDown} 2s;
-            animation-fill-mode: forwards;
           }
-
-          #line {
-            opacity: 0;
-            animation: ${strike} 0.2s ease;
-            animation-delay: 2s;
-            animation-fill-mode: forwards;
-          }
-
-          #first {
-            animation: ${waveReverse} 2s;
-            // animation-direction: reverse;
-            animation-delay: ${waitForHellsBellsWav + 1.25}s;
-            animation-fill-mode: forwards;
-          }
-          #middle {
-            animation: ${waveReverse} 2s;
-            // animation-direction: reverse;
-            animation-delay: ${waitForHellsBellsWav + 1.05}s;
-            animation-fill-mode: forwards;
-          }
+          #first,
+          #middle,
           #last {
-            animation: ${waveReverse} 2s;
-            // animation-direction: reverse;
-            animation-delay: ${waitForHellsBellsWav + 0.85}s;
-            animation-fill-mode: forwards;
+            opacity: 0;
           }
+
+          ${_animationEnabled &&
+          css`
+            #stem {
+              animation: ${hide} 2s;
+              animation-fill-mode: forwards;
+            }
+
+            #bell {
+              animation: ${liftUpAndDown} 2s;
+              animation-fill-mode: forwards;
+            }
+
+            #line {
+              opacity: 0;
+              animation: ${strike} 0.2s ease;
+              animation-delay: 2s;
+              animation-fill-mode: forwards;
+            }
+            #first {
+              opacity: 1;
+              animation: ${waveReverse} 2s;
+              // animation-direction: reverse;
+              animation-delay: ${waitForHellsBellsWav + 1.25}s;
+              animation-fill-mode: forwards;
+            }
+            #middle {
+              opacity: 1;
+              animation: ${waveReverse} 2s;
+              // animation-direction: reverse;
+              animation-delay: ${waitForHellsBellsWav + 1.05}s;
+              animation-fill-mode: forwards;
+            }
+            #last {
+              opacity: 1;
+              animation: ${waveReverse} 2s;
+              // animation-direction: reverse;
+              animation-delay: ${waitForHellsBellsWav + 0.85}s;
+              animation-fill-mode: forwards;
+            }
+          `}
         `}
 `;
 

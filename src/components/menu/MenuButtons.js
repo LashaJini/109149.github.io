@@ -105,7 +105,7 @@ const MenuButtons = ({ observableElement }) => {
   const [isCta, setIsCta] = React.useState(false);
   const [ctaIsOpen, setCtaIsOpen] = React.useState(false);
   const sound = React.useContext(SoundContext);
-  // const animation = React.useContext(AnimationContext);
+  const animation = React.useContext(AnimationContext);
   const themeTogglerRef = React.useRef();
   const soundTogglerRef = React.useRef();
   const musicTogglerRef = React.useRef();
@@ -202,7 +202,6 @@ const MenuButtons = ({ observableElement }) => {
 
   function ringTheBell() {
     if (!sound.soundEnabled) {
-      console.log("wtf");
       bell.play();
     }
   }
@@ -232,6 +231,7 @@ const MenuButtons = ({ observableElement }) => {
             className="toggler-button hoverable"
             _x={getX(0)}
             _y={getY(0)}
+            _animationEnabled={animation.animationEnabled}
             ref={networkTogglerRef}
           >
             <NetworkToggler isCta={isCta} />
@@ -241,6 +241,7 @@ const MenuButtons = ({ observableElement }) => {
             _i={2}
             _x={getX(1)}
             _y={getY(1)}
+            _animationEnabled={animation.animationEnabled}
             ref={musicTogglerRef}
           >
             <MusicToggler isCta={isCta} />
@@ -250,6 +251,7 @@ const MenuButtons = ({ observableElement }) => {
             _i={3}
             _x={getX(2)}
             _y={getY(2)}
+            _animationEnabled={animation.animationEnabled}
             ref={soundTogglerRef}
             onClick={ringTheBell}
           >
@@ -260,6 +262,7 @@ const MenuButtons = ({ observableElement }) => {
             _i={4}
             _x={getX(3)}
             _y={getY(3)}
+            _animationEnabled={animation.animationEnabled}
             ref={animationTogglerRef}
           >
             <AnimationToggler width="50px" height="50px" />
@@ -269,6 +272,7 @@ const MenuButtons = ({ observableElement }) => {
             _i={5}
             _x={getX(4)}
             _y={getY(4)}
+            _animationEnabled={animation.animationEnabled}
             ref={themeTogglerRef}
           >
             <ThemeToggler />

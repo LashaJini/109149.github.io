@@ -1,6 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Linkable } from "../";
+import { AnimationContext } from "../";
 
 const Div = styled.div`
   width: 44px;
@@ -10,12 +11,16 @@ const Div = styled.div`
   justify-content: center;
   border-radius: 100%;
 
-  &:hover {
-    svg {
-      fill: rgb(235, 25, 110);
-      transform: scale(1.5);
-    }
-  }
+  ${({ _animationEnabled }) =>
+    _animationEnabled &&
+    css`
+      &:hover {
+        svg {
+          fill: rgb(235, 25, 110);
+          transform: scale(1.5);
+        }
+      }
+    `}
 
   div {
     width: 44px;
@@ -24,9 +29,13 @@ const Div = styled.div`
     align-items: center;
     justify-content: center;
 
-    &:hover:before {
-      transform: scale(0);
-    }
+    ${({ _animationEnabled }) =>
+      _animationEnabled &&
+      css`
+        &:hover:before {
+          transform: scale(0);
+        }
+      `}
   }
 
   div:before {
@@ -51,8 +60,10 @@ const Div = styled.div`
 `;
 
 const AnimTechButton = ({ children, url }) => {
+  const animation = React.useContext(AnimationContext);
+
   return (
-    <Div>
+    <Div _animationEnabled={animation.animationEnabled}>
       <Linkable url={url}>
         <div>{children}</div>
       </Linkable>

@@ -1,8 +1,11 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { themes } from "../../constants";
+import { AnimationContext } from "../";
 
 const Blockquote = ({ children, width, left, borderColor }) => {
+  const animation = React.useContext(AnimationContext);
+
   return (
     <>
       <Wrapper
@@ -11,7 +14,12 @@ const Blockquote = ({ children, width, left, borderColor }) => {
         _borderColor={borderColor}
         className="blockquote-wrapper"
       >
-        <Div _width={width} _left={left} _borderColor={borderColor}>
+        <Div
+          _width={width}
+          _left={left}
+          _borderColor={borderColor}
+          _animationEnabled={animation.animationEnabled}
+        >
           {children}
         </Div>
       </Wrapper>
@@ -46,7 +54,11 @@ const Div = styled.div`
     left: ${({ _left }) => (_left ? `${_left}px` : "50%")};
     background: ${themes.vars.bgColorPrimary};
     transform: translateX(-45%);
-    transition: background 1.2s ease-out;
+    ${({ _animationEnabled }) =>
+      _animationEnabled &&
+      css`
+        transition: background 1.2s ease-out;
+      `}
     z-index: 2;
   }
 

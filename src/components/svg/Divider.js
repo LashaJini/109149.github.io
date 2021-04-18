@@ -1,7 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { themes } from "../../constants";
 import SVG from "./SVG";
+import { AnimationContext } from "../";
 
 /**
  * @author 109149
@@ -21,15 +22,22 @@ const Divider = ({
 
 const SVGExtended = styled(SVG)`
   display: block; /* for the empty line... */
-  transition: fill 1.2s ease-out;
+  ${({ _animationEnabled }) =>
+    _animationEnabled &&
+    css`
+      transition: fill 1.2s ease-out;
+    `}
 `;
 
 function Divider5({ width, height, fill }) {
+  const animation = React.useContext(AnimationContext);
+
   return (
     <SVGExtended
       _width={width}
       _height={height}
       _fill={fill}
+      _animationEnabled={animation.animationEnabled}
       viewBox="0 0 270.93335 108.46666" // 65
       version="1.1"
     >

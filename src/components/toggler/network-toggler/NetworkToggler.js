@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { themes, networkUrls } from "../../../constants";
 import {
   EmailSVG,
@@ -9,9 +9,12 @@ import {
   GithubSVG,
   NetworkSVG,
 } from "../../svg";
+import { AnimationContext } from "../../";
 import { Linkable } from "../../";
 
 const NetworkToggler = ({ width, height, fill, isCta }) => {
+  const animation = React.useContext(AnimationContext);
+
   React.useEffect(() => {
     if (isCta) {
       document.querySelector(".network-toggler").classList.add("cta");
@@ -28,27 +31,46 @@ const NetworkToggler = ({ width, height, fill, isCta }) => {
         <NetworkSVG width={width} height={height} fill={fill} />
       </Toggler>
 
-      <Wrapper className="network-icon github-icon">
+      <Wrapper
+        className="network-icon github-icon"
+        _animationEnabled={animation.animationEnabled}
+      >
         <Linkable url={networkUrls.github}>
           <GithubSVG width={width} height={height} fill={fill} />
         </Linkable>
       </Wrapper>
-      <Wrapper className="network-icon stackoverflow-icon" _i={2}>
+      <Wrapper
+        className="network-icon stackoverflow-icon"
+        _i={2}
+        _animationEnabled={animation.animationEnabled}
+      >
         <Linkable url={networkUrls.stackoverflow}>
           <StackoverflowSVG width={width} height={height} fill={fill} />
         </Linkable>
       </Wrapper>
-      <Wrapper className="network-icon reddit-icon" _i={3}>
+      <Wrapper
+        className="network-icon reddit-icon"
+        _i={3}
+        _animationEnabled={animation.animationEnabled}
+      >
         <Linkable url={networkUrls.reddit}>
           <RedditSVG width={width} height={height} fill={fill} />
         </Linkable>
       </Wrapper>
-      <Wrapper className="network-icon twitter-icon" _i={4}>
+      <Wrapper
+        className="network-icon twitter-icon"
+        _i={4}
+        _animationEnabled={animation.animationEnabled}
+      >
         <Linkable url={networkUrls.twitter}>
           <TwitterSVG width={width} height={height} fill={fill} />
         </Linkable>
       </Wrapper>
-      <Wrapper className="network-icon email-icon" _i={5}>
+      <Wrapper
+        className="network-icon email-icon"
+        _i={5}
+        _animationEnabled={animation.animationEnabled}
+      >
         <Linkable url={networkUrls.email}>
           <EmailSVG width={width} height={height} fill={fill} />
         </Linkable>
@@ -120,7 +142,12 @@ const Toggler = styled(Div)`
 const Wrapper = styled(Toggler)`
   position: absolute;
   transform: translate(0);
-  transition: all ease ${({ _i }) => (_i ? _i * 90 : 200)}ms;
+  transition-property: none;
+  ${({ _animationEnabled }) =>
+    _animationEnabled &&
+    css`
+      transition: all ease ${({ _i }) => (_i ? _i * 90 : 200)}ms;
+    `}
   z-index: -1;
 `;
 

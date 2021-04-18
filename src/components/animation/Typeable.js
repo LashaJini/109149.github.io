@@ -1,17 +1,23 @@
 import React from "react";
 import styled, { keyframes, css } from "styled-components";
 import { themes } from "../../constants";
+import { AnimationContext } from "../";
 
 // TODO: fix on phone - absolute -> relative span issue
 const Typeable = ({ children, cursor = true }) => {
   const iRef = React.useRef();
+  const animation = React.useContext(AnimationContext);
 
   function spanify(str) {
     return str.split("").map((c) => {
       iRef.current += 1;
 
       return (
-        <Span key={iRef.current} _nth={iRef.current}>
+        <Span
+          key={iRef.current}
+          _nth={iRef.current}
+          _animationEnabled={animation.animationEnabled}
+        >
           {c}
         </Span>
       );
@@ -114,11 +120,15 @@ const appear = keyframes`
 `;
 
 const Span = styled.span`
-  opacity: 0;
-  position: absolute;
-  animation: ${appear} 0.3s;
-  animation-delay: ${({ _nth }) => (_nth ? _nth * 100 : 100)}ms;
-  animation-fill-mode: forwards;
+  ${({ _animationEnabled }) =>
+    _animationEnabled &&
+    css`
+      opacity: 0;
+      position: absolute;
+      animation: ${appear} 0.3s;
+      animation-delay: ${({ _nth }) => (_nth ? _nth * 100 : 100)}ms;
+      animation-fill-mode: forwards;
+    `}
 `;
 
 export default Typeable;

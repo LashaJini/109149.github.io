@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Linkable } from "../";
+import { Linkable, SoundContext } from "../";
 import { acdcYtUrls } from "../../constants";
 import { useACDC } from "../../hooks";
 import acdcWavs from "../../static/sound";
@@ -17,6 +17,7 @@ const {
 
 // 109149 svg
 const Logo = ({ width = "400px", height = "200px" }) => {
+  const sound = React.useContext(SoundContext);
   const { play } = useACDC(acdcWavs);
 
   return (
@@ -30,7 +31,7 @@ const Logo = ({ width = "400px", height = "200px" }) => {
           <g
             id="first_1_wrapper"
             transform="translate(-67.605284,-100.84629)"
-            onMouseEnter={play.demonFire}
+            onMouseEnter={() => sound.soundEnabled && play.demonFire()}
             className="hoverable"
           >
             <Linkable url={demonFireURL}>
@@ -54,7 +55,7 @@ const Logo = ({ width = "400px", height = "200px" }) => {
           <g
             id="first_0_wrapper"
             transform="translate(-67.605284,-100.84629)"
-            onMouseEnter={play.noMansLand}
+            onMouseEnter={() => sound.soundEnabled && play.noMansLand()}
           >
             <Linkable url={noMansLandURL}>
               <OuterStrokeLayer>
@@ -77,7 +78,7 @@ const Logo = ({ width = "400px", height = "200px" }) => {
           <g
             id="first_9_wrapper"
             transform="translate(-67.605284,-100.84629)"
-            onMouseEnter={play.backInBlack}
+            onMouseEnter={() => sound.soundEnabled && play.backInBlack()}
           >
             <Linkable url={backInBlackURL}>
               <OuterStrokeLayer>
@@ -100,7 +101,7 @@ const Logo = ({ width = "400px", height = "200px" }) => {
           <g
             id="lightning_wrapper"
             transform="translate(-67.605284,-100.84629)"
-            onMouseEnter={play.thunderstruck}
+            onMouseEnter={() => sound.soundEnabled && play.thunderstruck()}
           >
             <Linkable url={thunderstruckURL}>
               <OuterStrokeLayer>
@@ -123,7 +124,7 @@ const Logo = ({ width = "400px", height = "200px" }) => {
           <g
             id="second_1_wrapper"
             transform="translate(-67.605284,-100.84629)"
-            onMouseEnter={play.realize}
+            onMouseEnter={() => sound.soundEnabled && play.realize()}
           >
             <Linkable url={realizeURL}>
               <OuterStrokeLayer>
@@ -146,7 +147,7 @@ const Logo = ({ width = "400px", height = "200px" }) => {
           <g
             id="first_4_wrapper"
             transform="translate(-67.605284,-100.84629)"
-            onMouseEnter={play.shotInTheDark}
+            onMouseEnter={() => sound.soundEnabled && play.shotInTheDark()}
           >
             <Linkable url={shotInTheDarkURL}>
               <OuterStrokeLayer>
@@ -169,7 +170,7 @@ const Logo = ({ width = "400px", height = "200px" }) => {
           <g
             id="second_9_wrapper"
             transform="translate(-67.605284,-100.84629)"
-            onMouseEnter={play.wildReputation}
+            onMouseEnter={() => sound.soundEnabled && play.wildReputation()}
           >
             <Linkable url={wildReputationURL}>
               <OuterStrokeLayer>

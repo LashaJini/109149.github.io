@@ -13,7 +13,6 @@ const GridItem = styled.div`
   grid-column: ${({ col }) => (col ? col : `span ${numberOfColumns}`)};
   grid-row: ${({ row }) => (row ? row : "1")};
   z-index: 2;
-  transition: background 1.2s ease-out;
 `;
 
 export default GridItem;

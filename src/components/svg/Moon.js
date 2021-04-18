@@ -1,8 +1,11 @@
 import React from "react";
 import SVG from "./SVG";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
+import { AnimationContext } from "../";
 
 const Moon = ({ width, height, fill }) => {
+  const animation = React.useContext(AnimationContext);
+
   return (
     <>
       <SVGExtended
@@ -11,6 +14,7 @@ const Moon = ({ width, height, fill }) => {
         _width={width}
         _height={height}
         _fill={fill}
+        _animationEnabled={animation.animationEnabled}
         viewBox="0 0 914.24103 1023.7199"
       >
         <g id="g86" transform="translate(-58.089546,-6.1205709)">
@@ -43,8 +47,12 @@ const doTheMoonThing = keyframes`
 `;
 
 const SVGExtended = styled(SVG)`
-  animation: ${doTheMoonThing} 1s ease;
-  animation-fill-mode: forwards;
+  ${({ _animationEnabled }) =>
+    _animationEnabled &&
+    css`
+      animation: ${doTheMoonThing} 1s ease;
+      animation-fill-mode: forwards;
+    `}
 `;
 
 export default Moon;

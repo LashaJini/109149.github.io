@@ -1,14 +1,16 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { useEffectSkipFirstRender } from "../../hooks";
+import { AnimationContext } from "../";
 
 const Jiggle = ({ children, jiggle = false, delay }) => {
   const spanRef = React.useRef();
   const timerRef = React.useRef();
   const [jiggling, setJiggling] = React.useState(jiggle);
+  const animation = React.useContext(AnimationContext);
 
   function animate() {
-    if (!jiggling) {
+    if (animation.animationEnabled && !jiggling) {
       setJiggling(true);
     }
   }
@@ -28,7 +30,12 @@ const Jiggle = ({ children, jiggle = false, delay }) => {
 
   return (
     <>
-      <Span ref={spanRef} onMouseEnter={animate} _delay={delay}>
+      <Span
+        ref={spanRef}
+        onMouseEnter={animate}
+        _delay={delay}
+        _animationEnabled={animation.animationEnabled}
+      >
         {children}
       </Span>
     </>
@@ -72,10 +79,14 @@ const Span = styled.span`
   font-weight: bold;
   transform: scale(1);
 
-  &.jiggle {
-    animation: 1s ${jiggle} ease ${({ _delay }) => (_delay ? _delay : 0)}ms;
-    // animation-delay: ${({ _delay }) => (_delay ? _delay : 0)}ms;
-  }
+  ${({ _animationEnabled }) =>
+    _animationEnabled &&
+    css`
+      &.jiggle {
+        animation: 1s ${jiggle} ease ${({ _delay }) => (_delay ? _delay : 0)}ms;
+        // animation-delay: ${({ _delay }) => (_delay ? _delay : 0)}ms;
+      }
+    `}
 `;
 
 export default Jiggle;
