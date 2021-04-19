@@ -1,3 +1,4 @@
+import Deleteable from "./animation/Deleteable";
 import AnimationToggler from "./toggler/animation-toggler/AnimationToggler";
 import Colorable from "./colorable/Colorable";
 import Typeable from "./animation/Typeable";
@@ -62,4 +63,5 @@ export {
   SoundContext,
   AnimationContext,
   AnimationToggler,
+  Deleteable,
 };

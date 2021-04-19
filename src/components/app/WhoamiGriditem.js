@@ -1,7 +1,14 @@
 import React from "react";
 import GridItem from "./GridItem";
 import styled from "styled-components";
-import { Blockquote, Colorable, Typeable, Title, Paragraph } from "../";
+import {
+  Deleteable,
+  Blockquote,
+  Colorable,
+  Typeable,
+  Title,
+  Paragraph,
+} from "../";
 import { themes } from "../../constants";
 
 const WhoamiGriditem = () => {
@@ -14,8 +21,15 @@ const WhoamiGriditem = () => {
         <Blockquote>
           <Paragraph>
             <Typeable>
-              I am a CE student, a <Colorable>dog owner</Colorable> and I am
-              bored.
+              I am a CE student, a <Colorable>dog owner</Colorable> and I am{" "}
+              <Deleteable
+                after={1}
+                replaceWith={["bred", "boed", "!@$#!@$#!@$#", "bored"]}
+                writeSpeed={[90, 90, 50, 90]}
+              >
+                bord
+              </Deleteable>
+              .
             </Typeable>
           </Paragraph>
         </Blockquote>
