@@ -3,70 +3,35 @@ import styled, { keyframes, css } from "styled-components";
 import { themes } from "../../constants";
 import { AnimationContext } from "../";
 
-const Typeable = ({ children, cursor = true }) => {
+// currently handles only 1 depth; so, adding more than 1 text wrapped inside html element,
+// will crash the app.
+const Typeable = ({
+  children,
+  writeDelay = 1000,
+  writeSpeed = 90,
+  cursor = true,
+}) => {
   const iRef = React.useRef();
   const wrapperRef = React.useRef();
   const animation = React.useContext(AnimationContext);
-  // const [text, setText] = React.useState([]);
   const [items, setItems] = React.useState(Array(children.length).fill(""));
-
-  function spanify(str, delay = 0, reverse = false) {
-    iRef.current += delay;
-    const len = str.length + iRef.current; // for deleteable
-    return str.split("").map((c) => {
-      iRef.current += 1;
-
-      return (
-        <Span
-          key={iRef.current}
-          _nth={iRef.current}
-          _animationEnabled={animation.animationEnabled}
-          _reverse={reverse}
-          _len={len}
-        >
-          {c}
-        </Span>
-      );
-    });
-  }
-
-  // TODO: maybe add statement for edge cases (?)
-  function spanify_rec(children) {
-    if (typeof children === "string") {
-      return spanify(children, 10);
-    }
-
-    // if (children.type && children.type.name === "Deleteable") {
-    //   return spanify(children.props.replaceWith[0], 0, true);
-    // }
-
-    // in case if text is wrapped inside another Element
-    return React.createElement(
-      children.type,
-      {},
-      spanify_rec(children.props.children)
-    );
-  }
-
-  // if (typeof children === "string") {
-  //   iRef.current = 0;
-  //   return <Wrapper _cursor={cursor}>{spanify(children)}</Wrapper>;
-  // }
 
   React.useEffect(() => {
     iRef.current = 0;
-    // setItems(["a"]);
   }, []);
 
   React.useEffect(() => {
+    if (!animation.animationEnabled) {
+      setItems(children);
+      return;
+    }
+    setItems(Array(children.length).fill(""));
+
     let ids = [];
     let delay = 0;
-
-    let curr;
-    let repl;
-    let writeSpeed;
     let i = 0;
 
+    // @param {string | {text, type, props, children}} children
     function write(children, ms = 90, _i = 0) {
       if (children.length && typeof children === "object") {
         children.forEach((c) => {
@@ -112,8 +77,9 @@ const Typeable = ({ children, cursor = true }) => {
       }
     }
 
-    function del(text, ms = 90, _i = 0) {
-      text.forEach((c) => {
+    // @param {string} children
+    function del(children, ms = 90, _i = 0) {
+      children.forEach((c) => {
         i++;
         delay += ms;
         ids[i] = setTimeout(() => {
@@ -129,45 +95,54 @@ const Typeable = ({ children, cursor = true }) => {
 
     function rec(children, _i) {
       if (typeof children === "string") {
-        curr = children.split("");
-        write(curr, 90, _i);
+        let text = children.split("");
+        write(text, writeSpeed, _i);
       }
 
       if (children.type && children.type.name !== "Deleteable") {
-        curr = children.props.children.split("");
-        delay += 1000;
+        let text = children.props.children.split("");
+        delay += writeDelay;
         write(
           {
-            text: curr,
+            text,
             type: children.type,
             props: children.props,
             children: children,
           },
-          90,
+          writeSpeed,
           _i
         );
       }
 
       if (children.type && children.type.name === "Deleteable") {
-        curr = children.props.children.split("");
-        repl = children.props.replaceWith.map((r) => r.split(""));
-        writeSpeed = children.props.writeSpeed;
+        const deleteable = {
+          replaceWith: children.props.replaceWith.map((r) => r.split("")),
+          writeDelay: children.props.writeDelay,
+          writeSpeed: children.props.writeSpeed,
+          delDelay: children.props.delDelay,
+          delSpeed: children.props.delSpeed,
+          result: children.props.result,
+        };
+        const {
+          replaceWith,
+          writeDelay,
+          writeSpeed,
+          delDelay,
+          delSpeed,
+          result,
+        } = deleteable;
+        const text = children.props.children.split("");
 
-        delay += 1000;
-        write(curr, 90, _i);
+        for (let i = 0; i < replaceWith.length; i++) {
+          delay += writeDelay[i];
+          write(replaceWith[i], writeSpeed[i], _i);
 
-        delay += 1000;
-        del(curr, 90, _i);
-
-        for (let i = 0; i < repl.length - 1; i++) {
-          delay += 1000;
-          write(repl[i], writeSpeed[i], _i);
-
-          delay += 1000;
-          del(repl[i], 90, _i);
+          delay += delDelay[i];
+          del(replaceWith[i], delSpeed[i], _i);
         }
-        delay += 1000;
-        write(repl[repl.length - 1], writeSpeed[repl.length - 1], _i);
+
+        delay += result.writeDelay;
+        write(text, result.writeSpeed, _i);
       }
     }
 
@@ -176,52 +151,11 @@ const Typeable = ({ children, cursor = true }) => {
     return () => {
       ids.map((id) => clearTimeout(id));
     };
-    // let str = "";
-
-    // function rec(children) {
-    //   if (typeof children === "string") {
-    //     // str += children;
-    //     // setText((prev) => prev + children);
-    //     return children;
-    //   }
-
-    //   if (children.type) {
-    //     setText(
-    //       React.createElement(children.type, {}, rec(children.props.children))
-    //     );
-    //   }
-    // }
-
-    // children.forEach((child) => rec(child));
-
-    // let a = str.split("");
-    // let ids = [];
-
-    // a.forEach((elem, i) => {
-    //   ids[i] = setTimeout(() => {
-    //     setText((prev) => prev + elem);
-    //   }, i * 100);
-    // });
-
-    // return () => {
-    //   ids.map((id) => clearTimeout(id));
-    // };
-  }, [children]);
-
-  // array
-  // if (children.length && typeof children === "object") {
-  //   iRef.current = 0;
-  //   return (
-  //     <Wrapper _cursor={cursor} ref={wrapperRef}>
-  //       {text}
-  //     </Wrapper>
-  //   );
-  // }
+  }, [children, animation, writeDelay, writeSpeed]);
 
   return (
     <Wrapper _cursor={cursor} ref={wrapperRef}>
       {items.map((item, i) => {
-        // console.log(items);
         return <span key={i}>{item}</span>;
       })}
     </Wrapper>
@@ -273,48 +207,6 @@ const Wrapper = styled.div`
         animation: ${blink} 0.55s infinite alternate;
       }
     `};
-`;
-
-const appear = keyframes`
-  0% {
-    color: red;
-  }
-  20% {
-    font-size: ${size};
-  }
-  100% {
-    font-size: ${size};
-  }
-`;
-
-const appearReverse = keyframes`
-  0% {
-    font-size: ${size};
-  }
-  10% {
-    font-size: 0;
-  }
-  100% {
-    font-size: 0;
-  }
-`;
-
-const Span = styled.span`
-  ${({ _animationEnabled, _reverse }) =>
-    _animationEnabled && !_reverse
-      ? css`
-          font-size: 0;
-          animation: ${appear} 0.3s;
-          animation-delay: ${({ _nth }) => (_nth ? _nth * 100 : 100)}ms;
-          animation-fill-mode: forwards;
-        `
-      : css`
-          font-size: 1;
-          animation: ${appearReverse} 0.3s;
-          animation-delay: ${({ _nth, _len }) =>
-            _nth ? (_len - _nth) * 100 : 100}ms;
-          animation-fill-mode: forwards;
-        `}
 `;
 
 export default Typeable;

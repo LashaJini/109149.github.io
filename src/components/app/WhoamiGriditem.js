@@ -20,14 +20,17 @@ const WhoamiGriditem = () => {
       <ParagraphWrapper>
         <Blockquote>
           <Paragraph>
-            <Typeable>
+            <Typeable writeDelay={1000} writeSpeed={90}>
               I am a CE student, a <Colorable>dog owner</Colorable> and I am{" "}
               <Deleteable
-                after={1}
-                replaceWith={["bred", "boed", "!@$#!@$#!@$#", "bored"]}
-                writeSpeed={[90, 90, 50, 90]}
+                replaceWith={["bord", "bred", "boed", "!@$#!@$#!@$#"]}
+                writeDelay={[1000, 1000, 1000, 400]}
+                writeSpeed={[90, 90, 90, 30]}
+                delDelay={[1000, 1000, 1000, 1000]}
+                delSpeed={[90, 70, 50, 90]}
+                result={{ writeDelay: 2000, writeSpeed: 300 }}
               >
-                bord
+                bored
               </Deleteable>
               .
             </Typeable>
