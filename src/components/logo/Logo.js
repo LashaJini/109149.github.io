@@ -212,29 +212,29 @@ const FillLayer = styled.g`
   fill: url("#radial-gradient");
 `;
 
-const InnerStrokeLayer = styled.g`
-  stroke: black;
-  fill: url("#radial-gradient");
-  stroke-width: 2px;
+const StrokerLayer = styled.g`
   transition: all 1s;
-  filter: drop-shadow(0 0 5px rgba(255, 186, 3, 0.6));
+  stroke-width: 2px;
 
   &:hover {
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1));
   }
 `;
 
-const MainStrokeLayer = styled.g`
-  stroke: rgb(255, 237, 107);
-  stroke-dasharray: 17 1;
-  stroke-width: 2px;
-  fill: none;
-  transition: all 1s;
+const InnerStrokeLayer = styled(StrokerLayer)`
+  stroke: black;
+  fill: url("#radial-gradient");
   filter: drop-shadow(0 0 5px rgba(255, 186, 3, 0.6));
+  // filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 1));
+`;
 
-  &:hover {
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1));
-  }
+const MainStrokeLayer = styled(StrokerLayer)`
+  // stroke: black;
+  stroke: rgb(255, 237, 107, 0.9);
+  stroke-dasharray: 17 1;
+  fill: none;
+  filter: drop-shadow(0 0 5px rgba(255, 186, 3, 0.6));
+  // filter: drop-shadow(8px 8px 5px rgba(0, 0, 0, 0.9));
 `;
 
 export default Logo;
