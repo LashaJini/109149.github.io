@@ -1,3 +1,4 @@
+import Thunder1 from "./thunder/Thunder1";
 import Deleteable from "./animation/Deleteable";
 import AnimationToggler from "./toggler/animation-toggler/AnimationToggler";
 import Colorable from "./colorable/Colorable";
@@ -64,4 +65,5 @@ export {
   AnimationContext,
   AnimationToggler,
   Deleteable,
+  Thunder1,
 };

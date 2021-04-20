@@ -206,6 +206,7 @@ const LogoScene = styled.g``;
 const OuterStrokeLayer = styled.g`
   stroke: #63000a;
   stroke-width: 4px;
+  filter: drop-shadow(8px 4px 2px rgba(0, 0, 0, 1));
 `;
 
 const FillLayer = styled.g`
@@ -224,17 +225,17 @@ const StrokerLayer = styled.g`
 const InnerStrokeLayer = styled(StrokerLayer)`
   stroke: black;
   fill: url("#radial-gradient");
-  filter: drop-shadow(0 0 5px rgba(255, 186, 3, 0.6));
-  // filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 1));
+  // filter: drop-shadow(0 0 5px rgba(255, 186, 3, 0.6));
+  // filter: drop-shadow(5px 2px 0 rgba(0, 0, 0, 1));
 `;
 
+// not needed anymore
 const MainStrokeLayer = styled(StrokerLayer)`
-  // stroke: black;
-  stroke: rgb(255, 237, 107, 0.9);
+  stroke: black;
+  // stroke: rgb(255, 237, 107, 0.9);
   stroke-dasharray: 17 1;
   fill: none;
-  filter: drop-shadow(0 0 5px rgba(255, 186, 3, 0.6));
-  // filter: drop-shadow(8px 8px 5px rgba(0, 0, 0, 0.9));
+  // filter: drop-shadow(0 0 5px rgba(255, 186, 3, 0.6));
 `;
 
 export default Logo;
