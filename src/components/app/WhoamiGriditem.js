@@ -14,38 +14,50 @@ import { themes } from "../../constants";
 const WhoamiGriditem = () => {
   return (
     <GridItemExtended>
-      <TitleWrapper>
-        <Title># whoami</Title>
-      </TitleWrapper>
-      <ParagraphWrapper>
-        <Blockquote>
-          <Paragraph>
-            <Typeable writeDelay={1000} writeSpeed={90}>
-              I am a CE student, a <Colorable>dog owner</Colorable> and I am{" "}
-              <Deleteable
-                replaceWith={["bord", "bred", "boed", "!@$#!@$#!@$#"]}
-                writeDelay={[1000, 1000, 1000, 400]}
-                writeSpeed={[90, 90, 90, 30]}
-                delDelay={[1000, 1000, 1000, 1000]}
-                delSpeed={[90, 70, 50, 90]}
-                result={{ writeDelay: 2000, writeSpeed: 300 }}
-              >
-                bored
-              </Deleteable>
-              .
-            </Typeable>
-          </Paragraph>
-        </Blockquote>
-      </ParagraphWrapper>
+      <Div>
+        <TitleWrapper>
+          <Title># whoami</Title>
+        </TitleWrapper>
+        <ParagraphWrapper>
+          <Blockquote>
+            <Paragraph>
+              <Typeable writeDelay={1000} writeSpeed={90}>
+                I am a CE student, a <Colorable>dog owner</Colorable> and I am{" "}
+                <Deleteable
+                  replaceWith={["bord", "bred", "boed", "!@$#!@$#!@$#"]}
+                  writeDelay={[1000, 1000, 1000, 400]}
+                  writeSpeed={[90, 90, 90, 30]}
+                  delDelay={[1000, 1000, 1000, 1000]}
+                  delSpeed={[90, 70, 50, 90]}
+                  result={{ writeDelay: 2000, writeSpeed: 300 }}
+                >
+                  bored
+                </Deleteable>
+                .
+              </Typeable>
+            </Paragraph>
+          </Blockquote>
+        </ParagraphWrapper>
+      </Div>
     </GridItemExtended>
   );
 };
 
+const Div = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+`;
+
 const GridItemExtended = styled(GridItem)`
   scroll-snap-align: start;
   grid-row: 2;
-  flex-direction: column;
   height: 100vh;
+  position: relative;
 `;
 
 const TitleWrapper = styled.div`

@@ -10,18 +10,6 @@ const ProjectsGridItem = () => {
       <ProjectItem nth="1">
         <Card />
       </ProjectItem>
-      <ProjectItem nth="2">
-        <Card />
-      </ProjectItem>
-      <ProjectItem nth="3">
-        <Card />
-      </ProjectItem>
-      <ProjectItem nth="4">
-        <Card />
-      </ProjectItem>
-      <ProjectItem nth="5">
-        <Card />
-      </ProjectItem>
     </GridItemExtended>
   );
 };

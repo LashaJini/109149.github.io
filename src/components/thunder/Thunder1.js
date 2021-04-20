@@ -1,27 +1,39 @@
 import React from "react";
 import styled from "styled-components";
+import { AnimationContext } from "../";
 
-// TODO: do something about the randomness of left/right tree
-// TODO: on hover "play" music
-// TODO: on hover increase shadow
-// TODO: animate
-const Thunder1 = () => {
+const colors = ["white", "cyan", "blue", "purple"];
+
+// TODO: on hover "play" music (?)
+// TODO: on hover increase shadow (?)
+// TODO: multiple renders will cause problems in settimeout; use requestAnimationFrame instead (?)
+// TODO: fix pixel ratio on phone
+// TODO: add intersection observer
+const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
   const canvasRef = React.useRef();
   const ctxRef = React.useRef();
+  const redraw = React.useRef();
+  const animation = React.useContext(AnimationContext);
+
+  redraw.current = () => {
+    resize();
+    generate();
+  };
 
   function resize() {
     const scale = window.devicePixelRatio || 1;
 
     canvasRef.current.width = window.innerWidth * scale;
     canvasRef.current.height = window.innerHeight * scale;
+    // canvasRef.current.width *= scale;
+    // canvasRef.current.height *= scale;
   }
 
   React.useEffect(() => {
     ctxRef.current = canvasRef.current.getContext("2d");
 
-    resize();
-    generate();
-  }, []);
+    redraw.current();
+  }, [animation]);
 
   function generate() {
     ctxRef.current.clearRect(
@@ -31,21 +43,22 @@ const Thunder1 = () => {
       canvasRef.current.height
     );
 
-    const rootX = 160;
+    const rootX = 100;
     const rootY = 0;
     const INITIAL_HEIGHT = 56;
     const INITIAL_ANGLE = 20;
     const STEM_INITIAL_WIDTH = 8;
-    const STEM_COLOR = "white";
-    const LEAF_COLOR = "white";
-    const INITIAL_SHADOW = 30;
+    const INITIAL_SHADOW = 10;
+    // const STEM_COLOR = colors[Math.floor(Math.random() * colors.length)];
+    const STEM_COLOR = "blue";
+    // const SHADOW_COLOR = colors[Math.floor(Math.random() * colors.length)];
     const SHADOW_COLOR = "cyan";
     const LEAF_THRESHOLD = 30; // as big as possible to decrease render time
     const STEM_WIDTH_DECLINE_FACTOR = 0.8;
     const TREE_HEIGHT_DECLINE_FACTOR = 0.958; // 1 - no decline, 0 - full decline
 
     ctxRef.current.strokeStyle = STEM_COLOR;
-    ctxRef.current.fillStyle = LEAF_COLOR;
+    ctxRef.current.fillStyle = STEM_COLOR;
     ctxRef.current.shadowColor = SHADOW_COLOR;
     ctxRef.current.shadowBlur = INITIAL_SHADOW;
     ctxRef.current.lineCap = "round";
@@ -58,7 +71,8 @@ const Thunder1 = () => {
       angle,
       stemWidth,
       last,
-      drawProbability = 0.18
+      drawProbability = 0.18,
+      slowDown = 1
     ) {
       const { x: newX, y: newY, angle: lastAngle } = drawStem(
         rootX,
@@ -76,28 +90,14 @@ const Thunder1 = () => {
       const stemNewWidth = stemWidth * STEM_WIDTH_DECLINE_FACTOR;
       const newHeight = height * TREE_HEIGHT_DECLINE_FACTOR;
 
-      if (iter > 0) {
-        drawTree(
-          0,
-          height,
-          newHeight,
-          angle + dTheta,
-          stemNewWidth,
-          { x: newX, y: newY, angle: lastAngle },
-          drawProbability * 1.1
-        );
-        drawTree(
-          0,
-          height,
-          newHeight,
-          angle - dTheta,
-          stemNewWidth,
-          { x: newX, y: newY, angle: lastAngle },
-          drawProbability * 1.1
-        );
-        iter--;
-      } else {
-        Math.random() > drawProbability &&
+      animation.animationEnabled
+        ? setTimeout(() => {
+            anim();
+          }, 24 * slowDown)
+        : anim();
+
+      function anim() {
+        if (iter > 0) {
           drawTree(
             0,
             height,
@@ -105,9 +105,9 @@ const Thunder1 = () => {
             angle + dTheta,
             stemNewWidth,
             { x: newX, y: newY, angle: lastAngle },
-            drawProbability * 1.1
+            drawProbability * 1.1,
+            slowDown * 1.1
           );
-        Math.random() > drawProbability &&
           drawTree(
             0,
             height,
@@ -115,8 +115,34 @@ const Thunder1 = () => {
             angle - dTheta,
             stemNewWidth,
             { x: newX, y: newY, angle: lastAngle },
-            drawProbability * 1.1
+            drawProbability * 1.1,
+            slowDown * 1.1
           );
+          iter--;
+        } else {
+          Math.random() > drawProbability &&
+            drawTree(
+              0,
+              height,
+              newHeight,
+              angle + dTheta,
+              stemNewWidth,
+              { x: newX, y: newY, angle: lastAngle },
+              drawProbability * 1.1,
+              slowDown * 1.1
+            );
+          Math.random() > drawProbability &&
+            drawTree(
+              0,
+              height,
+              newHeight,
+              angle - dTheta,
+              stemNewWidth,
+              { x: newX, y: newY, angle: lastAngle },
+              drawProbability * 1.1,
+              slowDown * 1.1
+            );
+        }
       }
 
       ctxRef.current.restore();
@@ -151,7 +177,6 @@ const Thunder1 = () => {
       ctxRef.current.stroke();
 
       let result = { x: newX, y: newY, angle: newAngle };
-      console.log(result);
       return result;
     }
 
@@ -163,21 +188,22 @@ const Thunder1 = () => {
   }
 
   React.useEffect(() => {
-    window.addEventListener("resize", resize);
-    return () => window.removeEventListener("resize", resize);
+    window.addEventListener("resize", redraw.current);
+    return () => window.removeEventListener("resize", redraw.current);
   }, []);
 
-  console.log("render");
   return (
     <>
       <Canvas ref={canvasRef}></Canvas>
-      <button onClick={generate}>oi</button>
     </>
   );
 };
 
 const Canvas = styled.canvas`
   background: transparent;
+  // width: 100%;
+  width: 100vw;
+  height: 100%;
 `;
 
 export default Thunder1;

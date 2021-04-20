@@ -38,6 +38,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+  z-index: -1;
   max-width: 300px;
   // font-style: italic;
   // font-weight: bold;

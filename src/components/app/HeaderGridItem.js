@@ -32,7 +32,7 @@ const GridItemExtended = styled(GridItem)`
   grid-auto-rows: 230px;
   grid-gap: 20px;
   align-items: start;
-  background: ${themes.vars.bgColorSecondary};
+  // background: ${themes.vars.bgColorSecondary};
   background: linear-gradient(
     ${themes.vars.bgColorSecondary1},
     ${themes.vars.bgColorSecondary}
