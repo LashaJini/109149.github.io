@@ -603,8 +603,23 @@ const table = [
 ];
 
 const Sphere2 = () => {
+  const camera = React.useRef();
+  const scene = React.useRef();
+  const renderer = React.useRef();
+
   React.useEffect(() => {
-    let camera, scene, renderer;
+    camera.current = null;
+    scene.current = null;
+    renderer.current = null;
+  }, []);
+
+  React.useEffect(() => {
+    if (camera.current || scene.current || renderer.current) {
+      return;
+    }
+
+    console.log(camera.current, scene.current, renderer.current);
+    console.log("oi");
     let controls;
     const objects = [];
     const targets = { table: [], sphere: [], helix: [], grid: [] };
@@ -613,14 +628,14 @@ const Sphere2 = () => {
     animate();
 
     function init() {
-      camera = new THREE.PerspectiveCamera(
+      camera.current = new THREE.PerspectiveCamera(
         40,
         window.innerWidth / window.innerHeight,
         1,
         10000
       );
-      camera.position.z = 3000;
-      scene = new THREE.Scene();
+      camera.current.position.z = 3000;
+      scene.current = new THREE.Scene();
 
       // table
       for (let i = 0; i < table.length; i += 5) {
@@ -648,7 +663,7 @@ const Sphere2 = () => {
         object.position.x = Math.random() * 4000 - 2000;
         object.position.y = Math.random() * 4000 - 2000;
         object.position.z = Math.random() * 4000 - 2000;
-        scene.add(object);
+        scene.current.add(object);
 
         objects.push(object);
 
@@ -715,14 +730,19 @@ const Sphere2 = () => {
 
       //
 
-      renderer = new CSS3DRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.domElement.style.position = "absolute";
-      document.getElementById("container").appendChild(renderer.domElement);
+      renderer.current = new CSS3DRenderer();
+      renderer.current.setSize(window.innerWidth, window.innerHeight);
+      renderer.current.domElement.style.position = "absolute";
+      document
+        .getElementById("container")
+        .appendChild(renderer.current.domElement);
 
       //
 
-      controls = new TrackballControls(camera, renderer.domElement);
+      controls = new TrackballControls(
+        camera.current,
+        renderer.current.domElement
+      );
       controls.rotateSpeed = 0.5;
       controls.minDistance = 500;
       controls.maxDistance = 6000;
@@ -766,6 +786,7 @@ const Sphere2 = () => {
 
       window.addEventListener("resize", onWindowResize, false);
     }
+
     function transform(targets, duration) {
       TWEEN.removeAll();
 
@@ -805,10 +826,10 @@ const Sphere2 = () => {
     }
 
     function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
+      camera.current.aspect = window.innerWidth / window.innerHeight;
+      camera.current.updateProjectionMatrix();
 
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.current.setSize(window.innerWidth, window.innerHeight);
 
       render();
     }
@@ -822,10 +843,21 @@ const Sphere2 = () => {
     }
 
     function render() {
-      renderer.render(scene, camera);
+      renderer.current.render(scene.current, camera.current);
     }
+
+    function cleanup() {
+      while (scene.current.children.length > 0) {
+        scene.current.remove(scene.current.children[0]);
+      }
+    }
+
+    return () => {
+      cleanup();
+    };
   }, []);
 
+  console.log("render");
   return (
     <Wrapper>
       <Scene id="container"></Scene>
