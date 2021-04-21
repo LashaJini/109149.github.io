@@ -1,3 +1,5 @@
+import Sphere2 from "./sphere/Sphere2";
+import Sphere from "./sphere/Sphere";
 import Thunder1 from "./thunder/Thunder1";
 import Deleteable from "./animation/Deleteable";
 import AnimationToggler from "./toggler/animation-toggler/AnimationToggler";
@@ -66,4 +68,6 @@ export {
   AnimationToggler,
   Deleteable,
   Thunder1,
+  Sphere,
+  Sphere2,
 };
