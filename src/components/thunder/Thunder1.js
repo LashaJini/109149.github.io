@@ -6,67 +6,17 @@ import { AnimationContext } from "../";
 
 // TODO: on hover "play" music (?)
 // TODO: on hover increase shadow (?)
-// TODO: multiple renders will cause problems in settimeout; use requestAnimationFrame instead (?)
-// TODO: fix pixel ratio on phone
 // TODO: add intersection observer
 const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
   const canvasRef = React.useRef();
   const ctxRef = React.useRef();
   const redraw = React.useRef();
   const ratioRef = React.useRef();
+  const animationID = React.useRef();
   const animation = React.useContext(AnimationContext);
+  const animate = React.useRef();
 
-  redraw.current = () => {
-    resize();
-    generate();
-  };
-
-  function scale() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const devicePixelRatio = window.devicePixelRatio || 1;
-
-    const backingStoreRatio =
-      ctxRef.current.webkitBackingStorePixelRatio ||
-      ctxRef.current.mozBackingStorePixelRatio ||
-      ctxRef.current.msBackingStorePixelRatio ||
-      ctxRef.current.oBackingStorePixelRatio ||
-      ctxRef.current.backingStorePixelRatio ||
-      1;
-
-    const ratio = devicePixelRatio / backingStoreRatio;
-    ratioRef.current = ratio;
-    if (devicePixelRatio !== backingStoreRatio) {
-      // set the 'real' canvas size to the higher width/height
-      canvasRef.current.width = width * ratio;
-      canvasRef.current.height = height * ratio;
-
-      // ...then scale it back down with CSS
-      canvasRef.current.style.width = width + "px";
-      canvasRef.current.style.height = height + "px";
-    } else {
-      // this is a normal 1:1 device; just scale it simply
-      canvasRef.current.width = width;
-      canvasRef.current.height = height;
-      canvasRef.current.style.width = "";
-      canvasRef.current.style.height = "";
-    }
-
-    // scale the drawing context so everything will work at the higher ratio
-    ctxRef.current.scale(ratio, ratio);
-  }
-
-  function resize() {
-    scale();
-  }
-
-  React.useEffect(() => {
-    ctxRef.current = canvasRef.current.getContext("2d");
-
-    redraw.current(); // <- animation (!)
-  }, [animation]);
-
-  function generate() {
+  const strike = React.useCallback((animate) => {
     ctxRef.current.clearRect(
       0,
       0,
@@ -74,13 +24,8 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
       canvasRef.current.height
     );
 
-    const rootX = 100;
-    const rootY = 0;
-    // alert(
-    //   ctxRef.current.canvas.height / ratioRef.current +
-    //     ", " +
-    //     window.innerHeight
-    // );
+    const rootX = 30;
+    const rootY = 10;
     const INITIAL_HEIGHT =
       ctxRef.current.canvas.height / (ratioRef.current * 10) > 44
         ? ctxRef.current.canvas.height / (ratioRef.current * 10)
@@ -88,9 +33,7 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
     const INITIAL_ANGLE = 20;
     const STEM_INITIAL_WIDTH = 8;
     const INITIAL_SHADOW = 10;
-    // const STEM_COLOR = colors[Math.floor(Math.random() * colors.length)];
     const STEM_COLOR = "white";
-    // const SHADOW_COLOR = colors[Math.floor(Math.random() * colors.length)];
     const SHADOW_COLOR = "cyan";
     const LEAF_THRESHOLD = 30; // as big as possible to decrease render time
     const STEM_WIDTH_DECLINE_FACTOR = 0.8;
@@ -102,7 +45,8 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
     ctxRef.current.shadowBlur = INITIAL_SHADOW;
     ctxRef.current.lineCap = "round";
 
-    let iter = 15;
+    let iter = 12;
+    let animationList = [];
     function drawTree(
       rootX,
       rootY,
@@ -129,58 +73,47 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
       const stemNewWidth = stemWidth * STEM_WIDTH_DECLINE_FACTOR;
       const newHeight = height * TREE_HEIGHT_DECLINE_FACTOR;
 
-      animation.animationEnabled
-        ? setTimeout(() => {
-            anim();
-          }, 24 * slowDown)
-        : anim();
+      let right = () =>
+        drawTree(
+          0,
+          height,
+          newHeight,
+          angle + dTheta,
+          stemNewWidth,
+          { x: newX, y: newY, angle: lastAngle },
+          drawProbability * 1.1,
+          slowDown * 1.1
+        );
+      let left = () =>
+        drawTree(
+          0,
+          height,
+          newHeight,
+          angle - dTheta,
+          stemNewWidth,
+          { x: newX, y: newY, angle: lastAngle },
+          drawProbability * 1.1,
+          slowDown * 1.1
+        );
 
-      function anim() {
+      if (animate) {
         if (iter > 0) {
-          drawTree(
-            0,
-            height,
-            newHeight,
-            angle + dTheta,
-            stemNewWidth,
-            { x: newX, y: newY, angle: lastAngle },
-            drawProbability * 1.1,
-            slowDown * 1.1
-          );
-          drawTree(
-            0,
-            height,
-            newHeight,
-            angle - dTheta,
-            stemNewWidth,
-            { x: newX, y: newY, angle: lastAngle },
-            drawProbability * 1.1,
-            slowDown * 1.1
-          );
+          animationList.push(right);
+          animationList.push(left);
+          iter--;
+        } else if (iter > -200) {
+          Math.random() > drawProbability && animationList.push(right);
+          Math.random() > drawProbability && animationList.push(left);
+          iter--;
+        }
+      } else {
+        if (iter > 0) {
+          right();
+          left();
           iter--;
         } else {
-          Math.random() > drawProbability &&
-            drawTree(
-              0,
-              height,
-              newHeight,
-              angle + dTheta,
-              stemNewWidth,
-              { x: newX, y: newY, angle: lastAngle },
-              drawProbability * 1.1,
-              slowDown * 1.1
-            );
-          Math.random() > drawProbability &&
-            drawTree(
-              0,
-              height,
-              newHeight,
-              angle - dTheta,
-              stemNewWidth,
-              { x: newX, y: newY, angle: lastAngle },
-              drawProbability * 1.1,
-              slowDown * 1.1
-            );
+          Math.random() > drawProbability && right();
+          Math.random() > drawProbability && left();
         }
       }
     }
@@ -217,14 +150,86 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
       return result;
     }
 
-    ctxRef.current.restore();
-    // alert(ctxRef.current.canvas.height + ", " + canvasRef.current.height);
+    // ctxRef.current.restore();
     drawTree(rootX, rootY, INITIAL_HEIGHT, INITIAL_ANGLE, STEM_INITIAL_WIDTH, {
       x: rootX,
       y: rootY,
       angle: INITIAL_ANGLE,
     });
+
+    let currentAnim = 0;
+    function update(time) {
+      animationID.current = undefined;
+      if (!currentAnim) {
+        currentAnim = 0;
+      }
+
+      animationList[currentAnim]();
+      currentAnim++;
+
+      if (!animationID.current && currentAnim < animationList.length)
+        animationID.current = window.requestAnimationFrame(update);
+    }
+    animate &&
+      (() => {
+        animationID.current = window.requestAnimationFrame(update);
+      })();
+  }, []);
+
+  redraw.current = () => {
+    scale();
+    clearAnimation();
+    strike(animate.current);
+  };
+
+  function clearAnimation() {
+    if (animationID.current) {
+      window.cancelAnimationFrame(animationID.current);
+      animationID.current = undefined;
+    }
   }
+
+  function scale() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const devicePixelRatio = window.devicePixelRatio || 1;
+
+    const backingStoreRatio =
+      ctxRef.current.webkitBackingStorePixelRatio ||
+      ctxRef.current.mozBackingStorePixelRatio ||
+      ctxRef.current.msBackingStorePixelRatio ||
+      ctxRef.current.oBackingStorePixelRatio ||
+      ctxRef.current.backingStorePixelRatio ||
+      1;
+
+    const ratio = devicePixelRatio / backingStoreRatio;
+    ratioRef.current = ratio;
+    if (devicePixelRatio !== backingStoreRatio) {
+      // set the 'real' canvas size to the higher width/height
+      canvasRef.current.width = width * ratio;
+      canvasRef.current.height = height * ratio;
+
+      // ...then scale it back down with CSS
+      canvasRef.current.style.width = width + "px";
+      canvasRef.current.style.height = height + "px";
+    } else {
+      // this is a normal 1:1 device; just scale it simply
+      canvasRef.current.width = width;
+      canvasRef.current.height = height;
+      canvasRef.current.style.width = "";
+      canvasRef.current.style.height = "";
+    }
+
+    // scale the drawing context so everything will work at the higher ratio
+    ctxRef.current.scale(ratio, ratio);
+  }
+
+  React.useEffect(() => {
+    ctxRef.current = canvasRef.current.getContext("2d");
+
+    animate.current = animation.animationEnabled;
+    redraw.current();
+  }, [animation.animationEnabled]);
 
   React.useEffect(() => {
     window.addEventListener("resize", redraw.current);
@@ -240,10 +245,6 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
 
 const Canvas = styled.canvas`
   background: transparent;
-  // width: 100%;
-  // height: 100%;
-  // min-width: 300px;
-  // min-height: 300px;
   position: absolute;
 `;
 
