@@ -6,6 +6,7 @@ import { SwoopIn } from "../";
 import { themes } from "../../constants";
 import { bp } from "../../constants";
 
+// TODO: change text color cuz of thunder...
 const RecentProjectsGridItem = () => {
   return (
     <GridItemExtended>
@@ -52,10 +53,12 @@ const Div = styled.div`
 
 const Thunder = styled(Div)`
   z-index: -1;
+  // top: 0;
+  // left: 0;
+  // width: 100%;
+  // height: 100%;
+
   @media (min-width: ${bp.lg}) {
-    // width: 100%;
-    // height: 100%;
-    // position: absolute;
     grid-row: 1;
     grid-column: 2;
   }
@@ -66,6 +69,7 @@ const GridItemExtended = styled(GridItem)`
   grid-row: 3;
   height: 100vh;
   width: 100%;
+  // min-height: 600px;
   position: relative;
 
   @media (min-width: ${bp.lg}) {

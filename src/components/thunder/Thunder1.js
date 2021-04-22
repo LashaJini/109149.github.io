@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { AnimationContext } from "../";
 
-const colors = ["white", "cyan", "blue", "purple"];
+// const colors = ["white", "cyan", "blue", "purple"];
 
 // TODO: on hover "play" music (?)
 // TODO: on hover increase shadow (?)
@@ -13,6 +13,7 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
   const canvasRef = React.useRef();
   const ctxRef = React.useRef();
   const redraw = React.useRef();
+  const ratioRef = React.useRef();
   const animation = React.useContext(AnimationContext);
 
   redraw.current = () => {
@@ -20,19 +21,49 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
     generate();
   };
 
-  function resize() {
-    const scale = window.devicePixelRatio || 1;
+  function scale() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const devicePixelRatio = window.devicePixelRatio || 1;
 
-    canvasRef.current.width = window.innerWidth * scale;
-    canvasRef.current.height = window.innerHeight * scale;
-    // canvasRef.current.width *= scale;
-    // canvasRef.current.height *= scale;
+    const backingStoreRatio =
+      ctxRef.current.webkitBackingStorePixelRatio ||
+      ctxRef.current.mozBackingStorePixelRatio ||
+      ctxRef.current.msBackingStorePixelRatio ||
+      ctxRef.current.oBackingStorePixelRatio ||
+      ctxRef.current.backingStorePixelRatio ||
+      1;
+
+    const ratio = devicePixelRatio / backingStoreRatio;
+    ratioRef.current = ratio;
+    if (devicePixelRatio !== backingStoreRatio) {
+      // set the 'real' canvas size to the higher width/height
+      canvasRef.current.width = width * ratio;
+      canvasRef.current.height = height * ratio;
+
+      // ...then scale it back down with CSS
+      canvasRef.current.style.width = width + "px";
+      canvasRef.current.style.height = height + "px";
+    } else {
+      // this is a normal 1:1 device; just scale it simply
+      canvasRef.current.width = width;
+      canvasRef.current.height = height;
+      canvasRef.current.style.width = "";
+      canvasRef.current.style.height = "";
+    }
+
+    // scale the drawing context so everything will work at the higher ratio
+    ctxRef.current.scale(ratio, ratio);
+  }
+
+  function resize() {
+    scale();
   }
 
   React.useEffect(() => {
     ctxRef.current = canvasRef.current.getContext("2d");
 
-    redraw.current();
+    redraw.current(); // <- animation (!)
   }, [animation]);
 
   function generate() {
@@ -45,12 +76,20 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
 
     const rootX = 100;
     const rootY = 0;
-    const INITIAL_HEIGHT = 56;
+    // alert(
+    //   ctxRef.current.canvas.height / ratioRef.current +
+    //     ", " +
+    //     window.innerHeight
+    // );
+    const INITIAL_HEIGHT =
+      ctxRef.current.canvas.height / (ratioRef.current * 10) > 44
+        ? ctxRef.current.canvas.height / (ratioRef.current * 10)
+        : 48;
     const INITIAL_ANGLE = 20;
     const STEM_INITIAL_WIDTH = 8;
     const INITIAL_SHADOW = 10;
     // const STEM_COLOR = colors[Math.floor(Math.random() * colors.length)];
-    const STEM_COLOR = "blue";
+    const STEM_COLOR = "white";
     // const SHADOW_COLOR = colors[Math.floor(Math.random() * colors.length)];
     const SHADOW_COLOR = "cyan";
     const LEAF_THRESHOLD = 30; // as big as possible to decrease render time
@@ -144,8 +183,6 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
             );
         }
       }
-
-      ctxRef.current.restore();
     }
 
     // `last.angle -` kinda makes it look more beautiful
@@ -161,9 +198,9 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
       let newAngle = rotationAngle;
 
       if (
-        newX > canvasRef.current.innerWidth ||
+        newX > canvasRef.current.width / ratioRef.current - INITIAL_HEIGHT ||
         newX < 0 ||
-        newY > canvasRef.current.innerHeight ||
+        newY > canvasRef.current.height / ratioRef.current - INITIAL_HEIGHT ||
         newY < 0
       ) {
         return last;
@@ -180,6 +217,8 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
       return result;
     }
 
+    ctxRef.current.restore();
+    // alert(ctxRef.current.canvas.height + ", " + canvasRef.current.height);
     drawTree(rootX, rootY, INITIAL_HEIGHT, INITIAL_ANGLE, STEM_INITIAL_WIDTH, {
       x: rootX,
       y: rootY,
@@ -202,8 +241,10 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
 const Canvas = styled.canvas`
   background: transparent;
   // width: 100%;
-  width: 100vw;
-  height: 100%;
+  // height: 100%;
+  // min-width: 300px;
+  // min-height: 300px;
+  position: absolute;
 `;
 
 export default Thunder1;
