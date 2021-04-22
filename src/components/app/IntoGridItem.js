@@ -1,8 +1,7 @@
 import React from "react";
 import GridItem from "./GridItem";
 import styled from "styled-components";
-import { Title, Paragraph } from "../";
-import { SwoopIn } from "../";
+import { WhatAmI, Title } from "../";
 import { themes } from "../../constants";
 
 const IntoGridItem = () => {
@@ -11,21 +10,21 @@ const IntoGridItem = () => {
       <TitleWrapper>
         <Title>WHAT I'M INTO?</Title>
       </TitleWrapper>
-      <ParagraphWrapper>
-        <Paragraph>
-          <SwoopIn from="left" to="right">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet.
-          </SwoopIn>
-        </Paragraph>
-      </ParagraphWrapper>
+      <WhatAmIWrapper>
+        <WhatAmI />
+      </WhatAmIWrapper>
     </GridItemExtended>
   );
 };
 
+const WhatAmIWrapper = styled.div`
+  width: 80vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+`;
 const GridItemExtended = styled(GridItem)`
   scroll-snap-align: start;
   grid-row: 6;
@@ -40,15 +39,6 @@ const TitleWrapper = styled.div`
   user-select: none;
   min-height: 1rem;
   margin-bottom: 1.8rem;
-`;
-
-const ParagraphWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0 3rem;
-  // text-align: center;
 `;
 
 export default IntoGridItem;

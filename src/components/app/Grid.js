@@ -12,7 +12,7 @@ const Grid = styled.div`
   overflow-y: scroll;
   height: 100vh;
   scroll-snap-type: y proximity;
-  // scroll-padding: 5rem;
+  scroll-padding: 5rem;
 
   position: absolute;
   width: 100%;
