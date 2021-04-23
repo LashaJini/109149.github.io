@@ -3,20 +3,27 @@ import styled from "styled-components";
 import { themes } from "../../constants";
 
 // TODO: disabled
-const Button = (props) => {
+const Button = ({
+  href,
+  width,
+  height,
+  fillColor,
+  children,
+  newTab = true,
+}) => {
   return (
     <>
-      <Wrapper _width={props.width} _height={props.height}>
+      <Wrapper _width={width} _height={height}>
         <A
-          href={props.href || "https://google.com"}
-          target="_blank"
+          href={href || "https://google.com"}
+          target={newTab ? "_blank" : "_self"}
           rel="noreferrer"
           className="hoverable"
-          _fillColor={props.fillColor}
+          _fillColor={fillColor}
         >
           <p>
-            <FillSpan _fillColor={props.fillColor}></FillSpan>
-            <TextSpan>{props.children || "Click"}</TextSpan>
+            <FillSpan _fillColor={fillColor}></FillSpan>
+            <TextSpan>{children || "Click"}</TextSpan>
           </p>
         </A>
       </Wrapper>
