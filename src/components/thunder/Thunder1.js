@@ -7,7 +7,8 @@ import { AnimationContext } from "../";
 // TODO: on hover "play" music (?)
 // TODO: on hover increase shadow (?)
 // TODO: add intersection observer
-const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
+const Thunder1 = ({ defaultRootX, defaultRootY, defaultInitialAngle }) => {
+  const initials = React.useRef({ rootX: 30, rootY: 10, initialAngle: 20 });
   const canvasRef = React.useRef();
   const ctxRef = React.useRef();
   const redraw = React.useRef();
@@ -16,7 +17,7 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
   const animation = React.useContext(AnimationContext);
   const animate = React.useRef();
 
-  const strike = React.useCallback((animate) => {
+  const strike = React.useCallback((animate, initials) => {
     ctxRef.current.clearRect(
       0,
       0,
@@ -24,13 +25,13 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
       canvasRef.current.height
     );
 
-    const rootX = 30;
-    const rootY = 10;
+    const rootX = initials.rootX;
+    const rootY = initials.rootY;
     const INITIAL_HEIGHT =
       ctxRef.current.canvas.height / (ratioRef.current * 10) > 44
         ? ctxRef.current.canvas.height / (ratioRef.current * 10)
         : 48;
-    const INITIAL_ANGLE = 20;
+    const INITIAL_ANGLE = initials.initialAngle;
     const STEM_INITIAL_WIDTH = 8;
     const INITIAL_SHADOW = 10;
     const STEM_COLOR = "white";
@@ -179,7 +180,7 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
   redraw.current = () => {
     scale();
     clearAnimation();
-    strike(animate.current);
+    strike(animate.current, initials.current);
   };
 
   function clearAnimation() {
@@ -228,8 +229,18 @@ const Thunder1 = ({ rootX = 100, rootY = 0 }) => {
     ctxRef.current = canvasRef.current.getContext("2d");
 
     animate.current = animation.animationEnabled;
+    initials.current = {
+      rootX: defaultRootX || 30,
+      rootY: defaultRootY || 10,
+      initialAngle: defaultInitialAngle || 20,
+    };
     redraw.current();
-  }, [animation.animationEnabled]);
+  }, [
+    animation.animationEnabled,
+    defaultRootX,
+    defaultRootY,
+    defaultInitialAngle,
+  ]);
 
   React.useEffect(() => {
     window.addEventListener("resize", redraw.current);

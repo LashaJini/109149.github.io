@@ -3,32 +3,40 @@ import GridItem from "./GridItem";
 import styled from "styled-components";
 import { Thunder1, Title, Paragraph } from "../";
 import { SwoopIn } from "../";
-import { themes } from "../../constants";
-import { bp } from "../../constants";
+import { bp, themes } from "../../constants";
+import { useFullyVisible } from "../../hooks";
 
 // TODO: change text color cuz of thunder...
 const RecentProjectsGridItem = () => {
+  const dummyRef = React.useRef();
+  const fullyVisible = useFullyVisible(dummyRef.current);
+
   return (
     <GridItemExtended>
-      <Div>
-        <TitleWrapper>
-          <Title>RECENT PROJECTS</Title>
-        </TitleWrapper>
-        <ParagraphWrapper>
-          <Paragraph>
-            <SwoopIn from="left" to="right">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam et justo duo
-              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-              sanctus est Lorem ipsum dolor sit amet.
-            </SwoopIn>
-          </Paragraph>
-        </ParagraphWrapper>
-      </Div>
-      <Thunder>
-        <Thunder1 />
-      </Thunder>
+      <div ref={dummyRef}></div>
+      {fullyVisible && (
+        <>
+          <Div>
+            <TitleWrapper>
+              <Title>RECENT PROJECTS</Title>
+            </TitleWrapper>
+            <ParagraphWrapper>
+              <Paragraph>
+                <SwoopIn from="left" to="right">
+                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                  justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+                  sea takimata sanctus est Lorem ipsum dolor sit amet.
+                </SwoopIn>
+              </Paragraph>
+            </ParagraphWrapper>
+          </Div>
+          <Thunder>
+            <Thunder1 />
+          </Thunder>
+        </>
+      )}
     </GridItemExtended>
   );
 };
@@ -69,7 +77,6 @@ const GridItemExtended = styled(GridItem)`
   grid-row: 3;
   height: 100vh;
   width: 100%;
-  // min-height: 600px;
   position: relative;
 
   @media (min-width: ${bp.lg}) {
@@ -93,7 +100,6 @@ const ParagraphWrapper = styled.div`
   justify-content: center;
 
   padding: 0 3rem;
-  // text-align: center;
 `;
 
 export default RecentProjectsGridItem;

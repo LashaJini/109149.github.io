@@ -130,7 +130,7 @@ const details = [
 // TODO: add border (?)
 // TODO: responsive initial camera z position (?)
 const WhatAmI = () => {
-  const [type, setType] = useLocalStorage("109149-whatami-type", "table");
+  const [type, setType] = useLocalStorage("109149-whatami-type", "sphere");
   const scene = React.useRef();
   const camera = React.useRef();
   const renderer = React.useRef();

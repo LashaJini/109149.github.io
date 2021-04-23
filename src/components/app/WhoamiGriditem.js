@@ -10,35 +10,42 @@ import {
   Paragraph,
 } from "../";
 import { themes } from "../../constants";
+import { useFullyVisible } from "../../hooks";
 
 const WhoamiGriditem = () => {
+  const dummyRef = React.useRef();
+  const fullyVisible = useFullyVisible(dummyRef.current);
+
   return (
     <GridItemExtended>
-      <Div>
-        <TitleWrapper>
-          <Title># whoami</Title>
-        </TitleWrapper>
-        <ParagraphWrapper>
-          <Blockquote>
-            <Paragraph>
-              <Typeable writeDelay={1000} writeSpeed={90}>
-                I am a CE student, a <Colorable>dog owner</Colorable> and I am{" "}
-                <Deleteable
-                  replaceWith={["bord", "bred", "boed", "!@$#!@$#!@$#"]}
-                  writeDelay={[1000, 1000, 1000, 400]}
-                  writeSpeed={[90, 90, 90, 30]}
-                  delDelay={[1000, 1000, 1000, 1000]}
-                  delSpeed={[90, 70, 50, 90]}
-                  result={{ writeDelay: 2000, writeSpeed: 300 }}
-                >
-                  bored
-                </Deleteable>
-                .
-              </Typeable>
-            </Paragraph>
-          </Blockquote>
-        </ParagraphWrapper>
-      </Div>
+      <div ref={dummyRef}></div>
+      {fullyVisible && (
+        <Div>
+          <TitleWrapper>
+            <Title># whoami</Title>
+          </TitleWrapper>
+          <ParagraphWrapper>
+            <Blockquote>
+              <Paragraph>
+                <Typeable writeDelay={1000} writeSpeed={90}>
+                  I am a CE student, a <Colorable>dog owner</Colorable> and I am{" "}
+                  <Deleteable
+                    replaceWith={["bord", "bred", "boed", "!@$#!@$#!@$#"]}
+                    writeDelay={[1000, 1000, 1000, 400]}
+                    writeSpeed={[90, 90, 90, 30]}
+                    delDelay={[1000, 1000, 1000, 1000]}
+                    delSpeed={[90, 70, 50, 90]}
+                    result={{ writeDelay: 2000, writeSpeed: 300 }}
+                  >
+                    bored
+                  </Deleteable>
+                  .
+                </Typeable>
+              </Paragraph>
+            </Blockquote>
+          </ParagraphWrapper>
+        </Div>
+      )}
     </GridItemExtended>
   );
 };

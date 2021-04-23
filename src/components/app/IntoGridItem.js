@@ -3,16 +3,25 @@ import GridItem from "./GridItem";
 import styled from "styled-components";
 import { WhatAmI, Title } from "../";
 import { themes } from "../../constants";
+import { useFullyVisible } from "../../hooks";
 
 const IntoGridItem = () => {
+  const dummyRef = React.useRef();
+  const fullyVisible = useFullyVisible(dummyRef.current);
+
   return (
     <GridItemExtended>
-      <TitleWrapper>
-        <Title>WHAT I'M INTO?</Title>
-      </TitleWrapper>
-      <WhatAmIWrapper>
-        <WhatAmI />
-      </WhatAmIWrapper>
+      <div ref={dummyRef}></div>
+      {fullyVisible && (
+        <>
+          <TitleWrapper>
+            <Title>WHAT I'M INTO?</Title>
+          </TitleWrapper>
+          <WhatAmIWrapper>
+            <WhatAmI />
+          </WhatAmIWrapper>
+        </>
+      )}
     </GridItemExtended>
   );
 };

@@ -1,16 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useFullyVisible } from "../../hooks";
 
 const Paragraph = ({ children }) => {
-  const spanRef = React.useRef();
-  const fullyVisible = useFullyVisible(spanRef.current);
-
-  return (
-    <Div ref={spanRef} className="paragraph">
-      {fullyVisible && children}
-    </Div>
-  );
+  return <Div className="paragraph">{children}</Div>;
 };
 
 const Div = styled.div`
