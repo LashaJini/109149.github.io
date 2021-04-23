@@ -1,3 +1,6 @@
+import Neon from "./colorable/Neon";
+import Flashlight from "./flashlight/Flashlight";
+import FoF from "./404/FoF";
 import WhatAmI from "./whatami/WhatAmI";
 import Thunder1 from "./thunder/Thunder1";
 import Deleteable from "./animation/Deleteable";
@@ -30,6 +33,7 @@ import ThemeToggler from "./toggler/theme-toggler/ThemeToggler";
 import App from "./app/App";
 import Divider from "./svg/Divider";
 import Logo from "./logo/Logo";
+import Logo2 from "./logo/Logo2";
 import MenuButtons from "./menu/MenuButtons";
 
 export {
@@ -68,4 +72,8 @@ export {
   Deleteable,
   Thunder1,
   WhatAmI,
+  FoF,
+  Flashlight,
+  Neon,
+  Logo2,
 };

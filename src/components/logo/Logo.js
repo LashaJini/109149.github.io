@@ -213,7 +213,7 @@ const FillLayer = styled.g`
   fill: url("#radial-gradient");
 `;
 
-const StrokerLayer = styled.g`
+const StrokeLayer = styled.g`
   transition: all 1s;
   stroke-width: 2px;
 
@@ -222,19 +222,19 @@ const StrokerLayer = styled.g`
   }
 `;
 
-const InnerStrokeLayer = styled(StrokerLayer)`
+const InnerStrokeLayer = styled(StrokeLayer)`
   stroke: black;
   fill: url("#radial-gradient");
-  // filter: drop-shadow(0 0 5px rgba(255, 186, 3, 0.6));
+
   // filter: drop-shadow(5px 2px 0 rgba(0, 0, 0, 1));
 `;
 
-// not needed anymore
-const MainStrokeLayer = styled(StrokerLayer)`
+const MainStrokeLayer = styled(StrokeLayer)`
   stroke: black;
-  // stroke: rgb(255, 237, 107, 0.9);
   stroke-dasharray: 17 1;
   fill: none;
+
+  // stroke: rgb(255, 237, 107, 0.9);
   // filter: drop-shadow(0 0 5px rgba(255, 186, 3, 0.6));
 `;
 
