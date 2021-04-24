@@ -1,3 +1,5 @@
+import neonStartWav from "./neon-start.wav";
+import neonFlickering2Wav from "./neon-flickering2.wav";
 import neonFlickeringWav from "./neon-flickering.wav";
 import menuCloseWav from "./menu-close.wav";
 import menuOpenWav from "./menu-open.wav";
@@ -35,6 +37,8 @@ export {
   menuTickWav,
   menuCloseWav,
   neonFlickeringWav,
+  neonFlickering2Wav,
+  neonStartWav,
 };
 
 export default acdcWavs;
