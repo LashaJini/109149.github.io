@@ -3,18 +3,19 @@ import styled, { css } from "styled-components";
 import { Paragraph, Logo2, Neon, Flashlight, Button } from "../";
 import { rickRoll } from "../../constants";
 import { useHowler } from "../../hooks";
-import { neonFlickeringWav } from "../../static/sound";
+import {
+  // neonStartWav,
+  neonFlickering2Wav as neonFlickeringWav,
+} from "../../static/sound";
 import { themes } from "../../constants";
 
-// TODO: add switch: normal to flickerring neon
-// TODO: add sound toggler
-// TODO: responsive (?)
 // TODO: keyframes instead of interval (?)
 const defaultFill = "hsl(0, 100%, 50%)";
 const FoF = () => {
   const { sound: flickering } = useHowler({ src: [neonFlickeringWav] });
   const [p, setP] = React.useState(defaultFill);
   const [neonOn, setNeonOn] = React.useState(false);
+  const [soundOn, setSoundOn] = React.useState(false);
   const toggleNeon = () => {
     setP((prev) => (!prev ? defaultFill : undefined));
   };
@@ -23,9 +24,9 @@ const FoF = () => {
     let tids = [];
     let timerId;
     if (neonOn) {
-      timerId = setInterval(() => {
+      let doit = () => {
         tids[0] = setTimeout(() => {
-          // flickering.fade(0.5, 0, 950, flickering.play());
+          soundOn && flickering.fade(1, 0, 4000, flickering.play());
           toggleNeon();
         }, 25);
         tids[1] = setTimeout(() => {
@@ -33,24 +34,39 @@ const FoF = () => {
         }, 250);
         tids[2] = setTimeout(() => {
           toggleNeon();
-        }, 270);
+        }, 1000);
         tids[3] = setTimeout(() => {
-          flickering.stop();
-        }, 950);
-      }, 1000);
+          toggleNeon();
+        }, 4000);
+      };
+      doit();
+      timerId = setInterval(() => {
+        doit();
+      }, 4000);
     }
 
     return () => {
       clearInterval(timerId);
       tids.forEach((id) => clearTimeout(id));
     };
-  }, [neonOn, flickering]);
+  }, [neonOn, soundOn, flickering]);
 
-  const handleChange = (event) => {
-    setNeonOn((prev) => !prev);
+  const handleNeon = (event) => {
+    setNeonOn((prev) => {
+      prev === true && flickering.stop();
+      return !prev;
+    });
+    setSoundOn(false);
+  };
+  const handleSound = (event) => {
+    if (neonOn) {
+      setSoundOn((prev) => {
+        prev === true && flickering.stop();
+        return !prev;
+      });
+    }
   };
 
-  // console.log("render");
   return (
     <>
       <Wrapper>
@@ -59,48 +75,83 @@ const FoF = () => {
             <Logo2
               lightning={{ fill: p, filter: p && "url('#neon-filter-red')" }}
               all={{ fill: defaultFill, filter: "url('#neon-filter-red')" }}
-              width="60px"
-              height="77px"
+              width={40}
+              height={70}
             />
             <Neon />
           </LogoWrapper>
         ) : (
           <LogoWrapper>
-            <Logo2 all={{ fill: "white" }} width="60px" height="77px" />
+            <Logo2 all={{ fill: "white" }} width={40} height={70} />
             <Neon />
           </LogoWrapper>
         )}
-        <Label className="switch" htmlFor="neon-switch">
-          <Input
-            type="checkbox"
-            className="hoverable"
-            onChange={handleChange}
-            checked={neonOn}
-          />
-          <Slider className="slider"></Slider>
-        </Label>
+        <LabelWrapper>
+          <Label className="switch" htmlFor="neon-switch">
+            <Input
+              id="neon-switch"
+              type="checkbox"
+              className="hoverable"
+              onChange={handleNeon}
+              checked={neonOn}
+            />
+            <Slider className="slider"></Slider>
+          </Label>
+          <Label className="switch" htmlFor="sound-switch">
+            <Input
+              id="sound-switch"
+              type="checkbox"
+              className="hoverable"
+              onChange={handleSound}
+              checked={soundOn}
+              disabled={neonOn ? false : true}
+            />
+            <Slider className="slider"></Slider>
+          </Label>
+        </LabelWrapper>
         <Choose>
-          <Div>
+          <ParagraphWrapper>
             <Paragraph>Oi, you lost mate?</Paragraph>
-          </Div>
+          </ParagraphWrapper>
           <Buttons>
             <Button
               newTab={false}
+              height="40px"
+              width="120px"
               href={"https://109149.github.io"}
               fillColor="hsl(0,100%,30%)"
             >
               home
             </Button>
             <Or>or</Or>
-            <Button href={rickRoll}>enjoy</Button>
+            <Button
+              fillColor="hsl(10,100%,50%)"
+              href={rickRoll}
+              height="40px"
+              width="120px"
+            >
+              enjoy
+            </Button>
           </Buttons>
         </Choose>
+        <Flashlight />
       </Wrapper>
     </>
   );
 };
 
+const LabelWrapper = styled.div`
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-row: 2;
+  grid-column: 2;
+`;
+
 const Label = styled.label`
+  margin: 0.5rem;
   position: relative;
   display: inline-block;
   width: 80px;
@@ -113,6 +164,10 @@ const Input = styled.input`
   opacity: 0;
   width: 100%;
   height: 100%;
+
+  &:disabled {
+    display: none;
+  }
 `;
 
 const Slider = styled.span`
@@ -142,8 +197,8 @@ const Slider = styled.span`
   ${Input}:checked + & {
     border: 2px solid ${defaultFill};
     border-radius: 25px;
-    box-shadow: -3px 0 0.8rem red, inset -3px 0 0.8rem red, 3px 0 0.8rem red,
-      inset 3px 0 0.8rem red;
+    box-shadow: -3px 0 0.8rem ${defaultFill}, inset -3px 0 0.8rem ${defaultFill},
+      3px 0 0.8rem ${defaultFill}, inset 3px 0 0.8rem ${defaultFill};
   }
 
   ${Input}:hover + & {
@@ -153,38 +208,44 @@ const Slider = styled.span`
   ${Input}:checked + &:before {
     border: 2px solid ${defaultFill};
     background: ${themes.vars.bgColorPrimary};
-    box-shadow: -1px 0 0.2rem red, inset -1px 0 0.2rem red, 1px 0 0.2rem red,
-      inset 1px 0 0.2rem red;
+    box-shadow: -1px 0 0.2rem ${defaultFill}, inset -1px 0 0.2rem ${defaultFill},
+      1px 0 0.2rem ${defaultFill}, inset 1px 0 0.2rem ${defaultFill};
     transform: translate(30px, -4px);
   }
 
   ${Input}:hover + &:before {
     box-shadow: none;
   }
+
+  ${Input}:disabled + & {
+    border: 4px solid grey;
+    background: ${themes.vars.bgColorPrimary};
+  }
+  ${Input}:disabled + &:before {
+    border: 4px solid grey;
+    background: ${themes.vars.bgColorPrimary};
+  }
 `;
 
 const Wrapper = styled.div`
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;
+  grid-gap: 10px;
   user-select: none;
 `;
 
 const LogoWrapper = styled.div`
+  margin: 2rem 1rem 0 1rem;
+  grid-row: 1;
+  grid-column: 2;
   box-sizing: border-box;
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80vw;
   padding: 2rem;
   border: 4px solid transparent;
 
@@ -193,13 +254,13 @@ const LogoWrapper = styled.div`
     css`
       border: 4px solid ${defaultFill};
       border-radius: 10px;
-      box-shadow: -3px 0 1rem red, inset -3px 0 1rem red, 3px 0 1rem red,
-        inset 3px 0 1rem red;
+      box-shadow: -3px 0 1rem ${defaultFill}, inset -3px 0 1rem ${defaultFill},
+        3px 0 1rem ${defaultFill}, inset 3px 0 1rem ${defaultFill};
     `}
 `;
 
-const Div = styled.div`
-  margin: 2rem;
+const ParagraphWrapper = styled.div`
+  margin: 1rem;
   font-size: 1.125rem;
   font-weight: bold;
 `;
@@ -213,16 +274,12 @@ const Or = styled.span`
   font-weight: bold;
 `;
 const Choose = styled.div`
-  position: absolute;
-  margin-top: 2rem;
+  grid-row: 3;
+  grid-column: 2;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  bottom: 10%;
-  left: 50%;
-  transform: translate(-50%);
-  z-index: 5;
 `;
 
 export default FoF;
