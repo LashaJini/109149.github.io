@@ -90,8 +90,8 @@ function createTable(objects) {
 
   for (let i = 0; i < objects.length; i++) {
     let object = new THREE.Object3D();
-    object.position.x = 200 * (i % 9) - 800;
-    object.position.y = 200 * Math.floor(i / 9) + 100;
+    object.position.x = 200 * (i % 7) - 800;
+    object.position.y = 200 * Math.floor(i / 7) + 100;
     object.position.z = 0;
     table.push(object);
   }
@@ -104,9 +104,9 @@ function createGrid(objects) {
 
   for (let i = 0; i < objects.length; i++) {
     let object = new THREE.Object3D();
-    object.position.x = 200 * (i % 3) - 200;
-    object.position.y = 200 * (Math.floor(i / 3) % 3);
-    object.position.z = 400 * Math.floor(i / 9);
+    object.position.x = 200 * (i % 2) - 200;
+    object.position.y = 200 * (Math.floor(i / 2) % 2);
+    object.position.z = 400 * Math.floor(i / 4);
     grid.push(object);
   }
 

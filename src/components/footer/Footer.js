@@ -58,11 +58,28 @@ const Footer = ({ logo: { width, height } }) => {
           </LogoWrapper>
         </Network>
 
+        <FoF>
+          <Linkable newTab={false} url={window.location.href + "404"}>
+            I wanna see 404 page too!
+          </Linkable>
+        </FoF>
+
         <div>© 2021-present 109149. All Rights Reserved.</div>
       </Div>
     </>
   );
 };
+
+const FoF = styled.div`
+  margin-bottom: 1rem;
+  a {
+    text-decoration: underline;
+    color: hsl(10, 100%, 50%);
+    &:hover {
+      color: hsl(10, 100%, 40%);
+    }
+  }
+`;
 
 const LogoWrapper = styled.div`
   display: flex;

@@ -1,3 +1,4 @@
+import Main from "./main/Main";
 import Neon from "./colorable/Neon";
 import Flashlight from "./flashlight/Flashlight";
 import FoF from "./404/FoF";
@@ -76,4 +77,5 @@ export {
   Flashlight,
   Neon,
   Logo2,
+  Main,
 };

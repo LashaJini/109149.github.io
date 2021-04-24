@@ -124,9 +124,13 @@ const details = [
     titleText: "memes",
     content: "CONTENT",
   },
+  {
+    titleText: "AC🗲DC",
+    content: "CONTENT",
+  },
 ];
 
-// TODO: add camera origin button
+// TODO: details.content: list (?)
 // TODO: add border (?)
 // TODO: responsive initial camera z position (?)
 const WhatAmI = () => {

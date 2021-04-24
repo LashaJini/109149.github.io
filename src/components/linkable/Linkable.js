@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { rickRoll } from "../../constants";
 
-const Linkable = ({ url, children }) => {
+const Linkable = ({ url, children, newTab = true }) => {
   return (
     <>
       <A
         className="hoverable"
         href={url || rickRoll}
-        target="_blank"
+        target={newTab ? "_blank" : "_self"}
         rel="noreferrer"
       >
         {children}
