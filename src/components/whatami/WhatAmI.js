@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import "./WhatAmI.scss";
+import { themes } from "../../constants";
 import {
   initScene,
   initCamera,
@@ -327,12 +328,13 @@ const Wrapper = styled.div`
 const Scene = styled.div``;
 const Menu = styled.div`
   position: absolute;
-  bottom: 20%;
+  bottom: 18%;
   width: 100%;
   text-align: center;
 `;
 const Button = styled.button`
-  color: hsla(0, 100%, 80%, 0.5);
+  // color: hsla(0, 100%, 80%, 0.5);
+  color: ${themes.vars.textColorPrimary};
   background: transparent;
   outline: 1px solid hsla(0, 100%, 75%, 0.25);
   border: 0px;
