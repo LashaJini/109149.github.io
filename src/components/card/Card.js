@@ -67,23 +67,31 @@ const Card = ({ cardWidth }) => {
             _row="2"
             onClick={() => setIFrameIsVisible(true)}
           >
-            <Jiggle>
-              <YoutubeSVG width="100%" height="20px" fill="red" />
-            </Jiggle>
+            <YoutubeSVGWrapper>
+              <Jiggle>
+                <YoutubeSVG height="20px" fill="red" />
+              </Jiggle>
+            </YoutubeSVGWrapper>
             <YoutubeIFrame visible={iframeIsVisible} />
-            <Tooltip text="Demo video" attachTo={YtGriditem} width="100px" />
+            <Tooltip
+              text="Demo video"
+              attachTo={YoutubeSVGWrapper}
+              width="100px"
+            />
           </YtGriditem>
 
           <HeaderGridItem className="project-header-grid-item" _row="3">
-            <span>{data.projectName}</span>
-            <Tooltip text={data.headerInfo} attachTo={HeaderGridItem} />
+            <ProjectNameWrapper>{data.projectName}</ProjectNameWrapper>
+            <Tooltip text={data.headerInfo} attachTo={ProjectNameWrapper} />
           </HeaderGridItem>
 
           <DiffBarGridItem _col="3/7" _row="4">
-            <ProgressBar {...diff[3]} />
+            <ProgressBarWrapper>
+              <ProgressBar {...diff[3]} />
+            </ProgressBarWrapper>
             <Tooltip
               text="Difficulty (subjective)"
-              attachTo={DiffBarGridItem}
+              attachTo={ProgressBarWrapper}
             />
           </DiffBarGridItem>
 
@@ -248,5 +256,9 @@ const RepoButtonGriditem = styled(GridItem)`
   align-items: center;
   justify-content: center;
 `;
+
+const ProgressBarWrapper = styled.div``;
+const ProjectNameWrapper = styled.span``;
+const YoutubeSVGWrapper = styled.div``;
 
 export default Card;

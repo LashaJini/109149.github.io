@@ -24,16 +24,16 @@ const Tooltip = ({
 
 const disappear = keyframes`
   0% {
-    transform: scale(0) translateY(-100%);
+    opacity: 0;
   }
   20% {
-    transform: scale(1) translateY(-100%);
+    opacity: 1;
   }
   95% {
-    transform: scale(1) translateY(-100%);
+    opacity: 1;
   }
   100% {
-    display: none;
+    opacity: 0;
   }
 `;
 
@@ -50,14 +50,14 @@ const Div = styled.div`
   border-radius: 5px;
   position: absolute;
   top: 0;
-  transform: scale(0) translateY(-100%);
-  z-index: 100;
+  opacity: 0;
+  transform: translateY(-100%);
+  user-select: none;
+  z-index: -1;
 
-  // ${({ _attachTo }) => _attachTo}:active & {
-  //   display: none;
-  // }
-  ${({ _attachTo }) => _attachTo}:hover & {
+  ${({ _attachTo }) => _attachTo}:hover ~ & {
     animation: 2500ms ${disappear};
+    z-index: 100;
   }
 `;
 
