@@ -61,12 +61,12 @@ const Logo2 = ({
   );
 };
 
-const Lightning = ({ width = "200px", height = "400px", style, fill }) => {
+const Lightning = ({ width = 200, height = 400, style, fill }) => {
   return (
     <SVG
       viewBox="0 0 79.951775 166.10747"
-      _width={width}
-      _height={height}
+      _width={`${width}px`}
+      _height={`${height}px`}
       _fill={fill}
       style={style}
     >
@@ -80,12 +80,12 @@ const Lightning = ({ width = "200px", height = "400px", style, fill }) => {
   );
 };
 
-const Zero = ({ width = "200px", height = "400px", style, fill }) => {
+const Zero = ({ width = 200, height = 400, style, fill }) => {
   return (
     <SVG
       viewBox="0 0 93.375 214.73175"
-      _width={width}
-      _height={height}
+      _width={`${width}px`}
+      _height={`${height}px`}
       _fill={fill}
       style={style}
     >
@@ -99,11 +99,11 @@ const Zero = ({ width = "200px", height = "400px", style, fill }) => {
   );
 };
 
-const One = ({ width = "200px", height = "400px", style, fill }) => {
+const One = ({ width = 200, height = 400, style, fill }) => {
   return (
     <SVG
-      _width={width}
-      _height={height}
+      _width={`${width}px`}
+      _height={`${height}px`}
       _fill={fill}
       style={style}
       viewBox="0 0 83.310196 214.47031"
@@ -118,11 +118,11 @@ const One = ({ width = "200px", height = "400px", style, fill }) => {
   );
 };
 
-const Four = ({ width = "200px", height = "400px", style, fill }) => {
+const Four = ({ width = 200, height = 400, style, fill }) => {
   return (
     <SVG
-      _width={width}
-      _height={height}
+      _width={`${width + 5}px`} /* `Four` is big compare to others... */
+      _height={`${height}px`}
       _fill={fill}
       style={style}
       viewBox="0 0 112.30946 214.46634"
@@ -137,11 +137,11 @@ const Four = ({ width = "200px", height = "400px", style, fill }) => {
   );
 };
 
-const Nine = ({ width = "200px", height = "400px", style, fill }) => {
+const Nine = ({ width = 200, height = 400, style, fill }) => {
   return (
     <SVG
-      _width={width}
-      _height={height}
+      _width={`${width}px`}
+      _height={`${height}px`}
       _fill={fill}
       style={style}
       viewBox="0 0 94.501205 213.75282"
