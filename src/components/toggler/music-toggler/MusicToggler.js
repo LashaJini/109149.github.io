@@ -4,6 +4,13 @@ import {
   noMansLand,
   wildReputation,
   shotInTheDark,
+  demonFire,
+  hellsBells,
+  realize,
+  safeInNewYorkCity,
+  thunderstruck,
+  backInBlack,
+  witchsSpell,
 } from "../../../static/music";
 import {
   PrevButtonSVG as PrevButton,
@@ -14,7 +21,18 @@ import {
 import { themes } from "../../../constants";
 import "./MusicToggler.scss";
 
-const ACDC = [noMansLand, wildReputation, shotInTheDark];
+const ACDC = [
+  witchsSpell,
+  noMansLand,
+  wildReputation,
+  shotInTheDark,
+  demonFire,
+  hellsBells,
+  realize,
+  safeInNewYorkCity,
+  thunderstruck,
+  backInBlack,
+];
 
 const MusicToggler = ({ width, height, fill, isCta, isPlaying = false }) => {
   const audioRef = React.useRef();
