@@ -50,7 +50,12 @@ body {
   background: var(--bg-color-primary);
   box-sizing: border-box;
   overflow: hidden;
+  cursor: default;
   cursor: url("./components/svg/general-cursor.svg"), auto;
+}
+
+input {
+  cursor: auto;
 }
 
 code {
