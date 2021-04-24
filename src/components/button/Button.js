@@ -19,6 +19,7 @@ const Button = ({
           target={newTab ? "_blank" : "_self"}
           rel="noreferrer"
           className="hoverable"
+          _lineHeight={height}
           _fillColor={fillColor}
         >
           <p>
@@ -39,14 +40,7 @@ const Wrapper = styled.div`
   height: ${({ _height }) => (_height ? _height : "60px")};
 `;
 
-const TextSpan = styled.span`
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  transform: translateY(100%);
-  z-index: 3;
-`;
+const TextSpan = styled.span``;
 
 const FillSpan = styled.span`
   width: 10px;
@@ -57,6 +51,7 @@ const FillSpan = styled.span`
   left: -8%;
   transition: width 400ms ease-out;
   transform: skewX(-10deg);
+  z-index: -1;
 `;
 
 const A = styled.a`
@@ -71,6 +66,7 @@ const A = styled.a`
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  line-height: ${({ _lineHeight }) => (_lineHeight ? _lineHeight : "60px")};
 
   &:hover {
     color: ${themes.vars.textColorSecondary};
