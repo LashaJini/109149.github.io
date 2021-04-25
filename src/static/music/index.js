@@ -1,3 +1,7 @@
+import systemsDown from "./acdc-systems-down.mp3";
+import rejection from "./acdc-rejection.mp3";
+import moneyShot from "./acdc-money-shot.mp3";
+import codeRed from "./acdc-code-red.mp3";
 import noMansLand from "./acdc-no-mans-land.mp3";
 import wildReputation from "./acdc-wild-reputation.mp3";
 import shotInTheDark from "./acdc-shot-in-the-dark.mp3";
@@ -20,6 +24,10 @@ const ACDCMusic = {
   thunderstruck,
   backInBlack,
   witchsSpell,
+  codeRed,
+  moneyShot,
+  rejection,
+  systemsDown,
 };
 
 export {
@@ -33,6 +41,10 @@ export {
   thunderstruck,
   backInBlack,
   witchsSpell,
+  codeRed,
+  moneyShot,
+  rejection,
+  systemsDown,
 };
 
 export default ACDCMusic;
