@@ -24,6 +24,8 @@ const css = {
 const soundEnabled = true;
 /* animation is enabled by default */
 const animationEnabled = true;
+/* music is disabled by default */
+const musicEnabled = false;
 
 const themes = {
   dark: "dark",
@@ -85,4 +87,5 @@ export {
   networkUrls,
   soundEnabled,
   animationEnabled,
+  musicEnabled,
 };

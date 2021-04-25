@@ -1,6 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import {
+  AnimationContext,
+  MusicContext,
   Image,
   Scaleable,
   Jiggle,
@@ -42,6 +44,8 @@ const diff = [
 // TODO: restrict number of characters in description (?)
 const Card = ({ data, cardWidth }) => {
   const [iframeIsVisible, setIFrameIsVisible] = React.useState(false);
+  const music = React.useContext(MusicContext);
+  const animation = React.useContext(AnimationContext);
 
   // listen click for outside iframe
   useEventListener("click", (event) => {
@@ -56,7 +60,12 @@ const Card = ({ data, cardWidth }) => {
   return (
     <div>
       <Scaleable>
-        <Grid className="project-card-grid" _width={cardWidth}>
+        <Grid
+          _musicEnabled={music.musicEnabled}
+          _animationEnabled={animation.animationEnabled}
+          className="project-card-grid"
+          _width={cardWidth}
+        >
           <ImageGridItem className="project-image-grid-item">
             <Image name={data.cardImage} />
           </ImageGridItem>
@@ -110,7 +119,7 @@ const Card = ({ data, cardWidth }) => {
 
           <LiveWebsiteGridItem _col="2/5" _row="10">
             <Button
-              url={data.website || data.repoUrl}
+              href={data.website || data.repoUrl}
               width="100%"
               fillColor="#ff003c"
             >
@@ -118,7 +127,7 @@ const Card = ({ data, cardWidth }) => {
             </Button>
           </LiveWebsiteGridItem>
           <RepoButtonGriditem _col="5/8" _row="10">
-            <Button url={data.repoUrl} width="100%" fillColor="#c648c8">
+            <Button href={data.repoUrl} width="100%" fillColor="#c648c8">
               Repo
             </Button>
           </RepoButtonGriditem>
@@ -127,6 +136,27 @@ const Card = ({ data, cardWidth }) => {
     </div>
   );
 };
+
+const beat = keyframes`
+  0% {
+    box-shadow: 0 0 4px hsl(0, 100%, 50%);
+  }
+  20% {
+    box-shadow: 0 0 10px hsl(0, 100%, 50%);
+  }
+  40% {
+    box-shadow: 0 0 18px hsl(0, 100%, 50%);
+  }
+  60% {
+    box-shadow: 0 0 12px hsl(0, 100%, 50%);
+  }
+  80% {
+    box-shadow: 0 0 24px hsl(0, 100%, 50%);
+  }
+  100% {
+    box-shadow: 0 0 20px hsl(0, 100%, 50%);
+  }
+`;
 
 const Grid = styled.div`
   display: grid;
@@ -154,6 +184,13 @@ const Grid = styled.div`
       box-shadow: 0 15px 50px hsl(0, 100%, 50%);
     }
   }
+
+  ${({ _musicEnabled, _animationEnabled }) =>
+    _animationEnabled &&
+    _musicEnabled &&
+    css`
+      animation: ${beat} 1s infinite alternate;
+    `}
 `;
 
 const GridItem = styled.div`

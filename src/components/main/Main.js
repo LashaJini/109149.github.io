@@ -1,9 +1,16 @@
 import React from "react";
-import { ThemeContext, SoundContext, AnimationContext, MenuButtons } from "../";
+import {
+  MusicContext,
+  ThemeContext,
+  SoundContext,
+  AnimationContext,
+  MenuButtons,
+} from "../";
 import {
   themes,
   soundEnabled as _soundEnabled,
   animationEnabled as _animationEnabled,
+  musicEnabled as _musicEnabled,
 } from "../../constants";
 import styled from "styled-components";
 import { useDarkMode, useAnimation, useSound } from "../../hooks";
@@ -33,6 +40,7 @@ const Main = () => {
     _animationEnabled
   );
   const [soundEnabled, setSoundEnabled] = useSound(_soundEnabled);
+  const [musicEnabled, setMusicEnabled] = useSound(_musicEnabled);
 
   const gridRef = React.useRef();
   const resizeObserver = React.useRef();
@@ -77,6 +85,11 @@ const Main = () => {
   const toggleAnimation = () => {
     setAnimationEnabled((prev) => !prev);
   };
+
+  const toggleMusic = (state) => {
+    state ? setMusicEnabled(state) : setMusicEnabled((prev) => !prev);
+  };
+
   return (
     <>
       <ThemeContext.Provider
@@ -97,21 +110,28 @@ const Main = () => {
               toggleAnimation,
             }}
           >
-            <Grid
-              className="app-grid"
-              ref={gridRef}
-              _animationEnabled={animationEnabled}
+            <MusicContext.Provider
+              value={{
+                musicEnabled,
+                toggleMusic,
+              }}
             >
-              <Div ref={observableElementRef}></Div>
-              <HeaderGridItem className="grid-item-header" />
-              <WhoamiGriditem />
-              <RecentProjectsGridItem />
-              <ProjectsGridItem className="project-cards-grid-item" />
-              <TechFamiliarGridItem />
-              <IntoGridItem />
-              <FooterGridItem />
-            </Grid>
-            <MenuButtons observableElement={observableElement} />
+              <Grid
+                className="app-grid"
+                ref={gridRef}
+                _animationEnabled={animationEnabled}
+              >
+                <Div ref={observableElementRef}></Div>
+                <HeaderGridItem className="grid-item-header" />
+                <WhoamiGriditem />
+                <RecentProjectsGridItem />
+                <ProjectsGridItem className="project-cards-grid-item" />
+                <TechFamiliarGridItem />
+                <IntoGridItem />
+                <FooterGridItem />
+              </Grid>
+              <MenuButtons observableElement={observableElement} />
+            </MusicContext.Provider>
           </AnimationContext.Provider>
         </SoundContext.Provider>
       </ThemeContext.Provider>

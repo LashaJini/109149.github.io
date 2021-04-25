@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import {
+  codeRed,
+  moneyShot,
+  rejection,
+  systemsDown,
   noMansLand,
   wildReputation,
   shotInTheDark,
@@ -20,8 +24,10 @@ import {
 } from "../../svg";
 import { themes } from "../../../constants";
 import "./MusicToggler.scss";
+import { MusicContext } from "../../";
 
 const ACDC = [
+  systemsDown,
   witchsSpell,
   noMansLand,
   wildReputation,
@@ -32,6 +38,9 @@ const ACDC = [
   safeInNewYorkCity,
   thunderstruck,
   backInBlack,
+  codeRed,
+  moneyShot,
+  rejection,
 ];
 
 const MusicToggler = ({ width, height, fill, isCta, isPlaying = false }) => {
@@ -48,22 +57,27 @@ const MusicToggler = ({ width, height, fill, isCta, isPlaying = false }) => {
     }
   }, [musicIsPlaying]);
 
-  const playNext = React.useCallback(() => {
-    pause();
+  const playNext = React.useCallback(
+    (enabledMusic) => () => {
+      pause();
 
-    if (currentlyPlaying.index === ACDC.length - 1) {
-      setCurrentlyPlaying({
-        index: 0,
-        src: ACDC[0],
-      });
-    } else {
-      setCurrentlyPlaying((prev) => ({
-        index: prev.index + 1,
-        src: ACDC[prev.index + 1],
-      }));
-    }
-    setMusicIsPlaying(true);
-  }, [currentlyPlaying, pause]);
+      if (currentlyPlaying.index === ACDC.length - 1) {
+        setCurrentlyPlaying({
+          index: 0,
+          src: ACDC[0],
+        });
+      } else {
+        setCurrentlyPlaying((prev) => ({
+          index: prev.index + 1,
+          src: ACDC[prev.index + 1],
+        }));
+      }
+      setMusicIsPlaying(true);
+      enabledMusic /* when music ends and next song starts automatically, we don't need to set context. */ &&
+        enabledMusic(true);
+    },
+    [currentlyPlaying, pause]
+  );
 
   React.useEffect(() => {
     if (musicIsPlaying) {
@@ -89,12 +103,13 @@ const MusicToggler = ({ width, height, fill, isCta, isPlaying = false }) => {
     }
   }, [isCta]);
 
-  const playCurrent = () => {
+  const playCurrent = (enabledMusic) => () => {
     pause();
     setMusicIsPlaying((prev) => !prev);
+    enabledMusic(); // provider will toggle it.
   };
 
-  const playPrev = () => {
+  const playPrev = (enabledMusic) => () => {
     pause();
 
     if (currentlyPlaying.index === 0) {
@@ -109,12 +124,13 @@ const MusicToggler = ({ width, height, fill, isCta, isPlaying = false }) => {
       }));
     }
     setMusicIsPlaying(true);
+    enabledMusic(true);
   };
 
   React.useEffect(() => {
     function nextSong() {
       audioRef.current.currentTime = 0;
-      playNext();
+      playNext()();
     }
     let tmp = audioRef.current;
     tmp.addEventListener("ended", nextSong);
@@ -122,25 +138,35 @@ const MusicToggler = ({ width, height, fill, isCta, isPlaying = false }) => {
   }, [playNext]);
 
   return (
-    <Div className="music-toggler">
-      <audio ref={audioRef} /*controls*/ src={currentlyPlaying.src}></audio>
-      <PrevButtonWrapper className="prev-button hoverable" onClick={playPrev}>
-        <PrevButton width={"16px"} height={"16px"} />
-      </PrevButtonWrapper>
-      <NextButtonWrapper className="next-button hoverable" onClick={playNext}>
-        <NextButton width={"16px"} height={"16px"} />
-      </NextButtonWrapper>
-      <PlayPauseButtonWrapper
-        className="play-pause-button hoverable"
-        onClick={playCurrent}
-      >
-        {musicIsPlaying ? (
-          <PauseButton width={width} height={height} />
-        ) : (
-          <PlayButton width={width} height={height} />
-        )}
-      </PlayPauseButtonWrapper>
-    </Div>
+    <MusicContext.Consumer>
+      {({ musicEnabled, toggleMusic }) => (
+        <Div className="music-toggler">
+          <audio ref={audioRef} /*controls*/ src={currentlyPlaying.src}></audio>
+          <PrevButtonWrapper
+            className="prev-button hoverable"
+            onClick={playPrev(toggleMusic)}
+          >
+            <PrevButton width="16px" height="16px" />
+          </PrevButtonWrapper>
+          <NextButtonWrapper
+            className="next-button hoverable"
+            onClick={playNext(toggleMusic)}
+          >
+            <NextButton width="16px" height="16px" />
+          </NextButtonWrapper>
+          <PlayPauseButtonWrapper
+            className="play-pause-button hoverable"
+            onClick={playCurrent(toggleMusic)}
+          >
+            {musicIsPlaying ? (
+              <PauseButton width={width} height={height} />
+            ) : (
+              <PlayButton width={width} height={height} />
+            )}
+          </PlayPauseButtonWrapper>
+        </Div>
+      )}
+    </MusicContext.Consumer>
   );
 };
 

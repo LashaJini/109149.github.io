@@ -28,7 +28,12 @@ import ProgressBar from "./progressbar/ProgressBar";
 import Card from "./card/Card";
 import Footer from "./footer/Footer";
 import NetworkToggler from "./toggler/network-toggler/NetworkToggler";
-import { AnimationContext, ThemeContext, SoundContext } from "./context";
+import {
+  MusicContext,
+  AnimationContext,
+  ThemeContext,
+  SoundContext,
+} from "./context";
 import SoundToggler from "./toggler/sound-toggler/SoundToggler";
 import MusicToggler from "./toggler/music-toggler/MusicToggler";
 import ThemeToggler from "./toggler/theme-toggler/ThemeToggler";
@@ -80,4 +85,5 @@ export {
   Logo2,
   Main,
   Image,
+  MusicContext,
 };

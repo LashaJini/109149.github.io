@@ -1,5 +1,15 @@
 import React from "react";
-import { themes, soundEnabled, animationEnabled } from "../../constants";
+import {
+  themes,
+  soundEnabled,
+  animationEnabled,
+  musicEnabled,
+} from "../../constants";
+
+export const MusicContext = React.createContext({
+  musicEnabled,
+  toggleMusic: () => {},
+});
 
 export const AnimationContext = React.createContext({
   animationEnabled,
