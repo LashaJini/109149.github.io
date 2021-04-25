@@ -2,6 +2,13 @@ import React from "react";
 import { AnimTechButton } from "../";
 
 const techs = {
+  three: {
+    component: React.lazy(() => import("../svg/Three")),
+    url: "https://threejs.org/",
+    args: {
+      fill: "black",
+    },
+  },
   github: {
     component: React.lazy(() => import("../svg/Github")),
     url: "https://github.com",

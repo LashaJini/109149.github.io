@@ -3,12 +3,16 @@ import { Card } from "../";
 import styled from "styled-components";
 import GridItem from "./GridItem";
 import ProjectItem from "./ProjectItem";
+import projects from "../../data/projects-data.json";
 
 const ProjectsGridItem = () => {
   return (
     <GridItemExtended>
       <ProjectItem nth="1">
-        <Card />
+        <Card data={projects[0]} />
+      </ProjectItem>
+      <ProjectItem nth="2">
+        <Card data={projects[1]} />
       </ProjectItem>
     </GridItemExtended>
   );

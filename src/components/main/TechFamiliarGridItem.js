@@ -85,8 +85,11 @@ const GridItemExtended = styled(GridItem)`
   height: 100vh;
   width: 100%;
   position: relative;
+  font-size: 1.5rem;
+  color: ${themes.vars.textColorSecondary}; // thunder...
 
   @media (min-width: ${bp.lg}) {
+    color: ${themes.vars.textColorPrimary};
     display: grid;
     grid-template-columns: 2fr 4fr 4fr 1fr;
   }

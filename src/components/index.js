@@ -1,3 +1,4 @@
+import Image from "./image/Image";
 import Main from "./main/Main";
 import Neon from "./colorable/Neon";
 import Flashlight from "./flashlight/Flashlight";
@@ -78,4 +79,5 @@ export {
   Neon,
   Logo2,
   Main,
+  Image,
 };

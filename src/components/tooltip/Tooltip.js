@@ -3,19 +3,25 @@ import styled, { keyframes } from "styled-components";
 import { themes } from "../../constants";
 
 const Tooltip = ({
+  topPos,
+  leftPos,
   text,
   width,
   height,
   position,
   fillColor,
+  style,
   attachTo /* styled component must be positioned relative */,
 }) => {
   return (
     <Div
       _width={width}
-      height={height}
+      _height={height}
       _attachTo={attachTo}
       _fillColor={fillColor}
+      _top={topPos}
+      _left={leftPos}
+      style={style}
     >
       {text}
     </Div>
@@ -49,7 +55,8 @@ const Div = styled.div`
     _fillColor ? _fillColor : themes.vars.bgColorSecondary};
   border-radius: 5px;
   position: absolute;
-  top: 0;
+  top: ${({ _top }) => (_top ? _top : 0)};
+
   opacity: 0;
   transform: translateY(-100%);
   user-select: none;

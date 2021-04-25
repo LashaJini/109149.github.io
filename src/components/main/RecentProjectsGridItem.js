@@ -23,11 +23,7 @@ const RecentProjectsGridItem = () => {
             <ParagraphWrapper>
               <Paragraph>
                 <SwoopIn from="left" to="right">
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                  justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                  sea takimata sanctus est Lorem ipsum dolor sit amet.
+                  Solo projects made in my free time.
                 </SwoopIn>
               </Paragraph>
             </ParagraphWrapper>
@@ -46,6 +42,7 @@ const Div = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  font-weight: bold;
 
   @media (min-width: ${bp.xxs}) {
     width: 100%;
@@ -78,8 +75,11 @@ const GridItemExtended = styled(GridItem)`
   height: 100vh;
   width: 100%;
   position: relative;
+  font-size: 1.25rem;
+  color: ${themes.vars.textColorSecondary}; // cuz lightning...
 
   @media (min-width: ${bp.lg}) {
+    color: ${themes.vars.textColorPrimary};
     display: grid;
     grid-template-columns: 1fr 4fr 4fr 2fr;
   }

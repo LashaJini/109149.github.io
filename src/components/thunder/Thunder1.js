@@ -4,6 +4,8 @@ import { AnimationContext } from "../";
 
 // const colors = ["white", "cyan", "blue", "purple"];
 
+// TODO: hmmm... I don't like what animated version looks like.
+
 // TODO: on hover "play" music (?)
 // TODO: on hover increase shadow (?)
 // TODO: add intersection observer

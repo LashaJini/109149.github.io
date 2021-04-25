@@ -14,6 +14,7 @@ const IFrame = styled.iframe`
 
 // TODO: stop video when user clicks away (?)
 const YoutubeIFrame = ({
+  url,
   visible = false,
   width = "300px",
   height = "300px",
@@ -35,7 +36,7 @@ const YoutubeIFrame = ({
       width={width}
       height={height}
       display={display}
-      src="https://www.youtube.com/embed/pAgnJDJN4VA"
+      src={url}
       title="YouTube video player"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen

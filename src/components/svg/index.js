@@ -1,3 +1,4 @@
+import ThreeSVG from "./Three";
 import ClapperBoardSVG from "./ClapperBoard";
 import YoutubeSVG from "./Youtube";
 import TypescriptSVG from "./Typescript";
@@ -40,6 +41,7 @@ const SVGComponents = {
   YoutubeSVG,
   ReactSVG,
   ClapperBoardSVG,
+  ThreeSVG,
 };
 
 export default SVGComponents;
@@ -64,4 +66,5 @@ export {
   YoutubeSVG,
   ReactSVG,
   ClapperBoardSVG,
+  ThreeSVG,
 };

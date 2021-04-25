@@ -1,6 +1,9 @@
 import React from "react";
+import styled from "styled-components";
 import "./MenuButtons.scss";
 import {
+  // Tooltip,
+  // ThemeContext,
   SoundContext,
   AnimationContext,
   NetworkToggler,
@@ -257,7 +260,9 @@ const MenuButtons = ({ observableElement }) => {
             ref={soundTogglerRef}
             onClick={ringTheBell}
           >
-            <SoundToggler width="40px" height="40px" />
+            <SoundTogglerWrapper>
+              <SoundToggler width="40px" height="40px" />
+            </SoundTogglerWrapper>
           </A>
           <A
             className="toggler-button hoverable"
@@ -267,7 +272,9 @@ const MenuButtons = ({ observableElement }) => {
             _animationEnabled={animation.animationEnabled}
             ref={animationTogglerRef}
           >
-            <AnimationToggler width="50px" height="50px" />
+            <AnimationTogglerWrapper>
+              <AnimationToggler width="50px" height="50px" />
+            </AnimationTogglerWrapper>
           </A>
           <A
             className="toggler-button hoverable"
@@ -277,7 +284,9 @@ const MenuButtons = ({ observableElement }) => {
             _animationEnabled={animation.animationEnabled}
             ref={themeTogglerRef}
           >
-            <ThemeToggler />
+            <ThemeTogglerWrapper>
+              <ThemeToggler />
+            </ThemeTogglerWrapper>
           </A>
         </Nav>
 
@@ -326,5 +335,9 @@ const MenuButtons = ({ observableElement }) => {
     </StickyDiv>
   );
 };
+
+const ThemeTogglerWrapper = styled.div``;
+const AnimationTogglerWrapper = styled.div``;
+const SoundTogglerWrapper = styled.div``;
 
 export default MenuButtons;
