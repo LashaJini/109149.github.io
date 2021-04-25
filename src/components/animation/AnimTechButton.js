@@ -4,8 +4,8 @@ import { Linkable } from "../";
 import { AnimationContext } from "../";
 
 const Div = styled.div`
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,36 +16,31 @@ const Div = styled.div`
     css`
       &:hover {
         svg {
-          fill: rgb(235, 25, 110);
+          fill: hsl(0, 100%, 50%);
           transform: scale(1.5);
+        }
+        a > div:before {
+          transform: scale(0);
         }
       }
     `}
 
   div {
-    width: 44px;
-    height: 44px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    ${({ _animationEnabled }) =>
-      _animationEnabled &&
-      css`
-        &:hover:before {
-          transform: scale(0);
-        }
-      `}
   }
 
   div:before {
     content: "";
-    width: 44px;
-    height: 44px;
+    width: 100%;
+    height: 100%;
     display: block;
     border-radius: 100%;
-    background: linear-gradient(45deg, #ff003c, #c648c8);
-    box-shadow: 1px 1px 12px rgba(235, 25, 110, 1);
+    background: linear-gradient(45deg, hsl(0, 100%, 50%), hsl(0, 100%, 70%));
+    box-shadow: 1px 1px 15px hsl(0, 100%, 50%);
     transition: all 265ms ease-out;
     position: absolute;
     top: 0;
@@ -63,7 +58,7 @@ const AnimTechButton = ({ children, url }) => {
   const animation = React.useContext(AnimationContext);
 
   return (
-    <Div _animationEnabled={animation.animationEnabled}>
+    <Div _animationEnabled={animation.animationEnabled} className="hoverable">
       <Linkable url={url}>
         <div>{children}</div>
       </Linkable>
