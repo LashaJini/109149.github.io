@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import data from "../../data/projects-data.json";
-import ACDC from "./acdc.jpg";
 import {
+  Image,
   Scaleable,
   Jiggle,
   Tooltip,
@@ -41,7 +40,7 @@ const diff = [
 // TODO: use css hover instead
 // TODO: dropdown (?)
 // TODO: restrict number of characters in description (?)
-const Card = ({ cardWidth }) => {
+const Card = ({ data, cardWidth }) => {
   const [iframeIsVisible, setIFrameIsVisible] = React.useState(false);
 
   // listen click for outside iframe
@@ -59,7 +58,7 @@ const Card = ({ cardWidth }) => {
       <Scaleable>
         <Grid className="project-card-grid" _width={cardWidth}>
           <ImageGridItem className="project-image-grid-item">
-            <img src={ACDC} alt="repository logo" />
+            <Image name={data.cardImage} />
           </ImageGridItem>
 
           <YtGriditem
@@ -72,22 +71,16 @@ const Card = ({ cardWidth }) => {
                 <YoutubeSVG height="20px" fill="red" />
               </Jiggle>
             </YoutubeSVGWrapper>
-            <YoutubeIFrame visible={iframeIsVisible} />
-            <Tooltip
-              text="Demo video"
-              attachTo={YoutubeSVGWrapper}
-              width="100px"
-            />
+            <YoutubeIFrame visible={iframeIsVisible} url={data.ytUrl} />
           </YtGriditem>
 
           <HeaderGridItem className="project-header-grid-item" _row="3">
             <ProjectNameWrapper>{data.projectName}</ProjectNameWrapper>
-            <Tooltip text={data.headerInfo} attachTo={ProjectNameWrapper} />
           </HeaderGridItem>
 
           <DiffBarGridItem _col="3/7" _row="4">
             <ProgressBarWrapper>
-              <ProgressBar {...diff[3]} />
+              <ProgressBar {...diff[data.difficulty]} />
             </ProgressBarWrapper>
             <Tooltip
               text="Difficulty (subjective)"
@@ -116,7 +109,11 @@ const Card = ({ cardWidth }) => {
           </DescriptionGridItem>
 
           <LiveWebsiteGridItem _col="2/5" _row="10">
-            <Button url={data.repoUrl} width="100%" fillColor="#ff003c">
+            <Button
+              url={data.website || data.repoUrl}
+              width="100%"
+              fillColor="#ff003c"
+            >
               Website
             </Button>
           </LiveWebsiteGridItem>
@@ -150,11 +147,11 @@ const Grid = styled.div`
 
   &:hover {
     img {
-      box-shadow: 0 5px 30px rgba(235, 25, 110, 1);
+      box-shadow: 0 5px 30px hsl(0, 100%, 50%);
     }
 
     img:hover {
-      box-shadow: 0 15px 50px rgba(235, 25, 110, 1);
+      box-shadow: 0 15px 50px hsl(0, 100%, 50%);
     }
   }
 `;
