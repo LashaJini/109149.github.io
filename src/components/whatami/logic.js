@@ -46,7 +46,7 @@ function createCSSObjects(details) {
     element.classList.add("whatami-element");
     element.classList.add("hoverable");
     element.style.backgroundColor =
-      "hsla(0,100%," + Math.floor(Math.random() * 60 + 20) + "%,0.5)";
+      "hsla(0,100%," + Math.floor(Math.random() * 55 + 20) + "%,0.5)";
     wrapper.appendChild(element);
 
     let title = document.createElement("div");
