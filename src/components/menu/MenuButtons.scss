@@ -3,7 +3,28 @@ $number-of-togglers: 5;
 
 /* main */
 .cta-menu-buttons-wrapper-nav {
-  top: 75%;
+  top: 77%;
+  @media (min-height: 300px) {
+    top: 50%;
+  }
+  @media (min-height: 360px) {
+    top: 55%;
+  }
+  @media (min-height: 400px) {
+    top: 60%;
+  }
+  @media (min-height: 480px) {
+    top: 65%;
+  }
+  @media (min-height: 600px) {
+    top: 70%;
+  }
+  @media (min-height: 700px) {
+    top: 75%;
+  }
+  @media (min-height: 900px) {
+    top: 77%;
+  }
 }
 .menu-menu-buttons-wrapper-nav {
   top: 0;
@@ -23,7 +44,8 @@ $number-of-togglers: 5;
   transform: scale(1) translate3d(0, 0, 0);
 }
 .menu-menu-open-button {
-  transform: scale(0) translate3d(0, 0, 0);
+  // transform: scale(0) translate3d(0, 0, 0);
+  display: none;
 }
 
 /* a */
