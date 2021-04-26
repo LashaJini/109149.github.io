@@ -40,7 +40,7 @@ const Main = () => {
     _animationEnabled
   );
   const [soundEnabled, setSoundEnabled] = useSound(_soundEnabled);
-  const [musicEnabled, setMusicEnabled] = useSound(_musicEnabled);
+  const [musicEnabled, setMusicEnabled] = React.useState(_musicEnabled);
 
   const gridRef = React.useRef();
   const resizeObserver = React.useRef();
