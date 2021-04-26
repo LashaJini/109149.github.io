@@ -2,7 +2,61 @@ import React from "react";
 import { AnimTechButton } from "../";
 
 const techs = {
-  three: {
+  rust: {
+    component: React.lazy(() => import("../svg/Rust")),
+    url: "https://sass-lang.com/",
+    args: {
+      fill: "black",
+    },
+  },
+  scss: {
+    component: React.lazy(() => import("../svg/Sass")),
+    url: "https://sass-lang.com/",
+    args: {
+      fill: "hsl(330,52%,81%)",
+    },
+  },
+  sass: {
+    component: React.lazy(() => import("../svg/Sass")),
+    url: "https://sass-lang.com/",
+    args: {
+      fill: "hsl(330,52%,81%)",
+    },
+  },
+  css: {
+    component: React.lazy(() => import("../svg/CSS")),
+    url: "https://www.w3.org/Style/CSS/Overview.en.html",
+    args: {
+      fill: "hsl(207,71%,42%)",
+    },
+  },
+  pug: {
+    component: React.lazy(() => import("../svg/Pug2")),
+    url: "https://pugjs.org/",
+    args: {},
+  },
+  html: {
+    component: React.lazy(() => import("../svg/HTML")),
+    url: "https://html.spec.whatwg.org/",
+    args: {
+      fill: "hsl(11,77%,54%)",
+    },
+  },
+  deno: {
+    component: React.lazy(() => import("../svg/Deno")),
+    url: "https://deno.land/",
+    args: {
+      fill: "black",
+    },
+  },
+  git: {
+    component: React.lazy(() => import("../svg/Git")),
+    url: "https://git-scm.com/",
+    args: {
+      fill: "hsl(9,86%,56%)",
+    },
+  },
+  threejs: {
     component: React.lazy(() => import("../svg/Three")),
     url: "https://threejs.org/",
     args: {
@@ -49,8 +103,8 @@ const techs = {
   },
 };
 
-const Tech = ({ name }) => {
-  let TechLogo = <></>;
+const Tech = ({ name, args = {}, onlyLogo = false }) => {
+  let TechLogo = <>{name}</>;
 
   if (techs.hasOwnProperty(name)) {
     TechLogo = techs[name].component;
@@ -58,9 +112,13 @@ const Tech = ({ name }) => {
 
   return (
     <React.Suspense fallback={<div>OI</div>}>
-      <AnimTechButton url={techs[name].url}>
-        <TechLogo {...techs[name].args} />
-      </AnimTechButton>
+      {onlyLogo ? (
+        <TechLogo {...(techs[name] ?? {}).args} {...args} />
+      ) : (
+        <AnimTechButton url={techs[name].url}>
+          <TechLogo {...(techs[name] ?? {}).args} />
+        </AnimTechButton>
+      )}
     </React.Suspense>
   );
 };
