@@ -26,13 +26,13 @@
     ]
   },
   {
-    "cardImage": "acdc",
+    "cardImage": "portfolio",
     "projectName": "Portfolio Project",
     "repoUrl": "https://github.com/109149/109149.github.io",
     "website": "https://109149.github.io",
     "ytUrl": "https://www.youtube.com/embed/PZE89NFYb04",
     "difficulty": "2",
-    "description": "The main reason for making this project was to learn more about styled-components, (s)css and other (decorative) building blocks for web app. Which became a homepage for other projects as well.",
+    "description": "The main reason for making this project was to learn more about styled-components, (s)css and other (decorative) building blocks for web app, which later became a homepage for other projects as well.",
     "techUsed": [
       {
         "name": "github"
@@ -45,6 +45,26 @@
       },
       {
         "name": "threejs"
+      }
+    ]
+  },
+  {
+    "cardImage": "toParticles",
+    "projectName": "Text to Particles",
+    "repoUrl": "https://github.com/109149/misc",
+    "website": "https://109149.github.io/misc/projects/to-particles#/",
+    "ytUrl": "https://www.youtube.com/embed/6A4mYa4f7Y4",
+    "difficulty": "4",
+    "description": "This is the first project I've ever made. Converts user input to moveable \"particles\".",
+    "techUsed": [
+      {
+        "name": "github"
+      },
+      {
+        "name": "typescript"
+      },
+      {
+        "name": "react"
       }
     ]
   }

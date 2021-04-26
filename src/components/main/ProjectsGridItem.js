@@ -9,10 +9,10 @@ const ProjectsGridItem = () => {
   return (
     <GridItemExtended>
       <ProjectItem nth="1">
-        <Card data={projects[0]} />
+        <Card data={projects[1]} />
       </ProjectItem>
       <ProjectItem nth="2">
-        <Card data={projects[1]} />
+        <Card data={projects[2]} />
       </ProjectItem>
     </GridItemExtended>
   );

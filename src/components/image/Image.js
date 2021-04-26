@@ -1,10 +1,16 @@
 import React from "react";
-import ACDC from "../../static/images/acdc.jpg";
+import { ACDC, Portfolio, ToParticles } from "../../static/images";
 import { Linkable } from "../";
 
 const images = {
+  toParticles: {
+    url: ToParticles,
+  },
   acdc: {
     url: ACDC,
+  },
+  portfolio: {
+    url: Portfolio,
   },
 };
 
