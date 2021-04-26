@@ -69,6 +69,10 @@ code {
   height: 100%;
 }
 
+#loader {
+  display: none;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }

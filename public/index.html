@@ -25,10 +25,132 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>109149 | Portfolio</title>
+    <style>
+      :root {
+        /* color */
+        --bg-color-primary: #ccc;
+        --bg-color-secondary: #333333;
+        --bg-color-secondary-1: #212121;
+        --text-color-primary: black;
+        --text-color-secondary: white;
+        --title-color-primary: #d00000;
+
+        /* breakpoints */
+        --bp-xss: 0;
+        --bp-xs: 320px;
+        --bp-sm1: 360px;
+        --bp-sm2: 460px;
+        --bp-sm: 600px;
+        --bp-md1: 760px;
+        --bp-md: 960px;
+        --bp-lg1: 1080px;
+        --bp-lg: 1280px;
+        --bp-xl1: 1500px;
+        --bp-xl: 1920px;
+      }
+
+      /* dark mode */
+      [data-theme="dark"] {
+        /* color */
+        --bg-color-primary: #151515;
+        --bg-color-secondary: #333333;
+        --bg-color-secondary-1: #212121;
+        --text-color-primary: white;
+        --text-color-secondary: black;
+        --title-color-primary: #d00000;
+      }
+      @keyframes rotate-loader {
+        0% {
+          transform: rotate(0);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes counter {
+        0% {
+          counter-increment: count 0;
+        }
+        10% {
+          counter-increment: count 10;
+        }
+        20% {
+          counter-increment: count 20;
+        }
+        30% {
+          counter-increment: count 30;
+        }
+        40% {
+          counter-increment: count 40;
+        }
+        50% {
+          counter-increment: count 50;
+        }
+        60% {
+          counter-increment: count 60;
+        }
+        70% {
+          counter-increment: count 70;
+        }
+        80% {
+          counter-increment: count 80;
+        }
+        90% {
+          counter-increment: count 90;
+        }
+        100% {
+          counter-increment: count 100;
+        }
+      }
+
+      body {
+        background: var(--bg-color-primary);
+      }
+
+      #loader-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--text-color-primary);
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+      #loader {
+        animation: rotate-loader infinite 1s running;
+        border: thick double hsl(0, 100%, 50%);
+        border-radius: 100%;
+        border-left: none;
+        border-top: none;
+        border-bottom: none;
+        width: 120px;
+        height: 120px;
+      }
+      #loader-wrapper:after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(120%, -50%);
+        content: "%";
+      }
+      #loader-wrapper:before {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        content: counter(count);
+        counter-reset: count 0;
+        animation: counter 0.4s linear;
+        animation-fill-mode: forwards;
+      }
+    </style>
   </head>
   <body data-theme="dark">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <div id="loader-wrapper">
+      <div id="loader"></div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
