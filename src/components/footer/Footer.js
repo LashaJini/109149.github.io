@@ -59,7 +59,7 @@ const Footer = ({ logo: { width, height } }) => {
         </Network>
 
         <FoF>
-          <Linkable newTab={false} url={window.location.origin + "404"}>
+          <Linkable newTab={false} url={window.location.origin + "/#/404"}>
             I wanna see 404 page too!
           </Linkable>
         </FoF>
