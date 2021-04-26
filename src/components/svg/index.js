@@ -1,3 +1,11 @@
+import RustSVG from "./Rust";
+import SassSVG from "./Sass";
+import CSSSVG from "./CSS";
+import Pug2SVG from "./Pug2";
+import PugSVG from "./Pug";
+import HTMLSVG from "./HTML";
+import DenoSVG from "./Deno";
+import GitSVG from "./Git";
 import ThreeSVG from "./Three";
 import ClapperBoardSVG from "./ClapperBoard";
 import YoutubeSVG from "./Youtube";
@@ -42,6 +50,14 @@ const SVGComponents = {
   ReactSVG,
   ClapperBoardSVG,
   ThreeSVG,
+  GitSVG,
+  DenoSVG,
+  HTMLSVG,
+  PugSVG,
+  Pug2SVG,
+  CSSSVG,
+  SassSVG,
+  RustSVG,
 };
 
 export default SVGComponents;
@@ -67,4 +83,12 @@ export {
   ReactSVG,
   ClapperBoardSVG,
   ThreeSVG,
+  GitSVG,
+  DenoSVG,
+  HTMLSVG,
+  PugSVG,
+  Pug2SVG,
+  CSSSVG,
+  SassSVG,
+  RustSVG,
 };
