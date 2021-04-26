@@ -307,9 +307,9 @@ const MenuButtons = ({ observableElement }) => {
                 in="blur"
                 mode="matrix"
                 values="1 1 1 1 0
-                      0 1 0 0 0
-                      0 0 1 0 0
-                      0 0 0 24 -9"
+                        0 0.1 0 0 0
+                        0 0 0.1 0 0
+                        0 0 0 26 -9"
                 result="goo"
               />
 
@@ -320,7 +320,7 @@ const MenuButtons = ({ observableElement }) => {
                 values="0 0 0 0 0
                       0 0 0 0 0
                       0 0 0 0 0
-                      0 0 0 1 -0.1"
+                      0 0 0 1.4 -0.1"
                 result="shadow"
               />
               <feOffset in="shadow" dx="3" dy="10" result="shadow" />

@@ -69,8 +69,6 @@ const GridItemExtended = styled(GridItem)`
 
 const TitleWrapper = styled.div`
   color: ${themes.vars.titleColorPrimary};
-  letter-spacing: 2px;
-  font-size: 1.25rem;
   user-select: none;
   min-height: 1rem;
   margin-bottom: 1.8rem;

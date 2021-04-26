@@ -1,3 +1,4 @@
+import TechCard from "./card/TechCard";
 import Image from "./image/Image";
 import Main from "./main/Main";
 import Neon from "./colorable/Neon";
@@ -86,4 +87,5 @@ export {
   Main,
   Image,
   MusicContext,
+  TechCard,
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import GridItem from "./GridItem";
 import styled from "styled-components";
-import { Thunder1, Title, Paragraph } from "../";
+import { TechCard, Thunder1, Title, Paragraph } from "../";
 import { SwoopIn } from "../";
 import { bp, themes } from "../../constants";
 import { useFullyVisible } from "../../hooks";
@@ -33,11 +33,7 @@ const TechFamiliarGridItem = () => {
             <ParagraphWrapper>
               <Paragraph>
                 <SwoopIn from="right" to="left">
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                  justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                  sea takimata sanctus est Lorem ipsum dolor sit amet.
+                  <TechCard />
                 </SwoopIn>
               </Paragraph>
             </ParagraphWrapper>
@@ -73,8 +69,10 @@ const Thunder = styled(Div)`
   position: absolute;
   top: 0;
   right: 0;
+  display: none;
 
   @media (min-width: ${bp.lg}) {
+    display: block;
     grid-row: 1;
     grid-column: 3;
   }
@@ -86,10 +84,8 @@ const GridItemExtended = styled(GridItem)`
   width: 100%;
   position: relative;
   font-size: 1.5rem;
-  color: ${themes.vars.textColorSecondary}; // thunder...
 
   @media (min-width: ${bp.lg}) {
-    color: ${themes.vars.textColorPrimary};
     display: grid;
     grid-template-columns: 2fr 4fr 4fr 1fr;
   }
@@ -109,7 +105,7 @@ const ParagraphWrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  padding: 0 3rem;
+  padding: 0 1.5rem;
   // text-align: center;
 `;
 
