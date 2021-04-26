@@ -4,6 +4,10 @@ const details = [
     content: "'I don't hate it.' - Linus Torvalds.",
   },
   {
+    titleText: "vim",
+    content: "Vim is love, Vim is life.",
+  },
+  {
     titleText: "wasm",
     content: "'Native code' on web?",
   },
@@ -80,6 +84,11 @@ const details = [
     titleText: "chinese",
     content:
       "Because 'China population is equivalent 18.47% of the total world population'.",
+  },
+  {
+    titleText: "psychology",
+    content:
+      "Understanding human behaviour in different situations is helpful.",
   },
   {
     titleText: "physics",
