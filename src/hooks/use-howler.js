@@ -19,7 +19,7 @@ const useHowler = ({ src, volume = 1, loop = false }) => {
       preload: true,
       html5: true,
       onend: function () {
-        console.log("done playing!");
+        // console.log("done playing!");
       },
     })
   );

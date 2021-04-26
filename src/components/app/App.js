@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { FoF, Main } from "../";
 
 const App = () => {
-  console.log("render");
+  // console.log("render");
   return (
     <Router>
       <Switch>

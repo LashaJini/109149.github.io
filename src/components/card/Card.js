@@ -51,7 +51,6 @@ const Card = ({ data, cardWidth }) => {
   useEventListener("click", (event) => {
     if (event.target.nodeName !== "IFRAME") {
       if (iframeIsVisible) {
-        // console.log(document.querySelector("iframe"));
         setIFrameIsVisible(false);
       }
     }
@@ -165,9 +164,7 @@ const Grid = styled.div`
   align-items: center;
   justify-items: center;
   width: ${({ _width }) => (_width ? _width : "100%")};
-  min-width: 280px;
-  // max-width: 440px;
-  // max-height: 800px;
+  max-width: 420px;
   border-radius: 5px;
   padding: 1rem 0;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
