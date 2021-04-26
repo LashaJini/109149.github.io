@@ -119,7 +119,7 @@ const _data = [
 const TechCard = () => {
   const [data, setData] = React.useState(_data);
 
-  const handleHover = (d, i) => {
+  const handleClick = (i) => {
     setData((prev) => {
       let current = data[i];
       let newData = [...prev];
@@ -137,7 +137,6 @@ const TechCard = () => {
     });
   };
 
-  // console.log("render");
   return (
     <>
       <Container>
@@ -146,8 +145,12 @@ const TechCard = () => {
             return (
               <Li key={i}>
                 <Div
-                  onMouseEnter={() => handleHover(d, i)}
-                  onMouseLeave={() => handleHover(d, i)}
+                  // onMouseEnter={(event) => handleHover(event, d, i)}
+                  // onMouseLeave={(event) => handleHover(event, d, i)}
+                  className={`techcard-tech-logo ${
+                    d.replaceWith.name && "hoverable"
+                  }`}
+                  onClick={() => handleClick(i)}
                 >
                   <Tech name={d.name} onlyLogo={true} args={d.args} />
                 </Div>
