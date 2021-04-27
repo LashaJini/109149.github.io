@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from "react-ga";
 import { Logo, Linkable, Jiggle } from "../";
 import styled from "styled-components";
 import { themes, networkUrls } from "../../constants";
@@ -11,6 +12,14 @@ import {
 } from "../svg";
 
 const Footer = ({ logo: { width, height } }) => {
+  const GAHandler = (c) => {
+    ReactGA.event({
+      category: `cta-${c}`,
+      action: "clicked",
+      transport: "beacon",
+    });
+  };
+
   return (
     <>
       <Div>
@@ -23,35 +32,50 @@ const Footer = ({ logo: { width, height } }) => {
         <Network>
           <LogoWrapper>
             <Jiggle>
-              <Linkable url={networkUrls.github}>
+              <Linkable
+                url={networkUrls.github}
+                onClick={() => GAHandler("github")}
+              >
                 <GithubSVG width={"28px"} height={"28px"} />
               </Linkable>
             </Jiggle>
           </LogoWrapper>
           <LogoWrapper>
             <Jiggle>
-              <Linkable url={networkUrls.stackoverflow}>
+              <Linkable
+                url={networkUrls.stackoverflow}
+                onClick={() => GAHandler("stackoverflow")}
+              >
                 <StackoverflowSVG width={"28px"} height={"28px"} />
               </Linkable>
             </Jiggle>
           </LogoWrapper>
           <LogoWrapper>
             <Jiggle>
-              <Linkable url={networkUrls.reddit}>
+              <Linkable
+                url={networkUrls.reddit}
+                onClick={() => GAHandler("reddit")}
+              >
                 <RedditSVG width={"28px"} height={"28px"} />
               </Linkable>
             </Jiggle>
           </LogoWrapper>
           <LogoWrapper>
             <Jiggle>
-              <Linkable url={networkUrls.twitter}>
+              <Linkable
+                url={networkUrls.twitter}
+                onClick={() => GAHandler("twitter")}
+              >
                 <TwitterSVG width={"28px"} height={"28px"} />
               </Linkable>
             </Jiggle>
           </LogoWrapper>
           <LogoWrapper>
             <Jiggle>
-              <Linkable url={networkUrls.email}>
+              <Linkable
+                url={networkUrls.email}
+                onClick={() => GAHandler("email")}
+              >
                 <EmailSVG width={"28px"} height={"28px"} />
               </Linkable>
             </Jiggle>

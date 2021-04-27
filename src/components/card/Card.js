@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from "react-ga";
 import styled, { keyframes, css } from "styled-components";
 import {
   AnimationContext,
@@ -121,12 +122,30 @@ const Card = ({ data, cardWidth }) => {
               href={data.website || data.repoUrl}
               width="100%"
               fillColor="#ff003c"
+              customHandler={() =>
+                ReactGA.event({
+                  category: `${data.projectName} - Website`,
+                  action: "clicked",
+                  transport: "beacon",
+                })
+              }
             >
               Website
             </Button>
           </LiveWebsiteGridItem>
           <RepoButtonGriditem _col="5/8" _row="10">
-            <Button href={data.repoUrl} width="100%" fillColor="#c648c8">
+            <Button
+              href={data.repoUrl}
+              width="100%"
+              fillColor="#c648c8"
+              customHandler={() =>
+                ReactGA.event({
+                  category: `${data.projectName} - Repo`,
+                  action: "clicked",
+                  transport: "beacon",
+                })
+              }
+            >
               Repo
             </Button>
           </RepoButtonGriditem>

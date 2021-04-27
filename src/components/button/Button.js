@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { themes } from "../../constants";
+import ReactGA from "react-ga";
 
 // TODO: disabled
 const Button = ({
@@ -10,7 +11,19 @@ const Button = ({
   fillColor,
   children,
   newTab = true,
+  ga = false,
+  customHandler = undefined,
 }) => {
+  const handleClick = () => {
+    if (ga) {
+      ReactGA.event({
+        category: "Link",
+        action: "Link clicked",
+        transport: "beacon",
+      });
+    }
+  };
+
   return (
     <>
       <Wrapper _width={width} _height={height}>
@@ -19,6 +32,7 @@ const Button = ({
           target={newTab ? "_blank" : "_self"}
           rel="noreferrer"
           className="hoverable"
+          onClick={customHandler || handleClick}
           _lineHeight={height}
           _fillColor={fillColor}
         >

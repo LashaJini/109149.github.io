@@ -8,6 +8,9 @@ import {
   neonFlickering2Wav as neonFlickeringWav,
 } from "../../static/sound";
 import { themes } from "../../constants";
+import ReactGA from "react-ga";
+
+ReactGA.pageview("/#/404");
 
 // TODO: keyframes instead of interval (?)
 const defaultFill = "hsl(0, 100%, 50%)";
@@ -129,6 +132,14 @@ const FoF = () => {
               href={rickRoll}
               height="40px"
               width="120px"
+              ga={true}
+              customHandler={() =>
+                ReactGA.event({
+                  category: "RickRoll",
+                  action: "RickRoll'D",
+                  transport: "beacon",
+                })
+              }
             >
               enjoy
             </Button>

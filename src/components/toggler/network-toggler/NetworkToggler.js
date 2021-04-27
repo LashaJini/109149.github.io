@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from "react-ga";
 import styled, { css } from "styled-components";
 import { themes, networkUrls } from "../../../constants";
 import {
@@ -25,6 +26,14 @@ const NetworkToggler = ({ width, height, fill, isCta }) => {
     }
   }, [isCta]);
 
+  const GAHandler = (c) => {
+    ReactGA.event({
+      category: `cta-${c}`,
+      action: "clicked",
+      transport: "beacon",
+    });
+  };
+
   return (
     <Div className="network-toggler">
       <Toggler>
@@ -35,7 +44,7 @@ const NetworkToggler = ({ width, height, fill, isCta }) => {
         className="network-icon github-icon"
         _animationEnabled={animation.animationEnabled}
       >
-        <Linkable url={networkUrls.github}>
+        <Linkable url={networkUrls.github} onClick={() => GAHandler("github")}>
           <GithubSVG width={width} height={height} fill={fill} />
         </Linkable>
       </Wrapper>
@@ -44,7 +53,10 @@ const NetworkToggler = ({ width, height, fill, isCta }) => {
         _i={2}
         _animationEnabled={animation.animationEnabled}
       >
-        <Linkable url={networkUrls.stackoverflow}>
+        <Linkable
+          url={networkUrls.stackoverflow}
+          onClick={() => GAHandler("stackoverflow")}
+        >
           <StackoverflowSVG width={width} height={height} fill={fill} />
         </Linkable>
       </Wrapper>
@@ -53,7 +65,7 @@ const NetworkToggler = ({ width, height, fill, isCta }) => {
         _i={3}
         _animationEnabled={animation.animationEnabled}
       >
-        <Linkable url={networkUrls.reddit}>
+        <Linkable url={networkUrls.reddit} onClick={() => GAHandler("reddit")}>
           <RedditSVG width={width} height={height} fill={fill} />
         </Linkable>
       </Wrapper>
@@ -62,7 +74,10 @@ const NetworkToggler = ({ width, height, fill, isCta }) => {
         _i={4}
         _animationEnabled={animation.animationEnabled}
       >
-        <Linkable url={networkUrls.twitter}>
+        <Linkable
+          url={networkUrls.twitter}
+          onClick={() => GAHandler("twitter")}
+        >
           <TwitterSVG width={width} height={height} fill={fill} />
         </Linkable>
       </Wrapper>
@@ -71,7 +86,7 @@ const NetworkToggler = ({ width, height, fill, isCta }) => {
         _i={5}
         _animationEnabled={animation.animationEnabled}
       >
-        <Linkable url={networkUrls.email}>
+        <Linkable url={networkUrls.email} onClick={() => GAHandler("email")}>
           <EmailSVG width={width} height={height} fill={fill} />
         </Linkable>
       </Wrapper>
