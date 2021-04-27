@@ -99,7 +99,15 @@ const Typeable = ({
         write(text, writeSpeed, _i);
       }
 
-      if (children.type && children.type.name !== "Deleteable") {
+      if (
+        children.type &&
+        !children.props.delDelay &&
+        !children.props.delSpeed &&
+        !children.props.replaceWith &&
+        !children.props.result &&
+        !children.props.writeDelay &&
+        !children.props.writeSpeed
+      ) {
         let text = children.props.children.split("");
         delay += writeDelay;
         write(
@@ -114,7 +122,15 @@ const Typeable = ({
         );
       }
 
-      if (children.type && children.type.name === "Deleteable") {
+      if (
+        children.type &&
+        children.props.delDelay &&
+        children.props.delSpeed &&
+        children.props.replaceWith &&
+        children.props.result &&
+        children.props.writeDelay &&
+        children.props.writeSpeed
+      ) {
         const deleteable = {
           replaceWith: children.props.replaceWith.map((r) => r.split("")),
           writeDelay: children.props.writeDelay,
