@@ -11,6 +11,7 @@ const Typeable = ({
   writeSpeed = 90,
   cursor = true,
 }) => {
+  const animated = React.useRef(false);
   const iRef = React.useRef();
   const wrapperRef = React.useRef();
   const animation = React.useContext(AnimationContext);
@@ -25,6 +26,7 @@ const Typeable = ({
       setItems(children);
       return;
     }
+    if (animated.current) return;
     setItems(Array(children.length).fill(""));
 
     let ids = [];
@@ -163,6 +165,7 @@ const Typeable = ({
     }
 
     children.forEach((child, _i) => rec(child, _i));
+    ids[ids.length] = setTimeout(() => (animated.current = true), delay); // in reality, animation is not done yet.
 
     return () => {
       ids.map((id) => clearTimeout(id));
@@ -215,7 +218,7 @@ const Wrapper = styled.div`
       &:after {
         content: "";
         position: absolute;
-        bottom: 0.4rem;
+        bottom: 0.38rem;
         background: ${themes.vars.textColorPrimary};
         margin-left: 1px;
         width: 8px;
