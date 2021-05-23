@@ -4,6 +4,7 @@ import {
   soundEnabled,
   animationEnabled,
   musicEnabled,
+  oldEnabled,
 } from "../../constants";
 
 export const MusicContext = React.createContext({
@@ -19,6 +20,11 @@ export const AnimationContext = React.createContext({
 export const ThemeContext = React.createContext({
   theme: themes.dark,
   toggleTheme: () => {},
+});
+
+export const PortfolioContext = React.createContext({
+  oldEnabled,
+  togglePortfolio: () => {},
 });
 
 export const SoundContext = React.createContext({

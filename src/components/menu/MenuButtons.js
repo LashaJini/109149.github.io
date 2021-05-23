@@ -40,69 +40,6 @@ function getY(y) {
   return Math.floor(-r * Math.sin(start + spread * y));
 }
 
-function ctaMode() {
-  /* main */
-  document
-    .querySelector(".menu-buttons-wrapper")
-    .classList.add("cta-menu-buttons-wrapper-nav");
-  document
-    .querySelector(".menu-buttons-wrapper")
-    .classList.remove("menu-menu-buttons-wrapper-nav");
-
-  /* nav */
-  document.querySelector(".menu").classList.add("cta-nav");
-  document.querySelector(".menu").classList.remove("menu-nav");
-
-  /* label */
-  document
-    .querySelector(".menu-open-button")
-    .classList.add("cta-menu-open-button");
-  document
-    .querySelector(".menu-open-button")
-    .classList.remove("menu-menu-open-button");
-
-  /* a */
-  document
-    .querySelectorAll(".toggler-button")
-    .forEach((x) => x.classList.add("a-cta"));
-  document
-    .querySelectorAll(".toggler-button")
-    .forEach((x) => x.classList.remove("a-nav"));
-}
-
-function menuMode() {
-  /* label should not be checked */
-  document.querySelector("#menu-open").checked = false;
-
-  /* main */
-  document
-    .querySelector(".menu-buttons-wrapper")
-    .classList.remove("cta-menu-buttons-wrapper-nav");
-  document
-    .querySelector(".menu-buttons-wrapper")
-    .classList.add("menu-menu-buttons-wrapper-nav");
-
-  /* nav */
-  document.querySelector(".menu").classList.remove("cta-nav");
-  document.querySelector(".menu").classList.add("menu-nav");
-
-  /* label */
-  document
-    .querySelector(".menu-open-button")
-    .classList.remove("cta-menu-open-button");
-  document
-    .querySelector(".menu-open-button")
-    .classList.add("menu-menu-open-button");
-
-  /* a */
-  document
-    .querySelectorAll(".toggler-button")
-    .forEach((x) => x.classList.remove("a-cta"));
-  document
-    .querySelectorAll(".toggler-button")
-    .forEach((x) => x.classList.add("a-nav"));
-}
-
 const MenuButtons = ({ observableElement }) => {
   const [intersecting, setIntersecting] = React.useState(true);
   const [isCta, setIsCta] = React.useState(false);
@@ -121,6 +58,69 @@ const MenuButtons = ({ observableElement }) => {
   const { sound: menuClose } = useHowler({ src: [menuCloseWav] });
   const { sound: menuTick } = useHowler({ src: [menuTickWav] });
   const { sound: bell } = useHowler({ src: [hellsBellsWav] });
+
+  function ctaMode() {
+    /* main */
+    document
+      .querySelector(".menu-buttons-wrapper")
+      .classList.add("cta-menu-buttons-wrapper-nav");
+    document
+      .querySelector(".menu-buttons-wrapper")
+      .classList.remove("menu-menu-buttons-wrapper-nav");
+
+    /* nav */
+    document.querySelector(".menu").classList.add("cta-nav");
+    document.querySelector(".menu").classList.remove("menu-nav");
+
+    /* label */
+    document
+      .querySelector(".menu-open-button")
+      .classList.add("cta-menu-open-button");
+    document
+      .querySelector(".menu-open-button")
+      .classList.remove("menu-menu-open-button");
+
+    /* a */
+    document
+      .querySelectorAll(".toggler-button")
+      .forEach((x) => x.classList.add("a-cta"));
+    document
+      .querySelectorAll(".toggler-button")
+      .forEach((x) => x.classList.remove("a-nav"));
+  }
+
+  function menuMode() {
+    /* label should not be checked */
+    document.querySelector("#menu-open").checked = false;
+
+    /* main */
+    document
+      .querySelector(".menu-buttons-wrapper")
+      .classList.remove("cta-menu-buttons-wrapper-nav");
+    document
+      .querySelector(".menu-buttons-wrapper")
+      .classList.add("menu-menu-buttons-wrapper-nav");
+
+    /* nav */
+    document.querySelector(".menu").classList.remove("cta-nav");
+    document.querySelector(".menu").classList.add("menu-nav");
+
+    /* label */
+    document
+      .querySelector(".menu-open-button")
+      .classList.remove("cta-menu-open-button");
+    document
+      .querySelector(".menu-open-button")
+      .classList.add("menu-menu-open-button");
+
+    /* a */
+    document
+      .querySelectorAll(".toggler-button")
+      .forEach((x) => x.classList.remove("a-cta"));
+    document
+      .querySelectorAll(".toggler-button")
+      .forEach((x) => x.classList.add("a-nav"));
+  }
 
   // handles initial setup for screen width less than bp.sm
   React.useEffect(() => {

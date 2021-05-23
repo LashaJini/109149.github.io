@@ -39,8 +39,11 @@ const Div = styled.div`
     height: 100%;
     display: block;
     border-radius: 100%;
-    background: linear-gradient(45deg, hsl(0, 100%, 50%), hsl(0, 100%, 70%));
-    box-shadow: 1px 1px 15px hsl(0, 100%, 50%);
+    ${({ inset }) =>
+      inset
+        ? "box-shadow: inset 1px 1px 15px hsl(0, 100%, 50%);"
+        : `background: linear-gradient(45deg, hsl(0, 100%, 50%), hsl(0, 100%, 70%));
+      box-shadow: 1px 1px 15px hsl(0, 100%, 50%);`}
     transition: all 265ms ease-out;
     position: absolute;
     top: 0;
@@ -54,11 +57,15 @@ const Div = styled.div`
   }
 `;
 
-const AnimTechButton = ({ children, url }) => {
+const AnimTechButton = ({ children, url, props /* inset */ }) => {
   const animation = React.useContext(AnimationContext);
 
   return (
-    <Div _animationEnabled={animation.animationEnabled} className="hoverable">
+    <Div
+      _animationEnabled={animation.animationEnabled}
+      className="hoverable"
+      {...props}
+    >
       <Linkable url={url}>
         <div>{children}</div>
       </Linkable>

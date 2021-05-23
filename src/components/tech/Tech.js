@@ -2,9 +2,16 @@ import React from "react";
 import { AnimTechButton } from "../";
 
 const techs = {
+  wasm: {
+    component: React.lazy(() => import("../svg/Wasm")),
+    url: "https://webassembly.org/",
+    args: {
+      fill: "#654ff0",
+    },
+  },
   rust: {
     component: React.lazy(() => import("../svg/Rust")),
-    url: "https://sass-lang.com/",
+    url: "https://www.rust-lang.org/",
     args: {
       fill: "black",
     },
@@ -103,7 +110,7 @@ const techs = {
   },
 };
 
-const Tech = ({ name, args = {}, onlyLogo = false }) => {
+const Tech = ({ name, props, args = {}, onlyLogo = false }) => {
   let TechLogo = <>{name}</>;
 
   if (techs.hasOwnProperty(name)) {
@@ -115,7 +122,7 @@ const Tech = ({ name, args = {}, onlyLogo = false }) => {
       {onlyLogo ? (
         <TechLogo {...(techs[name] ?? {}).args} {...args} />
       ) : (
-        <AnimTechButton url={techs[name].url}>
+        <AnimTechButton url={techs[name].url} props={props}>
           <TechLogo {...(techs[name] ?? {}).args} />
         </AnimTechButton>
       )}

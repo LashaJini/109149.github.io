@@ -51,7 +51,7 @@ body {
   height: 100vh;
   background: var(--bg-color-primary);
   box-sizing: border-box;
-  overflow: hidden;
+  // overflow: hidden;
   cursor: default;
   cursor: url("./components/svg/general-cursor.svg"), auto;
 }

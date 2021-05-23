@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Game of Life",
+    "description": "Conway's game of life project built with Rust, Wasm and Javascript. 3D version is built with three.js.",
+    "website": "https://109149.github.io/game-of-life",
+    "repo": "https://github.com/109149/game-of-life",
+    "stack": ["github", "wasm", "rust", "javascript", "react", "threejs"]
+  },
+  {
+    "title": "DSA",
+    "description": "DSA (data structures and algorithms) is the repository of solutions for leetcode, codewars and atcoder, written mostly in rust and javascript.",
+    "website": "",
+    "repo": "https://github.com/109149/dsa",
+    "stack": ["github", "rust", "javascript"]
+  }
+]

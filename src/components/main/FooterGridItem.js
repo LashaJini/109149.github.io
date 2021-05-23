@@ -7,7 +7,7 @@ const FooterGridItem = () => {
   return (
     <GridItemExtended className="IOOIOI">
       <FooterWrapper>
-        <Footer logo={{ width: "200px", height: "100px" }} />
+        <Footer width="200px" height="100px" />
       </FooterWrapper>
     </GridItemExtended>
   );

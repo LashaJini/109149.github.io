@@ -1,3 +1,5 @@
+import PortfolioToggler from "./toggler/portfolio-toggler/PortfolioToggler";
+import AppV2 from "./v2/app/App";
 import TechCard from "./card/TechCard";
 import Image from "./image/Image";
 import Main from "./main/Main";
@@ -34,6 +36,7 @@ import {
   AnimationContext,
   ThemeContext,
   SoundContext,
+  PortfolioContext,
 } from "./context";
 import SoundToggler from "./toggler/sound-toggler/SoundToggler";
 import MusicToggler from "./toggler/music-toggler/MusicToggler";
@@ -88,4 +91,7 @@ export {
   Image,
   MusicContext,
   TechCard,
+  AppV2,
+  PortfolioToggler,
+  PortfolioContext,
 };

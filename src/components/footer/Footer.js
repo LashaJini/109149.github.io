@@ -11,7 +11,7 @@ import {
   GithubSVG,
 } from "../svg";
 
-const Footer = ({ logo: { width, height } }) => {
+const Footer = ({ displayLogo = true, headline = true, width, height }) => {
   const GAHandler = (c) => {
     ReactGA.event({
       category: `cta-${c}`,
@@ -23,11 +23,13 @@ const Footer = ({ logo: { width, height } }) => {
   return (
     <>
       <Div>
-        <LogoWrapper>
-          <Logo width={width} height={height} />
-        </LogoWrapper>
+        {displayLogo && (
+          <LogoWrapper>
+            <Logo width={width} height={height} />
+          </LogoWrapper>
+        )}
 
-        <div>Help me overcome boredom.</div>
+        <div>{headline && "Help me overcome boredom."}</div>
 
         <Network>
           <LogoWrapper>
@@ -88,6 +90,18 @@ const Footer = ({ logo: { width, height } }) => {
           </Linkable>
         </FoF>
 
+        <FoF>
+          {window.location.href.includes("/#/old") ? (
+            <Linkable newTab={false} url={window.location.origin}>
+              new version
+            </Linkable>
+          ) : (
+            <Linkable newTab={false} url={window.location.origin + "/#/old"}>
+              old version
+            </Linkable>
+          )}
+        </FoF>
+
         <div>© 2021-present 109149. All Rights Reserved.</div>
       </Div>
     </>
@@ -114,7 +128,7 @@ const LogoWrapper = styled.div`
 
 const Div = styled.div`
   width: 100%;
-  height: 300px;
+  height: 350px;
   background: ${themes.vars.bgColorSecondary};
   display: flex;
   align-items: center;

@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { Fadeable, Jiggle } from "../";
 
-const Title = ({ children, delay = 55 }) => {
+const Title = ({ children, style = {}, delay = 55 }) => {
   return (
-    <H2>
+    <H2 style={style}>
       {typeof children === "string" &&
-        children.split("").map((c, i) => {
+        [...children].map((c, i) => {
           if (c === " ") return <span key={i}> </span>;
 
           return (

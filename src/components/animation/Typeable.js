@@ -7,9 +7,12 @@ import { AnimationContext } from "../";
 // will crash the app.
 const Typeable = ({
   children,
+  cursorBottom,
+  cursorHeight,
   writeDelay = 1000,
   writeSpeed = 90,
   cursor = true,
+  style = {},
 }) => {
   const animated = React.useRef(false);
   const iRef = React.useRef();
@@ -67,7 +70,7 @@ const Typeable = ({
                 if (p.props && j === _i) {
                   p = React.cloneElement(
                     elem,
-                    {},
+                    children.props,
                     (p.props.children ?? "") + c
                   );
                 }
@@ -110,7 +113,14 @@ const Typeable = ({
         !children.props.writeDelay &&
         !children.props.writeSpeed
       ) {
-        let text = children.props.children.split("");
+        // case when its an array... bad solution
+        let text = children.props.children;
+        if (typeof children.props.children !== "object") {
+          text = children.props.children.split("");
+        } else {
+          text = text.join(" ").split("");
+        }
+
         delay += writeDelay;
         write(
           {
@@ -173,7 +183,13 @@ const Typeable = ({
   }, [children, animation, writeDelay, writeSpeed]);
 
   return (
-    <Wrapper _cursor={cursor} ref={wrapperRef}>
+    <Wrapper
+      _cursor={cursor}
+      ref={wrapperRef}
+      style={style}
+      cursorHeight={cursorHeight}
+      cursorBottom={cursorBottom}
+    >
       {items.map((item, i) => {
         return <span key={i}>{item}</span>;
       })}
@@ -218,11 +234,12 @@ const Wrapper = styled.div`
       &:after {
         content: "";
         position: absolute;
-        bottom: 0.38rem;
+        bottom: ${({ cursorBottom }) =>
+          cursorBottom ? cursorBottom : "0.38rem"};
         background: ${themes.vars.textColorPrimary};
         margin-left: 1px;
         width: 8px;
-        height: ${size};
+        height: ${({ cursorHeight }) => (cursorHeight ? cursorHeight : size)};
         animation: ${blink} 0.55s infinite alternate;
       }
     `};
