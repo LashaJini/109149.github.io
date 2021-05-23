@@ -35,7 +35,7 @@ const Main = () => {
   const [observableElement, setObservableElement] = React.useState();
   // const [sound, setSound] = React.useState(soundEnabled);
 
-  const [darkModeEnabled, setDarkModeEnabled] = useDarkMode("dark", true);
+  const [darkModeEnabled, setDarkModeEnabled] = useDarkMode("dark");
   const [animationEnabled, setAnimationEnabled] = useAnimation(
     _animationEnabled
   );
