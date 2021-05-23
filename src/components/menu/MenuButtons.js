@@ -138,17 +138,19 @@ const MenuButtons = ({ observableElement }) => {
   });
 
   function handleIntersect(entries, observer) {
-    if (!entries[0].isIntersecting && entries[0].intersectionRatio <= 0.5) {
-      /* cta */
-      setIsCta(true);
-      setIntersecting(false);
-      ctaMode();
-    } else {
-      if (window.innerWidth > bp.sm.substring(bp.sm.length - 2, 0)) {
-        /* menu */
-        setIsCta(false);
-        setIntersecting(true);
-        menuMode();
+    if (window.location.href.includes("/old")) {
+      if (!entries[0].isIntersecting && entries[0].intersectionRatio <= 0.5) {
+        /* cta */
+        setIsCta(true);
+        setIntersecting(false);
+        ctaMode();
+      } else {
+        if (window.innerWidth > bp.sm.substring(bp.sm.length - 2, 0)) {
+          /* menu */
+          setIsCta(false);
+          setIntersecting(true);
+          menuMode();
+        }
       }
     }
   }
