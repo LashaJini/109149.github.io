@@ -10,13 +10,13 @@ import { useLocalStorage, usePrefersDarkMode } from "./";
  * @param {*} mode is initial value.
  * @returns {tuple}
  */
-const useDarkMode = (mode, inject = false) => {
+const useDarkMode = (mode) => {
   const [isDarkModeEnabled, setIsDarkModeEnabled] = useLocalStorage(
     "109149-dark-mode",
     mode
   );
   const prefersDarkMode = usePrefersDarkMode();
-  const enabled = inject || (isDarkModeEnabled ?? prefersDarkMode);
+  const enabled = isDarkModeEnabled || prefersDarkMode;
 
   React.useEffect(() => {
     const body = document.body;

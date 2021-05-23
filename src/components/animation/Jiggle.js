@@ -20,8 +20,10 @@ const Jiggle = ({ children, jiggle = false, delay }) => {
     if (jiggling) {
       spanRef.current.classList.add("jiggle");
       timerID = setTimeout(() => {
-        spanRef.current.classList.remove("jiggle");
-        setJiggling(false);
+        if (spanRef.current) {
+          spanRef.current.classList.remove("jiggle");
+          setJiggling(false);
+        }
       }, 1000);
       timerRef.current = timerID;
     }
