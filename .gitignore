@@ -49,3 +49,11 @@ yarn-error.log*
 
 tmp
 sugar.md
+
+src
+public
+.cz.json
+package.json
+README.md
+yarn*
+deploy.sh
