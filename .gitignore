@@ -49,3 +49,4 @@ yarn-error.log*
 
 tmp
 sugar.md
+deploy.sh
