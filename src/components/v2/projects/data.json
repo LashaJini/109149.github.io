@@ -1,5 +1,12 @@
 [
   {
+    "title": "DSA",
+    "description": "DSA (data structures and algorithms) is the repository of solutions for leetcode, codewars and atcoder, written mostly in rust and javascript.",
+    "website": "",
+    "repo": "https://github.com/109149/dsa",
+    "stack": ["github", "rust", "javascript"]
+  },
+  {
     "title": "Game of Life",
     "description": "Conway's game of life project built with Rust, Wasm and Javascript. 3D version is built with three.js.",
     "website": "https://109149.github.io/game-of-life",
@@ -7,10 +14,10 @@
     "stack": ["github", "wasm", "rust", "javascript", "react", "threejs"]
   },
   {
-    "title": "DSA",
-    "description": "DSA (data structures and algorithms) is the repository of solutions for leetcode, codewars and atcoder, written mostly in rust and javascript.",
-    "website": "",
-    "repo": "https://github.com/109149/dsa",
-    "stack": ["github", "rust", "javascript"]
+    "title": "Text to Particles",
+    "description": "My first ever react project written in typescript. The idea behind this project is that to convert user input text into moveable particles using canvas.",
+    "website": "https://109149.rocks/misc/projects/to-particles",
+    "repo": "https://github.com/109149/misc/",
+    "stack": ["github", "typescript", "react"]
   }
 ]
