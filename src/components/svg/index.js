@@ -1,3 +1,4 @@
+import NextSVG from "./Next";
 import WasmSVG from "./Wasm";
 import RustSVG from "./Rust";
 import SassSVG from "./Sass";
@@ -60,6 +61,7 @@ const SVGComponents = {
   SassSVG,
   RustSVG,
   WasmSVG,
+  NextSVG,
 };
 
 export default SVGComponents;
@@ -94,4 +96,5 @@ export {
   SassSVG,
   RustSVG,
   WasmSVG,
+  NextSVG,
 };

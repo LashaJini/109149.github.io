@@ -4,20 +4,44 @@
     "description": "DSA (data structures and algorithms) is the repository of solutions for leetcode, codewars and atcoder, written mostly in rust and javascript.",
     "website": "",
     "repo": "https://github.com/109149/dsa",
+    "forked": false,
+    "maintainer": false,
     "stack": ["github", "rust", "javascript"]
-  },
-  {
-    "title": "Game of Life",
-    "description": "Conway's game of life project built with Rust, Wasm and Javascript. 3D version is built with three.js.",
-    "website": "https://109149.github.io/game-of-life",
-    "repo": "https://github.com/109149/game-of-life",
-    "stack": ["github", "wasm", "rust", "javascript", "react", "threejs"]
   },
   {
     "title": "Text to Particles",
     "description": "My first ever react project written in typescript. The idea behind this project is that to convert user input text into moveable particles using canvas.",
     "website": "https://109149.rocks/misc/projects/to-particles",
     "repo": "https://github.com/109149/misc/",
+    "forked": false,
+    "maintainer": false,
     "stack": ["github", "typescript", "react"]
+  },
+  {
+    "title": "Javascript Info",
+    "description": "Maintainer of javascript-tutorial/ka.javascript.info.",
+    "website": "https://javascript.info/",
+    "repo": "https://github.com/109149/ka.javascript.info",
+    "forked": true,
+    "maintainer": true,
+    "stack": ["javascript"]
+  },
+  {
+    "title": "Game of Life",
+    "description": "Conway's game of life project built with Rust, Wasm and Javascript. 3D version is built with three.js.",
+    "website": "https://109149.github.io/game-of-life",
+    "repo": "https://github.com/109149/game-of-life",
+    "forked": false,
+    "maintainer": false,
+    "stack": ["github", "wasm", "rust", "javascript", "react", "threejs"]
+  },
+  {
+    "title": "Personal Blog",
+    "description": "Blog written in nextjs. All ideas/posts are mine, even if the are wrong.",
+    "website": "https://www.109149.blog/",
+    "repo": "",
+    "forked": false,
+    "maintainer": false,
+    "stack": ["next"]
   }
 ]

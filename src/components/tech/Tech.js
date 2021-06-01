@@ -2,6 +2,13 @@ import React from "react";
 import { AnimTechButton } from "../";
 
 const techs = {
+  next: {
+    component: React.lazy(() => import("../svg/Next")),
+    url: "https://nextjs.org/",
+    args: {
+      fill: "#000",
+    },
+  },
   wasm: {
     component: React.lazy(() => import("../svg/Wasm")),
     url: "https://webassembly.org/",
@@ -13,7 +20,7 @@ const techs = {
     component: React.lazy(() => import("../svg/Rust")),
     url: "https://www.rust-lang.org/",
     args: {
-      fill: "black",
+      fill: "#000",
     },
   },
   scss: {
@@ -53,7 +60,7 @@ const techs = {
     component: React.lazy(() => import("../svg/Deno")),
     url: "https://deno.land/",
     args: {
-      fill: "black",
+      fill: "#000",
     },
   },
   git: {
@@ -67,14 +74,14 @@ const techs = {
     component: React.lazy(() => import("../svg/Three")),
     url: "https://threejs.org/",
     args: {
-      fill: "black",
+      fill: "#000",
     },
   },
   github: {
     component: React.lazy(() => import("../svg/Github")),
     url: "https://github.com",
     args: {
-      fill: "black",
+      fill: "#000",
     },
   },
   typescript: {
