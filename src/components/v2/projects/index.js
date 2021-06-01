@@ -19,6 +19,14 @@ const Index = () => {
                 <H4>
                   <H4Text>{d.title}</H4Text>
                 </H4>
+                <Flairs>
+                  {d.forked && (
+                    <Flair bgColor="purple" color="white">
+                      Forked
+                    </Flair>
+                  )}
+                  {d.maintainer && <Flair>Maintainer</Flair>}
+                </Flairs>
                 <Desc>{d.description}</Desc>
                 <Stack>
                   <Ul>
@@ -137,6 +145,19 @@ const Li = styled.li`
   display: inline;
   float: left;
   margin: 0.5rem 0.4rem 0.5rem 0;
+`;
+
+const Flairs = styled.div`
+  display: flex;
+`;
+const Flair = styled.div`
+  background: ${({ bgColor }) => (bgColor ? bgColor : "yellow")};
+  color: ${({ color }) => (color ? color : "black")};
+  border-radius: 15px;
+  padding: 5px 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-right: 3px;
 `;
 
 export default Index;
