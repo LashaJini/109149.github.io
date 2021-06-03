@@ -1,14 +1,5 @@
 [
   {
-    "title": "DSA",
-    "description": "DSA (data structures and algorithms) is the repository of solutions for leetcode, codewars and atcoder, written mostly in rust and javascript.",
-    "website": "",
-    "repo": "https://github.com/109149/dsa",
-    "forked": false,
-    "maintainer": false,
-    "stack": ["github", "rust", "javascript"]
-  },
-  {
     "title": "Text to Particles",
     "description": "My first ever react project written in typescript. The idea behind this project is that to convert user input text into moveable particles using canvas.",
     "website": "https://109149.rocks/misc/projects/to-particles",
@@ -18,12 +9,30 @@
     "stack": ["github", "typescript", "react"]
   },
   {
+    "title": "DSA",
+    "description": "DSA (data structures and algorithms) is the repository of solutions for leetcode, codewars and atcoder, written mostly in rust and javascript.",
+    "website": "",
+    "repo": "https://github.com/109149/dsa",
+    "forked": false,
+    "maintainer": false,
+    "stack": ["github", "rust", "javascript"]
+  },
+  {
     "title": "Javascript Info",
     "description": "Maintainer of javascript-tutorial/ka.javascript.info.",
     "website": "https://javascript.info/",
     "repo": "https://github.com/109149/ka.javascript.info",
     "forked": true,
     "maintainer": true,
+    "stack": ["javascript"]
+  },
+  {
+    "title": "You to ASCII",
+    "description": "Converts live video to ascii text.",
+    "website": "https://109149.github.io/you-to-ascii",
+    "repo": "https://github.com/109149/you-to-ascii",
+    "forked": false,
+    "maintainer": false,
     "stack": ["javascript"]
   },
   {
@@ -37,7 +46,7 @@
   },
   {
     "title": "Personal Blog",
-    "description": "Blog written in nextjs. All ideas/posts are mine, even if the are wrong.",
+    "description": "Blog written in nextjs. All ideas/posts are mine, even if they are wrong.",
     "website": "https://www.109149.blog/",
     "repo": "",
     "forked": false,
