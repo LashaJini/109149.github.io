@@ -9,6 +9,24 @@
     "stack": ["github", "typescript", "react"]
   },
   {
+    "title": "Call Me Maybe",
+    "description": "WebRTC one-on-one video chat application. I wanted to see how peer-to-peer connection works and made application which connects two peers through video.",
+    "website": "https://cmm-109149.herokuapp.com",
+    "repo": "https://github.com/109149/call-me-maybe/",
+    "forked": false,
+    "maintainer": false,
+    "stack": ["github", "javascript", "react"]
+  },
+  {
+    "title": "You to ASCII",
+    "description": "Converts live video to ascii text.",
+    "website": "https://109149.github.io/you-to-ascii",
+    "repo": "https://github.com/109149/you-to-ascii",
+    "forked": false,
+    "maintainer": false,
+    "stack": ["javascript"]
+  },
+  {
     "title": "DSA",
     "description": "DSA (data structures and algorithms) is the repository of solutions for leetcode, codewars and atcoder, written mostly in rust and javascript.",
     "website": "",
@@ -24,15 +42,6 @@
     "repo": "https://github.com/109149/ka.javascript.info",
     "forked": true,
     "maintainer": true,
-    "stack": ["javascript"]
-  },
-  {
-    "title": "You to ASCII",
-    "description": "Converts live video to ascii text.",
-    "website": "https://109149.github.io/you-to-ascii",
-    "repo": "https://github.com/109149/you-to-ascii",
-    "forked": false,
-    "maintainer": false,
     "stack": ["javascript"]
   },
   {

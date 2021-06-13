@@ -1,6 +1,6 @@
 import React from "react";
 import { Typeable, Linkable } from "../../";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { themes, bp } from "../../../constants";
 import axios from "axios";
 
@@ -112,17 +112,19 @@ const Content = () => {
         }}
         {...typeableProps}
       >
-        <Bold>Hi, I'm 109149</Bold>, and I'm CE student. Currently, I'm focusing
+        <Bold>Hi, I'm 109149</Bold>, and I'm a CE student. Currently, focusing
         on "CS" side of CE. In the past 4 weeks, I've pushed{" "}
         <Linkable url="https://github.com/109149">
           {totalCommits} commits
         </Linkable>{" "}
-        to GitHub. I'm reading{" "}
+        to GitHub. I like <Bold>Linux</Bold> and <Bold>(Neo)Vim</Bold>, I'm
+        reading{" "}
         <Linkable url="https://www.goodreads.com/user/show/125838240-109149">
           1 book
         </Linkable>{" "}
         at the moment: "Principles of Computer System Design" by Jerome H.
-        Saltzer.
+        Saltzer. And also, <BoldItalic>Marvel > DC</BoldItalic>, no hard
+        feelings.
       </Typeable>
     </Wrapper>
   );
@@ -140,8 +142,20 @@ const Wrapper = styled.div`
   }
 `;
 
-const Bold = styled.span`
+const bold = css`
   font-weight: bold;
+`;
+const italic = css`
+  font-style: italic;
+`;
+
+const Bold = styled.span`
+  ${bold}
+`;
+
+const BoldItalic = styled.span`
+  ${bold}
+  ${italic}
 `;
 
 export default Content;
