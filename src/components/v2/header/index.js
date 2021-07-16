@@ -7,9 +7,9 @@ const index = () => {
   return (
     <>
       <Logo>
-        <Linkable url="https://109149.github.io">
+        <Linkable url="/" newTab={false}>
           {/* <Title>109🗲149</Title> */}
-          <Title>{"<109149 />"}</Title>
+          <Title>{"[ 109149 ]"}</Title>
         </Linkable>
       </Logo>
     </>
