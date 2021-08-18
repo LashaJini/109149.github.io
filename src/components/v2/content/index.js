@@ -101,33 +101,31 @@ const Content = () => {
 
   return (
     <Wrapper>
-      {totalCommits > 0 && (
-        <Typeable
-          writeDelay={300}
-          writeSpeed={70}
-          style={{
-            fontSize: typeableProps.fontSize,
-            fontWeight: "normal",
-            lineHeight: "1.6",
-            margin: "0",
-          }}
-          {...typeableProps}
-        >
-          <Bold>Hi, I'm 109149</Bold>, and I'm a CE student. Currently, focusing
-          on "CS" side of CE. In the past 4 weeks, I've pushed{" "}
-          <Linkable url="https://github.com/109149">
-            {totalCommits} commits
-          </Linkable>{" "}
-          to GitHub. I like <Bold>Linux</Bold> and <Bold>(Neo)Vim</Bold>, I'm
-          reading{" "}
-          <Linkable url="https://www.goodreads.com/user/show/125838240-109149">
-            1 book
-          </Linkable>{" "}
-          at the moment: "Principles of Computer System Design" by Jerome H.
-          Saltzer. And also, I prefer <BoldItalic>Marvel</BoldItalic> over{" "}
-          <BoldItalic>DC</BoldItalic>.
-        </Typeable>
-      )}
+      <Typeable
+        writeDelay={300}
+        writeSpeed={70}
+        style={{
+          fontSize: typeableProps.fontSize,
+          fontWeight: "normal",
+          lineHeight: "1.6",
+          margin: "0",
+        }}
+        {...typeableProps}
+      >
+        <Bold>Hi, I'm 109149</Bold>, and I'm a CE student. Currently, focusing
+        on "CS" side of CE. In the past 4 weeks, I've pushed{" "}
+        <Linkable url="https://github.com/109149">
+          {totalCommits} public commits
+        </Linkable>{" "}
+        to Github. I like <Bold>Linux</Bold> and <Bold>(Neo)Vim</Bold>, I'm
+        reading{" "}
+        <Linkable url="https://www.goodreads.com/user/show/125838240-109149">
+          1 book
+        </Linkable>{" "}
+        at the moment: "Principles of Computer System Design" by Jerome H.
+        Saltzer. And also, I prefer <BoldItalic>Marvel</BoldItalic> over{" "}
+        <BoldItalic>DC</BoldItalic>.
+      </Typeable>
     </Wrapper>
   );
 };
