@@ -2,7 +2,7 @@
   {
     "title": "3D Portfolio",
     "description": "Simple Three.js 3D portfolio, with buttons which point to my social network accounts.",
-    "website": "https://109149.rocks/portfolio-3d",
+    "website": "https://lashajini.github.io/portfolio-3d",
     "repo": "https://github.com/109149/portfolio-3d/",
     "forked": false,
     "maintainer": false,
@@ -20,7 +20,7 @@
   {
     "title": "You to ASCII",
     "description": "Converts live video to ascii text.",
-    "website": "https://109149.github.io/you-to-ascii",
+    "website": "https://lashajini.github.io/you-to-ascii",
     "repo": "https://github.com/109149/you-to-ascii",
     "forked": false,
     "maintainer": false,
@@ -29,7 +29,7 @@
   {
     "title": "Game of Life",
     "description": "Conway's game of life project built with Rust, Wasm and Javascript. 3D version is built with three.js.",
-    "website": "https://109149.github.io/game-of-life",
+    "website": "https://lashajini.github.io/game-of-life",
     "repo": "https://github.com/109149/game-of-life",
     "forked": false,
     "maintainer": false,
@@ -38,7 +38,7 @@
   {
     "title": "Text to Particles",
     "description": "My first ever react project written in typescript. The idea behind this project is that to convert user input text into moveable particles using canvas.",
-    "website": "https://109149.rocks/misc/projects/to-particles",
+    "website": "https://lashajini.github.io/misc/projects/to-particles",
     "repo": "https://github.com/109149/misc/",
     "forked": false,
     "maintainer": false,

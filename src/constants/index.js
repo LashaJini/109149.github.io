@@ -71,11 +71,11 @@ const acdcYtUrls = {
 };
 
 const networkUrls = {
-  github: "https://github.com/109149/",
+  github: "https://github.com/lashajini/",
   stackoverflow: "https://stackoverflow.com/users/14414945/109149",
   reddit: "https://www.reddit.com/user/109149",
   twitter: "https://twitter.com/109149qwe",
-  email: "mailto:109149qwe@gmail.com",
+  email: "mailto:lashajini@gmail.com",
 };
 
 const rickRoll = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&autoplay=1";
